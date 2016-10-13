@@ -1,0 +1,12 @@
+@CHARSET "UTF-8";
+#globalnav-footer
+{
+	box-sizing:border-box;
+	width:100%;
+	min-width:320px!important;
+	padding:15px 0;
+	background-color:#000;
+	color:#888;
+	overflow:hidden;
+	font-family:FFMetaWebProLight,Arial,Helvetica,sans-serif
+}
