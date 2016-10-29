@@ -34,6 +34,9 @@
 	<mvc:resources mapping="/images/**" location="/images/" />
 	<mvc:resources mapping="/css/**" location="/css/" />
 	<mvc:annotation-driven />
+	
+	<context:property-placeholder location="classpath:dbDetails.properties"
+		ignore-unresolvable="true" ignore-resource-not-found="true" />
 </beans>
 	
 	

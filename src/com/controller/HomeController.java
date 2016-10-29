@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,6 +26,9 @@ public class HomeController {
 	@Autowired
 	JDBCDao jdbcDao;
 	
+	@Value("${dbString}")
+	  private String dbString;
+	
 	Logger logger= Logger.getLogger(HomeController.class);
  
 	//@RequestMapping("/welcome")
@@ -41,6 +45,7 @@ public class HomeController {
 		model.addObject("message", "From new function");
 		logger.debug("Debug Inside the logger");
 		logger.warn("Warn Inside the logger");
+		logger.warn("dbString >> " + dbString);
 		return model;
 	}
 	

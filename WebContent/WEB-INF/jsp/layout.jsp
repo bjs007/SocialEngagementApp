@@ -30,8 +30,8 @@
 			<td height="30" colspan="2" style="background-image:url('${pageContext.request.contextPath}/images/web-header.jpg')"><tiles:insertAttribute name="header" />
 		</tr>
 		<tr>
-			<td height="40%" width="3%" align="left" valign="top" style="background: rgb(42, 32, 30)"><tiles:insertAttribute name="menu" /></td>
-			<td width="40%"><tiles:insertAttribute name="body" /></td>
+			<td height="40%" width="1%" align="left" valign="top" style="background: rgb(42, 32, 30)"><tiles:insertAttribute name="menu" /></td>
+			<td width="88%"><tiles:insertAttribute name="body" /></td>
 		</tr>
 		<tr>
 			<td height="30" colspan="2"><tiles:insertAttribute name="footer" />
