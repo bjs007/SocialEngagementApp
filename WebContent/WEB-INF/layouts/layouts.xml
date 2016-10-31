@@ -38,5 +38,11 @@
 		<put-attribute name="title" value="Subject" />
 		<put-attribute name="body" value="/WEB-INF/jsp/subjectPage.jsp" />
 	</definition>
+	
+	<definition name="eventsHome" extends="base.definition">
+		<put-attribute name="title" value="EventsHome" />
+		<!-- <put-attribute name="menu" value="/WEB-INF/jsp/menu.jsp" /> -->
+		<put-attribute name="body" value="/WEB-INF/jsp/eventsHome.jsp" />
+	</definition>
 
 </tiles-definitions>

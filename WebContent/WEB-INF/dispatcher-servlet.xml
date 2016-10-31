@@ -17,6 +17,7 @@
 		value=".jsp" /> </bean> -->
 
 	<bean id="jdbcDao" class="com.dao.JDBCDao" />
+	<bean id="eventsJdbcDao" class="com.dao.EventsJdbcDao" />
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" />

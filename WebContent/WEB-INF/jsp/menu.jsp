@@ -10,7 +10,7 @@
 		<li class="orange"><a href="${pageContext.request.contextPath}/fetchStudent">See all past events</a></li>
 		<li class="bright"><a href="${pageContext.request.contextPath}/fetchSubject">Create a Broadcast</a></li>
 		<li class="red"><a href="${pageContext.request.contextPath}/fetchSubject">See all my Broadcasts</a></li>
-		<li class="blue"><a href="${pageContext.request.contextPath}/fetchSubject">Other links ...</a></li>
+		<li class="blue"><a href="${pageContext.request.contextPath}/events">Events</a></li>
 		
 		<!-- <li class="blue"><a href="">Blog</a></li>
 		<li class="bright"><a href="">Contact</a></li>
