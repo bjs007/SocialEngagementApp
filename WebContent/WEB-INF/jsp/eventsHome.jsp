@@ -2,10 +2,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 	<p>${message}</p>
-	<%-- <div align="center">
-		<form:form action="getStudentData" method="post" commandName="studentForm">
+	<div align="center">
+		<form:form action="saveEvent" method="post" commandName="eventForm">
 			<table border="1" style="background-color:#85c1e9;color:#34495e;font:Arial;border-radius:6px;font-size:12px;width:50%;">
-				<tr>
+				<%-- <tr>
 					<td colspan="2" align="center"><h2>Enter these fields to
 							fetch data</h2></td>
 				</tr>
@@ -24,13 +24,14 @@
 				<tr>
 					<td>Gender :</td>
 					<td><form:input path="gender" /></td>
-				</tr>
+				</tr> --%>
 				<tr>
 					<td colspan="2" align="center"><input type="submit" value="Submit" /></td>
 				</tr>
 			</table>
 		</form:form>
 	</div>
+	<%--
 	<p>${isDataPresent}</p>
 	
 	<div class="dataTables_wrapper" id="example_wrapper" align="center" >

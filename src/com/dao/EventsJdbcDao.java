@@ -2,15 +2,17 @@ package com.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 
-import com.models.Subject;
+import com.models.Event;
 
 public class EventsJdbcDao {
 	
@@ -18,23 +20,23 @@ public class EventsJdbcDao {
 	private String jdbcString;
 	
 	@Value("${dbUserName}")
-	private String userName;
+	private String dbUserName;
 	
 	@Value("${dbPassword}")
 	private String dbPassword;
 	
 	Logger logger= Logger.getLogger(EventsJdbcDao.class);
 	
-	public ArrayList<Subject> createEvents(Subject subject)
+	public String saveEvents(Event event)
 	{
 
-		System.out.println("-------- MySQL JDBC Connection Testing ------------");
-		ArrayList<Subject> subjectList=null;
+		System.out.println("-------- Events JDBC Connection Testing ------------");
+		ArrayList<Event> eventsList=null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
-			System.out.println("Where is your MySQL JDBC Driver?");
-			e.printStackTrace();
+			logger.error("Where is your MySQL JDBC Driver?");
+			logger.error(e.getStackTrace());
 			return null;
 		}
 
@@ -42,33 +44,73 @@ public class EventsJdbcDao {
 		Connection connection = null;
 
 		try {
-			connection = DriverManager
-					//.getConnection("jdbc:mysql://localhost:3307/Library","root","password");
-					.getConnection("jdbc:mysql://localhost:3307/Library?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC","root","password");
-		} catch (SQLException e) {
-			System.out.println("Connection Failed! Check output console");
+			connection = DriverManager.getConnection(jdbcString,dbUserName,dbPassword);
+		} catch (Exception e) {
+			logger.error("Connection Failed! Check output console");
+			logger.error(e.getStackTrace());
 			e.printStackTrace();
 			return null;
 		}
 
 		if (connection != null) {
-			System.out.println("You made it, take control your database now!");
+			logger.debug("You made it, take control your database now!");
 
 			try {
-				Statement statement=connection.createStatement();
-				StringBuilder selectTableSQL = new StringBuilder("SELECT * from subject where 1=1 ");
-				if(subject.getSubject_name()!=null && !subject.getSubject_name().isEmpty())
-					selectTableSQL.append(" and subject_name='"+subject.getSubject_name()+ "'");
-				if(subject.getProff_name()!=null && !subject.getProff_name().isEmpty())
-					selectTableSQL.append(" and proff_name='"+subject.getProff_name()+ "'");
-				if(subject.getTime()!=null && !subject.getTime().isEmpty())
-					selectTableSQL.append(" and time='"+subject.getTime()+ "'");
-				if(subject.getSubject_id()!=null)
-					selectTableSQL.append(" and subject_id="+subject.getSubject_id());
-				System.out.println(selectTableSQL.toString());
-
+				String insertEventsSQL = "Insert into events (event_desc,created_date_time,user_id,resources_needed,place,event_date_time,is_archived,is_resources_satisfied) values(?,?,?,?,?,?,?,?)";
+				PreparedStatement pstmt = connection.prepareStatement(insertEventsSQL);
+				
+				//event description
+				if(event.getEvent_desc()!=null && !event.getEvent_desc().isEmpty())
+					pstmt.setString(1,event.getEvent_desc());
+				else
+					pstmt.setString(1,null);
+				
+				//created date
+				pstmt.setString(2,new Date().toString());
+				
+				//user-id
+				if(event.getUser_id()!=null && event.getUser_id()>0)
+					pstmt.setString(3,event.getUser_id().toString());
+				else
+					pstmt.setString(3,null);
+				
+				//resources-needed
+				if(event.getResources_needed()!=null && !event.getResources_needed().isEmpty())
+					pstmt.setString(4,event.getResources_needed());
+				else
+					pstmt.setString(4,null);
+				
+				//place of event
+				if(event.getPlace()!=null && !event.getPlace().isEmpty())
+					pstmt.setString(5,event.getPlace());
+				else
+					pstmt.setString(5,null);
+				
+				//place of event
+				if(event.getPlace()!=null && !event.getPlace().isEmpty())
+					pstmt.setString(6,event.getPlace());
+				else
+					pstmt.setString(5,null);
+				
+				//event-date
+				if(event.getEvent_date_time()!=null)
+					pstmt.setString(6,event.getEvent_date_time().toString());
+				else
+					pstmt.setString(6,null);
+				
+				//is-archived
+				pstmt.setString(7,String.valueOf(event.getIs_archived()));
+				
+				//is_resources_satisfied
+				pstmt.setString(8,String.valueOf(event.getIs_resources_satisfied()));
+				
+				//int[] updateCounts = pstmt.executeBatch();
+				boolean updated = pstmt.execute();
+				
+				System.out.println();
+				/*	
 				ResultSet rs = statement.executeQuery(selectTableSQL.toString());
-				subjectList=new ArrayList<Subject>();
+				eventsList=new ArrayList<Events>();
 				while (rs.next()) {
 
 					String subject_id= rs.getString("subject_id");
@@ -80,10 +122,10 @@ public class EventsJdbcDao {
 					subject.setSubject_name(subject_name);
 					subject.setProff_name(proff_name);
 					subject.setTime(time);
-					subjectList.add(subject);
+					eventsList.add(subject);
 					logger.warn(subject);
-				}
-			} catch (SQLException e) {
+				}*/
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			try {
@@ -95,10 +137,6 @@ public class EventsJdbcDao {
 		} else {
 			System.out.println("Failed to make connection!");
 		}
-		if(subjectList.size()>0)
-			return subjectList;
-		else
-			return null;
+	return "Success";
 	}
-
 }
