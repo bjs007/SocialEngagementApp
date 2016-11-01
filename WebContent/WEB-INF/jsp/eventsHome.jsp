@@ -3,28 +3,28 @@
 
 	<p>${message}</p>
 	<div align="center">
-		<form:form action="saveEvent" method="post" commandName="eventForm">
+		<form:form action="saveEvent" method="post" commandName="eventsForm">
 			<table border="1" style="background-color:#85c1e9;color:#34495e;font:Arial;border-radius:6px;font-size:12px;width:50%;">
-				<%-- <tr>
+				<tr>
 					<td colspan="2" align="center"><h2>Enter these fields to
 							fetch data</h2></td>
 				</tr>
 				<tr>
-					<td>Student Id :</td>
-					<td><form:input path="student_id" /></td>
+					<td>Enter Description of the event:</td>
+					<td><form:input path="event_desc" /></td>
 				</tr>
 				<tr>
-					<td>First name:</td>
-					<td><form:input path="first_name" /></td>
+					<td>Mention Resource Needed :</td>
+					<td><form:input path="resources_needed" /></td>
 				</tr>
 				<tr>
-					<td>Last name:</td>
-					<td><form:input path="last_name" /></td>
+					<td>Place of event:</td>
+					<td><form:input path="place" /></td>
 				</tr>
 				<tr>
-					<td>Gender :</td>
-					<td><form:input path="gender" /></td>
-				</tr> --%>
+					<td>Date/Time for event :</td>
+					<td><form:input path="event_date_time" /></td>
+				</tr>
 				<tr>
 					<td colspan="2" align="center"><input type="submit" value="Submit" /></td>
 				</tr>

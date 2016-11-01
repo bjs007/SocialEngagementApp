@@ -26,13 +26,14 @@ public class EventsController {
 	Logger logger= Logger.getLogger(EventsController.class);
 	
 	@RequestMapping("/events")
-	public ModelAndView eventsHome(HttpServletRequest request,HttpServletResponse response) throws Exception {
+	public ModelAndView eventsHome(HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception {
 
 		ModelAndView model = new ModelAndView("eventsHome");
 		model.addObject("message", "From eventsHome controller");
 		logger.debug("Debug Inside the logger");
 		logger.warn("Warn Inside the logger");
 		//logger.warn("dbString >> " + dbString);
+		modelObj.addAttribute("eventsForm", new Event());
 		return model;
 	}
 	
@@ -49,17 +50,18 @@ public class EventsController {
 	}
 	
 	@RequestMapping("/saveEvent")
-	public ModelAndView saveEvents(@ModelAttribute("eventForm") Event event,HttpServletRequest request,HttpServletResponse response) throws Exception {
+	public ModelAndView saveEvents(@ModelAttribute("eventForm") Event event,HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception {
 
 		ModelAndView model = new ModelAndView("eventsHome");
 		model.addObject("message", "From eventsHome controller");
 		logger.debug("Debug Inside the logger");
 		logger.warn("Warn Inside the logger");
-		event = new Event();
-		event.setEvent_desc("Test event");
+		//event = new Event();
+		//event.setEvent_desc("Test event");
 		event.setCreated_date_time(new Date());
 		eventsDao.saveEvents(event);
 		//logger.warn("dbString >> " + dbString);
+		modelObj.addAttribute("eventsForm", new Event());
 		return model;
 	}
 
