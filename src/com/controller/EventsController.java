@@ -1,5 +1,6 @@
 package com.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -64,6 +65,27 @@ public class EventsController {
 		modelObj.addAttribute("eventsForm", new Event());
 		return model;
 	}
+	
+	@RequestMapping("/fetchEvent")
+	public ModelAndView fetchAllEvents(HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception {
+
+		ModelAndView model = new ModelAndView("eventsDisplay");
+		model.addObject("message", "From eventsHome controller");
+		logger.debug("Debug Inside the logger");
+		logger.warn("Warn Inside the logger");
+		//event = new Event();
+		//event.setEvent_desc("Test event");
+		//logger.warn("dbString >> " + dbString);
+		ArrayList<Event> eventList=eventsDao.getEventsDataFromDb();
+		for(Event event:eventList)
+		{
+			logger.debug(event);
+		}
+		modelObj.addAttribute("eventsList",eventList);
+		//modelObj.addAttribute("eventsForm", new Event());
+		return model;
+	}
+
 
 
 }

@@ -23,7 +23,7 @@
 				</tr>
 				<tr>
 					<td>Date/Time for event :</td>
-					<td><form:input path="event_date_time" /></td>
+					<td><form:input path="event_date_time" id="datetimepicker" type="text"/></td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center"><input type="submit" value="Submit" /></td>

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE tiles-definitions PUBLIC
-       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
-       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 	<definition name="base.definition" template="/WEB-INF/jsp/layout.jsp">
 		<put-attribute name="title" value="" />
@@ -13,19 +11,22 @@
 			<add-attribute value="https://code.jquery.com/jquery-1.12.3.js" />
 			<add-attribute value="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js" />
 			<add-attribute value="/scripts/scripts.js" />
+			<!-- <add-attribute value="/scripts/jquery.js" /> -->
+			<add-attribute value="/scripts/jquery.datetimepicker.full.min.js" />
 		</put-list-attribute>
-		 <put-list-attribute name="stylesheets">
-		 	<add-attribute value="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
-		 	<add-attribute value="/css/nice-menu.css" />
-		 	<add-attribute value="/css/custom.css" />
-		 </put-list-attribute>
+		<put-list-attribute name="stylesheets">
+			<add-attribute value="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
+			<add-attribute value="/css/nice-menu.css" />
+			<add-attribute value="/css/custom.css" />
+			<add-attribute value="/css/jquery.datetimepicker.css" />
+		</put-list-attribute>
 	</definition>
 
 	<definition name="contact" extends="base.definition">
 		<put-attribute name="title" value="Contact Manager" />
 		<put-attribute name="body" value="/WEB-INF/jsp/contact.jsp" />
 	</definition>
-	
+
 	<definition name="welcome" extends="base.definition">
 		<put-attribute name="title" value="Social App for Seniors" />
 		<put-attribute name="body" value="/WEB-INF/jsp/welcome.jsp" />
@@ -38,11 +39,17 @@
 		<put-attribute name="title" value="Subject" />
 		<put-attribute name="body" value="/WEB-INF/jsp/subjectPage.jsp" />
 	</definition>
-	
+
 	<definition name="eventsHome" extends="base.definition">
 		<put-attribute name="title" value="EventsHome" />
 		<put-attribute name="menu" value="/WEB-INF/jsp/eventsMenu.jsp" />
 		<put-attribute name="body" value="/WEB-INF/jsp/eventsHome.jsp" />
+	</definition>
+	
+	<definition name="eventsDisplay" extends="base.definition">
+		<put-attribute name="title" value="EventsDisplay" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/eventsMenu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/eventsDisplay.jsp" />
 	</definition>
 
 </tiles-definitions>
