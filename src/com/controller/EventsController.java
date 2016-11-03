@@ -28,7 +28,9 @@ public class EventsController {
 	Logger logger= Logger.getLogger(EventsController.class);
 	
 	@RequestMapping("/events")
-	public ModelAndView eventsHome(@RequestParam(required=false) Integer event_id,HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception {
+	//public ModelAndView eventsHome(@RequestParam(required=false) Integer event_id,HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception
+	public ModelAndView eventsHome(HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception
+	{
 
 		ModelAndView model = new ModelAndView("eventsHome");
 		model.addObject("message", "From eventsHome controller");
@@ -36,6 +38,10 @@ public class EventsController {
 		logger.warn("Warn Inside the logger");
 		//logger.warn("dbString >> " + dbString);
 		modelObj.addAttribute("eventsForm", new Event());
+		Object uId=request.getSession().getAttribute("user_id");
+		if(uId==null)
+			request.getSession().setAttribute("user_id", "4321");
+		//String user_id=request.getSession().getAttribute("user_id").toString();
 		return model;
 	}
 	
@@ -52,7 +58,7 @@ public class EventsController {
 	}
 	
 	@RequestMapping("/saveEvent")
-	public ModelAndView saveEvents(@ModelAttribute("eventForm") Event event,HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception {
+	public ModelAndView saveEvents(@ModelAttribute("eventsForm") Event event,HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception {
 
 		ModelAndView model = new ModelAndView("eventsHome");
 		model.addObject("message", "From eventsHome controller");
@@ -61,6 +67,8 @@ public class EventsController {
 		//event = new Event();
 		//event.setEvent_desc("Test event");
 		event.setCreated_date_time(new Date());
+		String user_id=request.getSession().getAttribute("user_id").toString();
+		event.setUser_id(Integer.parseInt(user_id));
 		eventsDao.saveEvents(event);
 		//logger.warn("dbString >> " + dbString);
 		modelObj.addAttribute("eventsForm", new Event());
@@ -92,7 +100,7 @@ public class EventsController {
 	@RequestMapping("/editEvent")
 	public ModelAndView editEvent(@RequestParam(value="event_id") Integer event_id,HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception {
 
-		ModelAndView model = new ModelAndView("eventsHome");
+		ModelAndView model = new ModelAndView("editEvent");
 		model.addObject("message", "From eventsHome controller");
 		logger.warn("Inside Event id : " + event_id);
 		logger.warn("Warn Inside the logger");
@@ -100,8 +108,20 @@ public class EventsController {
 		newEvent.setEvent_id(event_id);
 		modelObj.addAttribute("eventsForm", eventsDao.getEventsDataFromDb(newEvent).get(0));
 		//modelObj.addAttribute("eventsForm", new Event());
-		//return model;
-		return new ModelAndView("redirect:/events?event_id="+event_id);
+		//return new ModelAndView("redirect:/eventEdit?event_id="+event_id);
+		return model;
+	}
+	
+	@RequestMapping("/saveEditedEvent")
+	public ModelAndView saveEditEvent(@ModelAttribute("eventsForm") Event event,HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception {
+
+		ModelAndView model = new ModelAndView("editEvent");
+		model.addObject("message", "From eventsHome controller");
+		logger.warn("Warn Inside the logger");
+		eventsDao.saveEditedEvents(event);
+		//modelObj.addAttribute("eventsForm", new Event());
+		return new ModelAndView("redirect:/fetchEvent");
+		
 	}
 	
 	@RequestMapping("/deleteEvent")

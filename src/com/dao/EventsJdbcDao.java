@@ -367,4 +367,101 @@ public class EventsJdbcDao {
 			return false;
 		
 	}
+	
+	public String saveEditedEvents(Event event)
+	{
+
+		System.out.println("-------- Events JDBC Connection Testing ------------");
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			logger.error("Where is your MySQL JDBC Driver?");
+			logger.error(e.getStackTrace());
+			return null;
+		}
+
+		System.out.println("MySQL JDBC Driver Registered!");
+		Connection connection = null;
+
+		try {
+			connection = DriverManager.getConnection(jdbcString,dbUserName,dbPassword);
+		} catch (Exception e) {
+			logger.error("Connection Failed! Check output console");
+			logger.error(e.getStackTrace());
+			e.printStackTrace();
+			return null;
+		}
+
+		if (connection != null) {
+			logger.debug("You made it, take control your database now!");
+
+			try {
+				String insertEventsSQL = "update events set event_desc=?,created_date_time=?,user_id=?,resources_needed=?,place=?,event_date_time=?,is_archived=?,is_resources_satisfied=? where event_id=?";
+				PreparedStatement pstmt = connection.prepareStatement(insertEventsSQL);
+
+				//event description
+				if(event.getEvent_desc()!=null && !event.getEvent_desc().isEmpty())
+					pstmt.setString(1,event.getEvent_desc());
+				else
+					pstmt.setString(1,null);
+
+				//created date
+				pstmt.setString(2,new Date().toString());
+
+				//user-id
+				if(event.getUser_id()!=null && event.getUser_id()>0)
+					pstmt.setString(3,event.getUser_id().toString());
+				else
+					pstmt.setString(3,null);
+
+				//resources-needed
+				if(event.getResources_needed()!=null && !event.getResources_needed().isEmpty())
+					pstmt.setString(4,event.getResources_needed());
+				else
+					pstmt.setString(4,null);
+
+				//place of event
+				if(event.getPlace()!=null && !event.getPlace().isEmpty())
+					pstmt.setString(5,event.getPlace());
+				else
+					pstmt.setString(5,null);
+
+				//place of event
+				if(event.getPlace()!=null && !event.getPlace().isEmpty())
+					pstmt.setString(6,event.getPlace());
+				else
+					pstmt.setString(5,null);
+
+				//event-date
+				if(event.getEvent_date_time()!=null)
+					pstmt.setString(6,event.getEvent_date_time().toString());
+				else
+					pstmt.setString(6,null);
+
+				//is-archived
+				pstmt.setString(7,String.valueOf(event.getIs_archived()==null?"false":event.getIs_archived()));
+
+				//is_resources_satisfied
+				pstmt.setString(8,String.valueOf(event.getIs_resources_satisfied()==null?"false":event.getIs_resources_satisfied()));
+				
+				pstmt.setInt(9,event.getEvent_id());
+
+				//int[] updateCounts = pstmt.executeBatch();
+				int updated = pstmt.executeUpdate();
+
+				System.out.println();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		} else {
+			System.out.println("Failed to make connection!");
+		}
+		return "Success";
+	}
 }

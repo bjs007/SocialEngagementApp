@@ -1,8 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-	<p>${message}</p>
-	<p>${pageContext.request.contextPath}/editEventUrl<p>
 	<div align="center">
 	<table border="1" style="background-color:#85c1e9;color:#34495e;font:Arial;border-radius:6px;font-size:12px;width:50%;">
 		<c:forEach items="${eventsList}" var="event">
