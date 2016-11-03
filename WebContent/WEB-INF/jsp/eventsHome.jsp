@@ -17,6 +17,16 @@
 					<td>Mention Resource Needed :</td>
 					<td><form:input path="resources_needed" /></td>
 				</tr>
+				
+				<tr>
+					<td>Are all resource satisfied :</td>
+					<td><form:select path="is_resources_satisfied" >
+						<form:option selected="true" value="false" label="NO"/>
+   						<form:option value="true" label="YES"/>
+   						</form:select>
+					</td>
+				</tr>
+				
 				<tr>
 					<td>Place of event:</td>
 					<td><form:input path="place" /></td>

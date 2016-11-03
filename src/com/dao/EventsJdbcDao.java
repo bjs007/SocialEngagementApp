@@ -99,32 +99,15 @@ public class EventsJdbcDao {
 					pstmt.setString(6,null);
 
 				//is-archived
-				pstmt.setString(7,String.valueOf(event.getIs_archived()));
+				pstmt.setString(7,String.valueOf(event.getIs_archived()==null?"false":event.getIs_archived()));
 
 				//is_resources_satisfied
-				pstmt.setString(8,String.valueOf(event.getIs_resources_satisfied()));
+				pstmt.setString(8,String.valueOf(event.getIs_resources_satisfied()==null?"false":event.getIs_resources_satisfied()));
 
 				//int[] updateCounts = pstmt.executeBatch();
 				boolean updated = pstmt.execute();
 
 				System.out.println();
-				/*	
-				ResultSet rs = statement.executeQuery(selectTableSQL.toString());
-				eventsList=new ArrayList<Events>();
-				while (rs.next()) {
-
-					String subject_id= rs.getString("subject_id");
-					String subject_name = rs.getString("subject_name");
-					String proff_name = rs.getString("proff_name");
-					String time=rs.getString("time");
-					subject=new Subject();
-					subject.setSubject_id(Integer.parseInt(subject_id));
-					subject.setSubject_name(subject_name);
-					subject.setProff_name(proff_name);
-					subject.setTime(time);
-					eventsList.add(subject);
-					logger.warn(subject);
-				}*/
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -229,5 +212,159 @@ public class EventsJdbcDao {
 			return eventList;
 		else
 			return null;
+	}
+	public ArrayList<Event> getEventsDataFromDb(Event evt)
+	{
+
+		System.out.println("-------- MySQL JDBC Connection Testing ------------");
+		ArrayList<Event> eventList=null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.println("Where is your MySQL JDBC Driver?");
+			e.printStackTrace();
+			return null;
+		}
+
+		System.out.println("MySQL JDBC Driver Registered!");
+		Connection connection = null;
+
+		try {
+			connection = DriverManager
+					//.getConnection("jdbc:mysql://localhost:3307/Library","root","password");
+					.getConnection(jdbcString,dbUserName,dbPassword);
+		} catch (SQLException e) {
+			System.out.println("Connection Failed! Check output console");
+			e.printStackTrace();
+			return null;
+		}
+
+		if (connection != null) {
+			System.out.println("You made it, take control your database now!");
+
+			try {
+				Statement statement=connection.createStatement();
+				StringBuilder selectTableSQL = new StringBuilder("SELECT * from events where 1=1 ");
+				if(evt.getEvent_id()!=null)
+					selectTableSQL.append(" and event_id='"+evt.getEvent_id()+ "'");
+
+				System.out.println(selectTableSQL.toString());
+
+				ResultSet rs = statement.executeQuery(selectTableSQL.toString());
+				eventList=new ArrayList<Event>();
+				while (rs.next()) {
+
+					Event event= new Event();
+
+					Integer event_id= rs.getInt("event_id");
+					event.setEvent_id(event_id);
+
+					String event_desc = rs.getString("event_desc");
+					event.setEvent_desc(event_desc);
+
+					SimpleDateFormat parser=new SimpleDateFormat("EEE MMM d HH:mm:ss zzz yyyy");
+					Date created_date_time= parser.parse(rs.getString("created_date_time"));
+					event.setCreated_date_time(created_date_time);
+
+					Integer user_id=rs.getInt("user_id");
+					event.setUser_id(user_id);
+
+					String resources_needed=rs.getString("resources_needed");
+					event.setResources_needed(resources_needed);
+
+					String place=rs.getString("place");
+					event.setPlace(place);
+
+					Date event_date_time= parser.parse(rs.getString("event_date_time"));
+					event.setEvent_date_time(event_date_time);
+
+					Boolean is_archived=rs.getBoolean("is_archived");
+					event.setIs_archived(is_archived);
+
+					Boolean is_resources_satisfied=rs.getBoolean("is_resources_satisfied");
+					event.setIs_resources_satisfied(is_resources_satisfied);
+
+
+					eventList.add(event);
+					logger.warn(event);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		} else {
+			System.out.println("Failed to make connection!");
+		}
+		if(eventList.size()>0)
+			return eventList;
+		else
+			return null;
+	}
+	
+	public Boolean deletEventsDataFromDb(Event evt)
+	{
+
+		System.out.println("-------- MySQL JDBC Connection Testing ------------");
+		Integer count=0;
+		ArrayList<Event> eventList=null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.println("Where is your MySQL JDBC Driver?");
+			e.printStackTrace();
+			return null;
+		}
+
+		System.out.println("MySQL JDBC Driver Registered!");
+		Connection connection = null;
+
+		try {
+			connection = DriverManager
+					//.getConnection("jdbc:mysql://localhost:3307/Library","root","password");
+					.getConnection(jdbcString,dbUserName,dbPassword);
+		} catch (SQLException e) {
+			System.out.println("Connection Failed! Check output console");
+			e.printStackTrace();
+			return null;
+		}
+
+		if (connection != null) {
+			System.out.println("You made it, take control your database now!");
+
+			try {
+				Statement statement=connection.createStatement();
+				StringBuilder selectTableSQL = new StringBuilder("delete from events where 1=1 ");
+				if(evt.getEvent_id()!=null)
+					selectTableSQL.append(" and event_id='"+evt.getEvent_id()+ "'");
+
+				System.out.println(selectTableSQL.toString());
+
+				count = statement.executeUpdate(selectTableSQL.toString());
+				logger.warn("deleted "+ count + " number of records");
+				}
+			catch(Exception e)
+			{
+				try {
+					connection.close();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+			
+
+		} else {
+			System.out.println("Failed to make connection!");
+		}
+		
+		if(count>0)
+			return true;
+		else
+			return false;
+		
 	}
 }
