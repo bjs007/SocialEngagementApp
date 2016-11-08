@@ -1,5 +1,9 @@
 package com.models;
 
+/**
+ * @author Dipanjan Karmakar
+ */
+
 import java.util.Date;
 
 public class Event {
