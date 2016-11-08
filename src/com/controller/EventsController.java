@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -31,6 +30,7 @@ public class EventsController {
 	//public ModelAndView eventsHome(@RequestParam(required=false) Integer event_id,HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception
 	public ModelAndView eventsHome(HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception
 	{
+		String staticUserId="4321";
 
 		ModelAndView model = new ModelAndView("eventsHome");
 		model.addObject("message", "From eventsHome controller");
@@ -40,7 +40,12 @@ public class EventsController {
 		modelObj.addAttribute("eventsForm", new Event());
 		Object uId=request.getSession().getAttribute("user_id");
 		if(uId==null)
-			request.getSession().setAttribute("user_id", "4321");
+			request.getSession().setAttribute("user_id", staticUserId);
+		Boolean isUserAdm=eventsDao.isAdminUser(Integer.parseInt(staticUserId));
+		if(isUserAdm)
+			request.getSession().setAttribute("isUserAdm", true);
+		else
+			request.getSession().setAttribute("isUserAdm", false);
 		//String user_id=request.getSession().getAttribute("user_id").toString();
 		return model;
 	}
@@ -138,6 +143,38 @@ public class EventsController {
 		//return model;
 		logger.warn("Deleted >> " + result);
 		return new ModelAndView("redirect:/fetchEvent");
+	}
+	@RequestMapping("/fetchArchivedEvent")
+	public ModelAndView fetchArchivedEvents(HttpServletRequest request,HttpServletResponse response,Model modelObj) 
+	{
+
+		ModelAndView model = new ModelAndView("eventsArchivedDisplay");
+		ArrayList<Event> eventList=null;
+		model.addObject("message", "From eventsHome controller");
+		logger.debug("Debug Inside the logger");
+		logger.warn("Warn Inside the logger");
+		//event = new Event();
+		//event.setEvent_desc("Test event");
+		//logger.warn("dbString >> " + dbString);
+		try{
+			eventList=eventsDao.getArchivedEventsDataFromDb();
+			if(eventList!=null){
+				for(Event event:eventList)
+				{
+					logger.debug(event);
+				}
+			}
+			else
+				logger.warn("Eventlist is null");
+		}catch(Exception e)
+		{
+			logger.error("Error in fetchArchivedEvents ",e);
+		}
+		if(eventList==null || eventList.isEmpty())
+			eventList=new ArrayList<Event>();
+		modelObj.addAttribute("eventsList",eventList);
+		//modelObj.addAttribute("eventsForm", new Event());
+		return model;
 	}
 
 

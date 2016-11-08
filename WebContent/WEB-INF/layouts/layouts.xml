@@ -57,5 +57,11 @@
 		<put-attribute name="menu" value="/WEB-INF/jsp/eventsMenu.jsp" />
 		<put-attribute name="body" value="/WEB-INF/jsp/editEvent.jsp" />
 	</definition>
+	
+	<definition name="eventsArchivedDisplay" extends="base.definition">
+		<put-attribute name="title" value="EventsDisplay" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/eventsMenu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/eventsArchivedDisplay.jsp" />
+	</definition>
 
 </tiles-definitions>

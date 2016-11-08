@@ -37,6 +37,15 @@
 					<td><form:input path="event_date_time" id="datetimepicker" type="text"/></td>
 				</tr>
 				<tr>
+				<td>Validity :</td>
+				<td>
+					<table>
+					<tr><td><form:radiobutton path="is_archived" value="false"/>Active</td></tr>
+					<tr><td><form:radiobutton path="is_archived" value="true"/>Archived</td></tr>
+					</table>
+				<td>
+				</tr>
+				<tr>
 					<td colspan="2" align="center"><input type="submit" value="Submit" /></td>
 				</tr>
 			</table>

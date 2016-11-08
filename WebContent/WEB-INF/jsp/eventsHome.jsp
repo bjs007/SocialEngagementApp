@@ -1,7 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-	<p>${message}</p>
+	<p>UserId: ${user_id}</p>
+	<p>${isUserAdm}</p>
 	<div align="center">
 		<form:form action="saveEvent" method="post" commandName="eventsForm">
 			<table border="1" style="background-color:#85c1e9;color:#34495e;font:Arial;border-radius:6px;font-size:12px;width:50%;">
