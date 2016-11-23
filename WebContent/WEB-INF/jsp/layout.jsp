@@ -1,6 +1,6 @@
 <!-- Created by Dipanjan Karmakar -->
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -11,6 +11,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title><tiles:insertAttribute name="title" ignore="true" /></title>
 	<style type="text/css">
 	body {
@@ -26,16 +27,18 @@
     </c:forEach>
 </head>
 <body>
-	<table border="1" cellpadding="3" cellspacing="2" align="center">
+	<table border="1" style="width: 100%; border-collapse: separate; ">
 		<tr>
-			<td height="30" colspan="2" style="background-image:url('${pageContext.request.contextPath}/images/web-header.jpg')"><tiles:insertAttribute name="header" />
+			<%-- <td height="30" colspan="2" style="background-image:url('${pageContext.request.contextPath}/images/web-header.jpg')"/> --%>
+			<td  colspan="2" class="layout_header"/>
+			<tiles:insertAttribute name="header" />
 		</tr>
 		<tr>
-			<td height="40%" width="1%" align="left" valign="top" style="background: rgb(42, 32, 30)"><tiles:insertAttribute name="menu" /></td>
-			<td width="88%"><tiles:insertAttribute name="body" /></td>
+			<td height="40%"  style="background: #16A085; width:30%;align:left;valign:top" ><tiles:insertAttribute name="menu" /></td>
+			<td style="width:70%"><tiles:insertAttribute name="body" /></td>
 		</tr>
 		<tr>
-			<td height="30" colspan="2"><tiles:insertAttribute name="footer" />
+			<td colspan ="2" class="layout_header"><tiles:insertAttribute name="footer" />
 			</td>
 		</tr>
 	</table>

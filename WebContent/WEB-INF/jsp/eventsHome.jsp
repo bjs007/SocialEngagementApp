@@ -6,9 +6,10 @@
 	<p>${isUserAdm}</p>
 	<div align="center">
 		<form:form action="saveEvent" method="post" commandName="eventsForm">
-			<table border="1" style="background-color:#85c1e9;color:#34495e;font:Arial;border-radius:6px;font-size:12px;width:50%;">
+			<!-- <table border="1" style="background-color:#85c1e9;color:#34495e;font:Arial;border-radius:6px;font-size:12px;width:50%;"> -->
+			<table class="rwd-table">
 				<tr>
-					<td colspan="2" align="center"><h2>Enter these fields to
+					<td colspan="2" ><h2>Enter these fields to
 							fetch data</h2></td>
 				</tr>
 				<tr>
@@ -38,7 +39,7 @@
 					<td><form:input path="event_date_time" id="datetimepicker" type="text"/></td>
 				</tr>
 				<tr>
-					<td colspan="2" align="center"><input type="submit" value="Submit" /></td>
+					<td colspan="2" style="text-align:center"><input type="submit" value="Submit" class="submitBtn"/></td>
 				</tr>
 			</table>
 		</form:form>
