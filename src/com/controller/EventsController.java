@@ -34,23 +34,33 @@ public class EventsController {
 	//public ModelAndView eventsHome(@RequestParam(required=false) Integer event_id,HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception
 	public ModelAndView eventsHome(HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception
 	{
-		String staticUserId="4321";
+		String staticUserId="5";
 
 		ModelAndView model = new ModelAndView("eventsHome");
-		model.addObject("message", "From eventsHome controller");
-		logger.debug("Debug Inside the logger");
-		logger.warn("Warn Inside the logger");
-		//logger.warn("dbString >> " + dbString);
 		modelObj.addAttribute("eventsForm", new Event());
+		
 		Object uId=request.getSession().getAttribute("user_id");
 		if(uId==null)
-			request.getSession().setAttribute("user_id", staticUserId);
-		Boolean isUserAdm=eventsDao.isAdminUser(Integer.parseInt(staticUserId));
+		{
+			uId=staticUserId;
+			request.getSession().setAttribute("user_id", uId);
+		}
+		Boolean isUserAdm=eventsDao.isAdminUser(Integer.parseInt(uId.toString()));
 		if(isUserAdm)
 			request.getSession().setAttribute("isUserAdm", true);
 		else
 			request.getSession().setAttribute("isUserAdm", false);
-		//String user_id=request.getSession().getAttribute("user_id").toString();
+		
+		Object uName=request.getSession().getAttribute("user_name");
+		String user_name=null;
+		if(uName==null)
+		{
+				int user_id=Integer.parseInt(uId.toString());
+				user_name=eventsDao.getUserNameFromId(user_id);
+		}
+		if(user_name==null || user_name.isEmpty())
+			user_name="UserAbc";
+		request.getSession().setAttribute("user_name", user_name);
 		return model;
 	}
 	
@@ -127,6 +137,11 @@ public class EventsController {
 		ModelAndView model = new ModelAndView("editEvent");
 		model.addObject("message", "From eventsHome controller");
 		logger.warn("Warn Inside the logger");
+		Integer user_id=Integer.parseInt(request.getSession().getAttribute("user_id").toString());
+		event.setUser_id(user_id);
+		String eventComment=event.getCommentToAdd();
+		String user_name=request.getSession().getAttribute("user_name").toString();
+		event.setCommentToAdd(user_name +"~"+eventComment);
 		eventsDao.saveEditedEvents(event);
 		//modelObj.addAttribute("eventsForm", new Event());
 		return new ModelAndView("redirect:/fetchEvent");

@@ -1,8 +1,10 @@
 <!-- Created by Dipanjan Karmakar -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-	<p>${message}</p>
+
+	<p>${user_name}</p>
 	<div align="center">
 		<form:form action="saveEditedEvent" method="post" commandName="eventsForm">
 			<form:hidden path="event_id"/>
@@ -41,10 +43,34 @@
 				<td>Validity :</td>
 				<td>
 					<table>
-					<tr><td><form:radiobutton path="is_archived" value="false"/>Active</td></tr>
-					<tr><td><form:radiobutton path="is_archived" value="true"/>Archived</td></tr>
+						<tr><td><form:radiobutton path="is_archived" value="false"/>Active</td></tr>
+						<tr><td><form:radiobutton path="is_archived" value="true"/>Archived</td></tr>
 					</table>
+				</td>
+				</tr>
+				<!-- <tr>
+				<td>Comments: </td>
+					<td>
+						<div class="block">
+        				<textarea id="textbox" style="height: 20px; width: 200px;" class="commentbox"></textarea>
+        					<div class="commentsblock">
+       			 			</div>
+    					</div>
+					
+					<td>
+				</tr> -->
+				<tr>
+				<td>Comments:</td>
+				
 				<td>
+					<c:if test="${not empty eventsForm.prevComments}">
+						<c:forEach items="${eventsForm.prevComments}" var="comment">
+							<c:set var="commentParts" value="${fn:split(comment.commentString, '~')}" />
+							<p><span style="color:INDIANRED;"><b><i><c:out value="${commentParts[0]}" /></i></b></span>  <c:out value="${commentParts[1]}" /></p>
+						</c:forEach>
+					</c:if>
+						<form:input path="commentToAdd" style="height: 20px; width: 200px;" class="commentbox" type="text"/>
+				</td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center"><input type="submit" value="Submit" /></td>
@@ -52,34 +78,3 @@
 			</table>
 		</form:form>
 	</div>
-	<%--
-	<p>${isDataPresent}</p>
-	
-	<div class="dataTables_wrapper" id="example_wrapper" align="center" >
-	<div align="center" style="width:50%">
-		<c:if test="${ not empty isDataPresent}">
-			<p>
-			<table id="dataTableExp" width="50%" class="display" 
-				style="background-color: #aed6f1 ; color:  #34495e ; font: Arial; border-radius:6px; font-size: 12px">
-				<thead>
-					<tr>
-						<th>Student Id</th>
-						<th>First name</th>
-						<th>Last name</th>
-						<th>Gender name</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${student}" var="current">
-						<tr>
-							<td><c:out value="${current.student_id}" />
-							<td><c:out value="${current.first_name}" />
-							<td><c:out value="${current.last_name}" />
-							<td><c:out value="${current.gender}" />
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</c:if>
-	</div>
-	</div> --%>

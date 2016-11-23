@@ -8,7 +8,7 @@ package com.enums;
  *
  */
 public enum ModuleEnum {
-
+ 
 	EVENTS(1),
 	BROADCAST(2),
 	DISCUSSION(3);
@@ -20,5 +20,13 @@ public enum ModuleEnum {
 	
 	public int value() {
         return value;
+    }
+	public static ModuleEnum fromValue(int v) {
+        for (ModuleEnum moduleEnum: ModuleEnum.values()) {
+            if (moduleEnum.value == v) {
+                return moduleEnum;
+            }
+        }
+        throw new IllegalArgumentException(String.valueOf(v));
     }
 }

@@ -10,3 +10,44 @@
 	overflow:hidden;
 	font-family:FFMetaWebProLight,Arial,Helvetica,sans-serif
 }
+ .block
+ {
+     width: 200px;
+     float: left;
+     border: 1px solid red;
+ }
+ 
+ .comments
+ {
+     width: 200px;
+     float: left;
+     border: 1px solid red;
+     min-height: 40px;
+ }
+ .commentsblock
+ {
+     width: 200px;
+     float: left;
+     border: 1px solid red;
+ }
+ .commentbox
+ {
+     overflow-y: hidden;
+     height: 20px;
+     width: 200px;
+ }
+ .divfloat
+ {
+     float: left;
+ }
+ .imageicons
+ {
+     height: 40px;
+     width: 42px;
+ }
+ .commentinfo
+ {
+     background: yellow;
+     word-wrap: break-word;
+     width: 152px;
+ }

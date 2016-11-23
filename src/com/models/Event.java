@@ -4,6 +4,7 @@ package com.models;
  * @author Dipanjan Karmakar
  */
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Event {
@@ -16,6 +17,8 @@ public class Event {
 	private Date event_date_time;
 	private Boolean is_archived;
 	private Boolean is_resources_satisfied;
+	private ArrayList<Comment> prevComments;
+	private String commentToAdd;
 	public Integer getEvent_id() {
 		return event_id;
 	}
@@ -88,6 +91,35 @@ public class Event {
 		this.event_id = event_id;
 	}
 
+	
+	/**
+	 * @return the prevComments
+	 */
+	public ArrayList<Comment> getPrevComments() {
+		return prevComments;
+	}
+
+	/**
+	 * @param prevComments the prevComments to set
+	 */
+	public void setPrevComments(ArrayList<Comment> prevComments) {
+		this.prevComments = prevComments;
+	}
+
+	/**
+	 * @return the commentToAdd
+	 */
+	public String getCommentToAdd() {
+		return commentToAdd;
+	}
+
+	/**
+	 * @param commentToAdd the commentToAdd to set
+	 */
+	public void setCommentToAdd(String commentToAdd) {
+		this.commentToAdd = commentToAdd;
+	}
+
 	@Override
 	public String toString() {
 		return "Event [event_id=" + event_id + ", event_desc=" + event_desc
@@ -95,6 +127,8 @@ public class Event {
 				+ user_id + ", resources_needed=" + resources_needed
 				+ ", place=" + place + ", event_date_time=" + event_date_time
 				+ ", is_archived=" + is_archived + ", is_resources_satisfied="
-				+ is_resources_satisfied + "]";
+				+ is_resources_satisfied + ", prevComments=" + prevComments
+				+ ", commentToAdd=" + commentToAdd + "]";
 	}
+
 }

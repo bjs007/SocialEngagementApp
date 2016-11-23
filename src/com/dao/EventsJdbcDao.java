@@ -17,6 +17,8 @@ import java.util.Date;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 
+import com.enums.ModuleEnum;
+import com.models.Comment;
 import com.models.Event;
 
 public class EventsJdbcDao {
@@ -288,6 +290,36 @@ public class EventsJdbcDao {
 					Boolean is_resources_satisfied=rs.getBoolean("is_resources_satisfied");
 					event.setIs_resources_satisfied(is_resources_satisfied);
 
+					//get comments data
+					String selectCommentSQL = new String("SELECT * from comments where module_type=?  and post_id=? order by comment_id");
+					PreparedStatement pstmt = connection.prepareStatement(selectCommentSQL);
+					pstmt.setInt(1, ModuleEnum.EVENTS.value());
+					pstmt.setInt(2, event.getEvent_id());
+					
+					ResultSet commRs = pstmt.executeQuery();
+					while (commRs.next()) {
+
+						String commentId = commRs.getString("comment_id");
+						String userId = commRs.getString("user_id");
+						String dateTime=commRs.getString("date_time");
+						String post_id=commRs.getString("post_id");
+						String commentString=commRs.getString("comment_string");
+						String moduleType=commRs.getString("module_type");
+						
+						Comment comment=new Comment();
+						comment.setCommentId(Integer.parseInt(commentId));
+						comment.setUserId(Integer.parseInt(userId));
+						SimpleDateFormat df = new SimpleDateFormat("EEE MMM d HH:mm:ss z yyyy");
+						comment.setDate_time(df.parse(dateTime));
+						comment.setPostId(Integer.parseInt(post_id));
+						comment.setCommentString(commentString);
+						comment.setModule_type(ModuleEnum.fromValue(Integer.parseInt(moduleType)));
+						logger.debug("Comment for eventId "+ event.getEvent_id() + " >> "+ event.toString() );
+						if(event.getPrevComments()==null || event.getPrevComments().isEmpty()){
+							event.setPrevComments(new ArrayList<Comment>());
+						}
+						event.getPrevComments().add(comment);
+					}
 
 					eventList.add(event);
 					logger.warn(event);
@@ -451,6 +483,25 @@ public class EventsJdbcDao {
 
 				//int[] updateCounts = pstmt.executeBatch();
 				int updated = pstmt.executeUpdate();
+				
+				
+				
+				String insertCommentSQL = "INSERT INTO comments (user_id,date_time,post_id,comment_string,module_type) VALUES (?,?,?,?,?)";
+				pstmt = connection.prepareStatement(insertCommentSQL);
+				
+				if(event.getUser_id()!=null && event.getUser_id()>0)
+					pstmt.setString(1,event.getUser_id().toString());
+				else
+					pstmt.setString(1,null);
+				
+				pstmt.setString(2,new Date().toString());
+				
+				pstmt.setInt(3, event.getEvent_id());
+				pstmt.setString(4, event.getCommentToAdd());
+				
+				pstmt.setInt(5, ModuleEnum.EVENTS.value());
+				boolean inserted = pstmt.execute();
+				
 
 				System.out.println("Saved records >> "+ updated);
 			} catch (Exception e) {
@@ -614,5 +665,69 @@ public class EventsJdbcDao {
 			return eventList;
 		else
 			return null;
+	}
+
+	/**
+	 * @param user_id
+	 * @return
+	 */
+	public String getUserNameFromId(Integer user_id) 
+	{
+		boolean result=false;
+
+		System.out.println("-------- MySQL JDBC Connection Testing ------------");
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.println("Where is your MySQL JDBC Driver?");
+			e.printStackTrace();
+			return null;
+		}
+
+		System.out.println("MySQL JDBC Driver Registered!");
+		Connection connection = null;
+
+		try {
+			connection = DriverManager
+					//.getConnection("jdbc:mysql://localhost:3307/Library","root","password");
+					.getConnection(jdbcString,dbUserName,dbPassword);
+		} catch (SQLException e) {
+			System.out.println("Connection Failed! Check output console");
+			e.printStackTrace();
+			return null;
+		}
+
+		if (connection != null) {
+			System.out.println("You made it, take control your database now!");
+
+			try {
+				String selectTableSQL = new String("SELECT * from users where userid= ? ");
+				PreparedStatement statement=connection.prepareStatement(selectTableSQL);
+				if(user_id!=null)
+					statement.setInt(1, user_id);
+
+				System.out.println(selectTableSQL.toString());
+
+				ResultSet rs = statement.executeQuery();
+				while (rs.next()) {
+					String userName=rs.getString("name");
+					if(userName.isEmpty())
+						return null;
+					else
+						return userName;
+				}
+				return null;
+			}
+			catch(Exception e1)
+			{
+				e1.printStackTrace();
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return null;
 	}
 }
