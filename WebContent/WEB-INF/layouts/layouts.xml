@@ -63,5 +63,9 @@
 		<put-attribute name="menu" value="/WEB-INF/jsp/eventsMenu.jsp" />
 		<put-attribute name="body" value="/WEB-INF/jsp/eventsArchivedDisplay.jsp" />
 	</definition>
-
+<definition name="hello" template="/WEB-INF/jsp/hellopage.jsp">
+<put-list-attribute name="loginstyle">
+			<add-attribute value="/css/logincss.css" />
+		</put-list-attribute> 
+</definition>
 </tiles-definitions>
