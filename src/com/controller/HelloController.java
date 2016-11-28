@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.dao.JDBCDao;
-import com.models.Student;
-import com.models.Subject;
+//import com.dao.JDBCDao;
+//import com.models.Student;
+//import com.models.Subject;
 
 
 
@@ -36,6 +36,18 @@ public class HelloController {
 	public ModelAndView hello(HttpServletRequest request,HttpServletResponse response) throws Exception {
 
 		ModelAndView model = new ModelAndView("hello");
+		model.addObject("message", "From new function");
+		//logger.debug("Debug Inside the logger");
+		//logger.warn("NEWLOG");
+		//logger.warn("Warn Inside the logger");
+		//logger.warn("dbString >> " + dbString);
+		return model;
+	}
+	
+	@RequestMapping("/createBroadcast")
+	public ModelAndView createBroadcast(HttpServletRequest request,HttpServletResponse response) throws Exception {
+
+		ModelAndView model = new ModelAndView("createBroadcast");
 		model.addObject("message", "From new function");
 		//logger.debug("Debug Inside the logger");
 		//logger.warn("NEWLOG");

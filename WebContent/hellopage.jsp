@@ -4,16 +4,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<tiles:importAttribute name="stylesheets"/>
-<tiles:importAttribute name="javascripts"/>
+<tiles:importAttribute name="loginstyle"/>
 
 <html lang='en'>
 <head>
-    <meta charset="UTF-8" /> 
     <title>
        Engage App
     </title>
-    <link rel="stylesheet" type="text/css" href="logincss.css" />
+    <link rel="stylesheet" type="text/css" href="css/logincss.css">
 </head>
 <body>
 
@@ -26,9 +24,9 @@
 		<span></span>
 		</div>
 		<div class="content">
-		<input name="sUserName" type="text" class="input username" placeholder="Username" required/>
+		<input name="sUserName" type="text" class="input username"/>
 		<div class="user-icon"></div>
-		<input name="sPwd" type="password" class="input password" placeholder="Password" required/>
+		<input name="sPwd" type="password" class="input password"/>
 		<div class="pass-icon"></div>	
                 
 		</div>
