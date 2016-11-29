@@ -3,7 +3,13 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-	jQuery('#datetimepicker').datetimepicker();
+	jQuery('#datetimepicker').datetimepicker({
+//	value: new Date(),
+	format:'Y/m/d H:i',
+	startDate:'+2016/11/01',
+	autoclose: true,
+	useCurrent: false 	
+	});
 });
 
 $(document).ready(function () {

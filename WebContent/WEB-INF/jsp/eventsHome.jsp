@@ -2,76 +2,51 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-	<p>UserId: ${user_id}</p>
-	<p>${isUserAdm}</p>
+
 	<div align="center">
-		<form:form action="saveEvent" method="post" commandName="eventsForm">
-			<!-- <table border="1" style="background-color:#85c1e9;color:#34495e;font:Arial;border-radius:6px;font-size:12px;width:50%;"> -->
-			<table class="rwd-table">
-				<tr>
-					<td colspan="2" ><h2>Enter these fields to
-							fetch data</h2></td>
-				</tr>
-				<tr>
-					<td>Enter Description of the event:</td>
-					<td><form:input path="event_desc" /></td>
-				</tr>
-				<tr>
-					<td>Mention Resource Needed :</td>
-					<td><form:input path="resources_needed" /></td>
-				</tr>
-				
-				<tr>
-					<td>Are all resource satisfied :</td>
-					<td><form:select path="is_resources_satisfied" >
-						<form:option selected="true" value="false" label="NO"/>
-   						<form:option value="true" label="YES"/>
-   						</form:select>
-					</td>
-				</tr>
-				
-				<tr>
-					<td>Place of event:</td>
-					<td><form:input path="place" /></td>
-				</tr>
-				<tr>
-					<td>Date/Time for event :</td>
-					<td><form:input path="event_date_time" id="datetimepicker" type="text"/></td>
-				</tr>
-				<tr>
-					<td colspan="2" style="text-align:center"><input type="submit" value="Submit" class="submitBtn"/></td>
-				</tr>
-			</table>
-		</form:form>
+		<div id="scrollcontainer" style="postion:relative; overflow:hidden; width:80%;">
+  			<span id="scrolltext" style="position:absolute; white-space:nowrap">Event is a mutipurpose module where you can do several activities ! Want to go to grocery or meet a friend - Schedule an event !</span>
+		</div>
+		<p></p>
+		<div class="w3-content w3-section" style="max-width:500px">
+	  		<img class="mySlides" src="images/events-home-1.jpg" style="width:500px; height: 300px">
+	  		<img class="mySlides" src="images/events-home-2.jpg" style="width:500px; height: 300px">
+	  		<img class="mySlides" src="images/events-home-3.jpg" style="width:500px; height: 300px">
+	  		<img class="mySlides" src="images/events-home-4.jpg" style="width:500px; height: 300px">
+	  		<img class="mySlides" src="images/events-home-5.jpg" style="width:500px; height: 300px">
+	  		<!-- <img class="mySlides" src="img_ny.jpg" style="width:100%">
+	  		<img class="mySlides" src="img_chicago.jpg" style="width:100%"> -->
+		</div>
+		
 	</div>
-	<%--
-	<p>${isDataPresent}</p>
 	
-	<div class="dataTables_wrapper" id="example_wrapper" align="center" >
-	<div align="center" style="width:50%">
-		<c:if test="${ not empty isDataPresent}">
-			<p>
-			<table id="dataTableExp" width="50%" class="display" 
-				style="background-color: #aed6f1 ; color:  #34495e ; font: Arial; border-radius:6px; font-size: 12px">
-				<thead>
-					<tr>
-						<th>Student Id</th>
-						<th>First name</th>
-						<th>Last name</th>
-						<th>Gender name</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${student}" var="current">
-						<tr>
-							<td><c:out value="${current.student_id}" />
-							<td><c:out value="${current.first_name}" />
-							<td><c:out value="${current.last_name}" />
-							<td><c:out value="${current.gender}" />
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</c:if>
-	</div>
-	</div> --%>
+<script>
+var myIndex = 0;
+carousel();
+
+function carousel() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";  
+    }
+    myIndex++;
+    if (myIndex > x.length) {myIndex = 1}    
+    x[myIndex-1].style.display = "block";  
+    setTimeout(carousel, 2000); // Change image every 2 seconds
+}
+
+function scroll() {
+	  $('#scrolltext').css('left', $('#scrollcontainer').width());
+	  $('#scrolltext').animate({
+	    left: '-='+($('#scrollcontainer').width()+$('#scrolltext').width())
+	  }, 10000, function() {
+	    scroll();
+	  });
+	}
+
+	scroll();
+
+
+</script>
+	

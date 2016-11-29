@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,22 +30,24 @@ public class EventsController {
 	@Autowired
 	private EventsJdbcDao eventsDao;
 	
+	@Value("${eventsStaticUserId}")
+	private String staticUserId;
+	
 	Logger logger= Logger.getLogger(EventsController.class);
 	
 	@RequestMapping("/events")
 	//public ModelAndView eventsHome(@RequestParam(required=false) Integer event_id,HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception
 	public ModelAndView eventsHome(HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception
 	{
-		String staticUserId="5";
 
 		ModelAndView model = new ModelAndView("eventsHome");
 		modelObj.addAttribute("eventsForm", new Event());
 		
-		Object uId=request.getSession().getAttribute("user_id");
+		Object uId=request.getSession().getAttribute("session_user_id");
 		if(uId==null)
 		{
 			uId=staticUserId;
-			request.getSession().setAttribute("user_id", uId);
+			request.getSession().setAttribute("session_user_id", uId);
 		}
 		Boolean isUserAdm=eventsDao.isAdminUser(Integer.parseInt(uId.toString()));
 		if(isUserAdm)
@@ -67,7 +71,7 @@ public class EventsController {
 	@RequestMapping("/createEvents")
 	public ModelAndView createEvents(HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception {
 
-		ModelAndView model = new ModelAndView("eventsHome");
+		ModelAndView model = new ModelAndView("createEvent");
 		model.addObject("message", "From eventsHome controller");
 		logger.debug("Debug Inside the logger");
 		logger.warn("Warn Inside the logger");
@@ -86,7 +90,7 @@ public class EventsController {
 		//event = new Event();
 		//event.setEvent_desc("Test event");
 		event.setCreated_date_time(new Date());
-		String user_id=request.getSession().getAttribute("user_id").toString();
+		String user_id=request.getSession().getAttribute("session_user_id").toString();
 		event.setUser_id(Integer.parseInt(user_id));
 		eventsDao.saveEvents(event);
 		//logger.warn("dbString >> " + dbString);
@@ -137,11 +141,14 @@ public class EventsController {
 		ModelAndView model = new ModelAndView("editEvent");
 		model.addObject("message", "From eventsHome controller");
 		logger.warn("Warn Inside the logger");
-		Integer user_id=Integer.parseInt(request.getSession().getAttribute("user_id").toString());
+		Integer user_id=Integer.parseInt(request.getSession().getAttribute("session_user_id").toString());
 		event.setUser_id(user_id);
 		String eventComment=event.getCommentToAdd();
-		String user_name=request.getSession().getAttribute("user_name").toString();
-		event.setCommentToAdd(user_name +"~"+eventComment);
+		if(StringUtils.hasText(eventComment))
+		{
+			String user_name=request.getSession().getAttribute("user_name").toString();
+			event.setCommentToAdd(user_name +"~"+eventComment);
+		}
 		eventsDao.saveEditedEvents(event);
 		//modelObj.addAttribute("eventsForm", new Event());
 		return new ModelAndView("redirect:/fetchEvent");
@@ -195,7 +202,5 @@ public class EventsController {
 		//modelObj.addAttribute("eventsForm", new Event());
 		return model;
 	}
-
-
 
 }

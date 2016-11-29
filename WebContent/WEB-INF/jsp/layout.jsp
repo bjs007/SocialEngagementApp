@@ -26,6 +26,7 @@
         <script type="text/javascript" src="<c:url value="${script}"/>"></script>
     </c:forEach>
 </head>
+
 <body>
 	<table border="1" style="width: 100%; border-collapse: separate; ">
 		<tr>

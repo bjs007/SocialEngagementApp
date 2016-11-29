@@ -19,6 +19,7 @@
 			<add-attribute value="/css/nice-menu.css" />
 			<add-attribute value="/css/custom.css" />
 			<add-attribute value="/css/jquery.datetimepicker.css" />
+			<add-attribute value="/css/w3.css" />
 		</put-list-attribute>
 	</definition>
 
@@ -45,7 +46,11 @@
 		<put-attribute name="menu" value="/WEB-INF/jsp/eventsMenu.jsp" />
 		<put-attribute name="body" value="/WEB-INF/jsp/eventsHome.jsp" />
 	</definition>
-	
+	<definition name="createEvent" extends="base.definition">
+		<put-attribute name="title" value="EventsHome" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/eventsMenu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/createEvents.jsp" />
+	</definition>
 	<definition name="eventsDisplay" extends="base.definition">
 		<put-attribute name="title" value="EventsDisplay" />
 		<put-attribute name="menu" value="/WEB-INF/jsp/eventsMenu.jsp" />

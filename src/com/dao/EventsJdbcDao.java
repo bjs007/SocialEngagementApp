@@ -16,6 +16,7 @@ import java.util.Date;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.util.StringUtils;
 
 import com.enums.ModuleEnum;
 import com.models.Comment;
@@ -92,15 +93,16 @@ public class EventsJdbcDao {
 				else
 					pstmt.setString(5,null);
 
-				//place of event
-				if(event.getPlace()!=null && !event.getPlace().isEmpty())
-					pstmt.setString(6,event.getPlace());
-				else
-					pstmt.setString(5,null);
-
 				//event-date
 				if(event.getEvent_date_time()!=null)
-					pstmt.setString(6,event.getEvent_date_time().toString());
+				{
+					SimpleDateFormat parser=new SimpleDateFormat("EEE MMM d HH:mm:ss z yyyy");
+					Date dateToSet=parser.parse(event.getEvent_date_time().toString());
+					logger.warn("Java date : " + dateToSet);
+					java.sql.Timestamp timeStampToSet=new java.sql.Timestamp( dateToSet.getTime());
+					logger.warn("SQL date : " + timeStampToSet);
+					pstmt.setTimestamp(6,timeStampToSet);
+				}
 				else
 					pstmt.setString(6,null);
 
@@ -160,7 +162,7 @@ public class EventsJdbcDao {
 
 			try {
 				Statement statement=connection.createStatement();
-				StringBuilder selectTableSQL = new StringBuilder("select * from socialDb.events");
+				StringBuilder selectTableSQL = new StringBuilder("select * from socialDb.events where is_archived='false';");
 
 				logger.warn(selectTableSQL.toString());
 
@@ -176,7 +178,7 @@ public class EventsJdbcDao {
 					String event_desc = rs.getString("event_desc");
 					event.setEvent_desc(event_desc);
 
-					SimpleDateFormat parser=new SimpleDateFormat("EEE MMM d HH:mm:ss zzz yyyy");
+					SimpleDateFormat parser=new SimpleDateFormat("EEE MMM d HH:mm:ss z yyyy");
 					Date created_date_time= parser.parse(rs.getString("created_date_time"));
 					event.setCreated_date_time(created_date_time);
 
@@ -188,8 +190,9 @@ public class EventsJdbcDao {
 
 					String place=rs.getString("place");
 					event.setPlace(place);
-
-					Date event_date_time= parser.parse(rs.getString("event_date_time"));
+					
+					java.sql.Timestamp dateTimeToSet=rs.getTimestamp("event_date_time");
+					Date event_date_time= new Date(dateTimeToSet.getTime());
 					event.setEvent_date_time(event_date_time);
 
 					Boolean is_archived=rs.getBoolean("is_archived");
@@ -268,7 +271,7 @@ public class EventsJdbcDao {
 					String event_desc = rs.getString("event_desc");
 					event.setEvent_desc(event_desc);
 
-					SimpleDateFormat parser=new SimpleDateFormat("EEE MMM d HH:mm:ss zzz yyyy");
+					SimpleDateFormat parser=new SimpleDateFormat("EEE MMM d HH:mm:ss z yyyy");
 					Date created_date_time= parser.parse(rs.getString("created_date_time"));
 					event.setCreated_date_time(created_date_time);
 
@@ -280,9 +283,11 @@ public class EventsJdbcDao {
 
 					String place=rs.getString("place");
 					event.setPlace(place);
-
-					Date event_date_time= parser.parse(rs.getString("event_date_time"));
-					event.setEvent_date_time(event_date_time);
+					
+					java.sql.Timestamp dateTimeToSet=rs.getTimestamp("event_date_time");
+					Date eventTimeStamp=new Date(dateTimeToSet.getTime());
+					//Date event_date_time= parser.parse(rs.getString("event_date_time"));
+					event.setEvent_date_time(eventTimeStamp);
 
 					Boolean is_archived=rs.getBoolean("is_archived");
 					event.setIs_archived(is_archived);
@@ -431,7 +436,8 @@ public class EventsJdbcDao {
 			logger.debug("You made it, take control your database now!");
 
 			try {
-				String insertEventsSQL = "update events set event_desc=?,created_date_time=?,user_id=?,resources_needed=?,place=?,event_date_time=?,is_archived=?,is_resources_satisfied=? where event_id=?";
+				//String insertEventsSQL = "update events set event_desc=?,created_date_time=?,user_id=?,resources_needed=?,place=?,event_date_time=?,is_archived=?,is_resources_satisfied=? where event_id=?";
+				String insertEventsSQL = "update events set event_desc=?,created_date_time=?,resources_needed=?,place=?,event_date_time=?,is_archived=?,is_resources_satisfied=? where event_id=?";
 				PreparedStatement pstmt = connection.prepareStatement(insertEventsSQL);
 
 				//event description
@@ -444,66 +450,68 @@ public class EventsJdbcDao {
 				pstmt.setString(2,new Date().toString());
 
 				//user-id
-				if(event.getUser_id()!=null && event.getUser_id()>0)
+				/*if(event.getUser_id()!=null && event.getUser_id()>0)
 					pstmt.setString(3,event.getUser_id().toString());
 				else
-					pstmt.setString(3,null);
+					pstmt.setString(3,null);*/
 
 				//resources-needed
 				if(event.getResources_needed()!=null && !event.getResources_needed().isEmpty())
-					pstmt.setString(4,event.getResources_needed());
+					pstmt.setString(3,event.getResources_needed());
+				else
+					pstmt.setString(3,null);
+
+				//place of event
+				if(event.getPlace()!=null && !event.getPlace().isEmpty())
+					pstmt.setString(4,event.getPlace());
 				else
 					pstmt.setString(4,null);
 
-				//place of event
-				if(event.getPlace()!=null && !event.getPlace().isEmpty())
-					pstmt.setString(5,event.getPlace());
-				else
-					pstmt.setString(5,null);
-
-				//place of event
-				if(event.getPlace()!=null && !event.getPlace().isEmpty())
-					pstmt.setString(6,event.getPlace());
-				else
-					pstmt.setString(5,null);
-
 				//event-date
 				if(event.getEvent_date_time()!=null)
-					pstmt.setString(6,event.getEvent_date_time().toString());
+				{
+					SimpleDateFormat parser=new SimpleDateFormat("EEE MMM d HH:mm:ss z yyyy");
+					Date dateToSet=parser.parse(event.getEvent_date_time().toString());
+					logger.warn("Java date : " + dateToSet);
+					java.sql.Timestamp timeStampToSet=new java.sql.Timestamp( dateToSet.getTime());
+					logger.warn("SQL date : " + timeStampToSet);
+					pstmt.setTimestamp(5,timeStampToSet);
+					
+				}
 				else
-					pstmt.setString(6,null);
+					pstmt.setString(5,null);
 
 				//is-archived
-				pstmt.setString(7,String.valueOf(event.getIs_archived()==null?"false":event.getIs_archived()));
+				pstmt.setString(6,String.valueOf(event.getIs_archived()==null?"false":event.getIs_archived()));
 
 				//is_resources_satisfied
-				pstmt.setString(8,String.valueOf(event.getIs_resources_satisfied()==null?"false":event.getIs_resources_satisfied()));
+				pstmt.setString(7,String.valueOf(event.getIs_resources_satisfied()==null?"false":event.getIs_resources_satisfied()));
 
-				pstmt.setInt(9,event.getEvent_id());
+				pstmt.setInt(8,event.getEvent_id());
 
 				//int[] updateCounts = pstmt.executeBatch();
 				int updated = pstmt.executeUpdate();
+				logger.warn("Updated events :" + updated);
 				
-				
-				
-				String insertCommentSQL = "INSERT INTO comments (user_id,date_time,post_id,comment_string,module_type) VALUES (?,?,?,?,?)";
-				pstmt = connection.prepareStatement(insertCommentSQL);
-				
-				if(event.getUser_id()!=null && event.getUser_id()>0)
-					pstmt.setString(1,event.getUser_id().toString());
-				else
-					pstmt.setString(1,null);
-				
-				pstmt.setString(2,new Date().toString());
-				
-				pstmt.setInt(3, event.getEvent_id());
-				pstmt.setString(4, event.getCommentToAdd());
-				
-				pstmt.setInt(5, ModuleEnum.EVENTS.value());
-				boolean inserted = pstmt.execute();
-				
-
-				System.out.println("Saved records >> "+ updated);
+				if(StringUtils.hasText(event.getCommentToAdd()))
+				{
+					String insertCommentSQL = "INSERT INTO comments (user_id,date_time,post_id,comment_string,module_type) VALUES (?,?,?,?,?)";
+					pstmt = connection.prepareStatement(insertCommentSQL);
+					
+					if(event.getUser_id()!=null && event.getUser_id()>0)
+						pstmt.setString(1,event.getUser_id().toString());
+					else
+						pstmt.setString(1,null);
+					
+					pstmt.setString(2,new Date().toString());
+					
+					pstmt.setInt(3, event.getEvent_id());
+					pstmt.setString(4, event.getCommentToAdd());
+					
+					pstmt.setInt(5, ModuleEnum.EVENTS.value());
+					boolean inserted = pstmt.execute();
+					logger.warn("Saved comments records >> "+ inserted);
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -623,7 +631,7 @@ public class EventsJdbcDao {
 					String event_desc = rs.getString("event_desc");
 					event.setEvent_desc(event_desc);
 
-					SimpleDateFormat parser=new SimpleDateFormat("EEE MMM d HH:mm:ss zzz yyyy");
+					SimpleDateFormat parser=new SimpleDateFormat("EEE MMM d HH:mm:ss z yyyy");
 					Date created_date_time= parser.parse(rs.getString("created_date_time"));
 					event.setCreated_date_time(created_date_time);
 
@@ -636,7 +644,8 @@ public class EventsJdbcDao {
 					String place=rs.getString("place");
 					event.setPlace(place);
 
-					Date event_date_time= parser.parse(rs.getString("event_date_time"));
+					java.sql.Timestamp dateTimeToSet=rs.getTimestamp("event_date_time");
+					Date event_date_time= new Date(dateTimeToSet.getTime());
 					event.setEvent_date_time(event_date_time);
 
 					Boolean is_archived=rs.getBoolean("is_archived");
