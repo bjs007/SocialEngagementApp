@@ -1,4 +1,4 @@
-<%@ page import="java.util.*,com.models.*" language="java" contentType="text/html; charset=UTF-8"
+<%@ page import="java.util.ArrayList,com.models.*" language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@taglib prefix ="c" uri="http://java.sun.com/jsp/jstl/core" %> 
@@ -82,16 +82,18 @@ function ab(){
 	var mydocument = document;
     var mylist = mydocument.getElementById("tt");
     var docFragments = mydocument.createDocumentFragment();
-    var sum = mydocument.getElementById("sumofarraylist").value;
+    var sum = mydocument.getElementById("sum").value;
     if((sum - begin) > 1 ){
     	for (var i = begin; i < begin + 2; ++i) {
             var liItem = mydocument.createElement("div");
-            var str = mydocument.getElementById(i).value;
+            var str = mydocument.getElementById(begin).value;
             var strarray = str.split("&&");
             if(strarray[2] == "1"){
             	liItem.innerHTML = "<div class=\"demo\"><div class=\"title\"><img src=\"images/1.png\" alt=\"\" class=\"head\"/><p class=\"name\">"+strarray[7]+"</p><p class=\"intro\">"+strarray[6]+"</p></div><div class=\"content\"><p>"+strarray[5]+"</p></div><div style=\"text-align:right\"><a href=\"joinin?eid="+strarray[3]+"&typeid="+strarray[2]+"\">->Join in!<-</a></div><div class=\"comment\" align=\"center\"><form method=\"get\" action=\"${pageContext.request.contextPath}/comsubmit\"><input type=\"hidden\" name = \"info\" value = \""+str+"\"><textarea id=\"\" name = \"infoarea\" style=\"width:300px;height:80px;\"></textarea><input type=\"submit\" value=\"SUBMIT COMMENTS\"></form></div></div><br>" ;            }
+            }
             else if(strarray[2] == "2"){
             	liItem.innerHTML = "<div class=\"demo\"><div class=\"title\"><img src=\"images/2.png\" alt=\"\" class=\"head\"/><p class=\"name\">"+strarray[7]+"</p><p class=\"intro\">"+strarray[6]+"</p></div><div class=\"content\"><p>"+strarray[5]+"</p></div><div style=\"text-align:right\"><a href=\"joinin?eid="+strarray[3]+"&typeid="+strarray[2]+"\">->Join in!<-</a></div><div class=\"comment\" align=\"center\"><form method=\"get\" action=\"${pageContext.request.contextPath}/comsubmit\"><input type=\"hidden\" name = \"info\" value = \""+str+"\"><textarea id=\"\" name = \"infoarea\" style=\"width:300px;height:80px;\"></textarea><input type=\"submit\" value=\"SUBMIT COMMENTS\"></form></div></div><br>" ;            }
+      		}
             docFragments.appendChild(liItem);
         }
     	begin += 2;
@@ -102,8 +104,10 @@ function ab(){
         var strarray = str.split("&&");
         if(strarray[2] == "1"){
         	liItem.innerHTML = "<div class=\"demo\"><div class=\"title\"><img src=\"images/1.png\" alt=\"\" class=\"head\"/><p class=\"name\">"+strarray[7]+"</p><p class=\"intro\">"+strarray[6]+"</p></div><div class=\"content\"><p>"+strarray[5]+"</p></div><div style=\"text-align:right\"><a href=\"joinin?eid="+strarray[3]+"&typeid="+strarray[2]+"\">->Join in!<-</a></div><div class=\"comment\" align=\"center\"><form method=\"get\" action=\"${pageContext.request.contextPath}/comsubmit\"><input type=\"hidden\" name = \"info\" value = \""+str+"\"><textarea id=\"\" name = \"infoarea\" style=\"width:300px;height:80px;\"></textarea><input type=\"submit\" value=\"SUBMIT COMMENTS\"></form></div></div><br>" ;            }
+        }
         else if(strarray[2] == "2"){
         	liItem.innerHTML = "<div class=\"demo\"><div class=\"title\"><img src=\"images/2.png\" alt=\"\" class=\"head\"/><p class=\"name\">"+strarray[7]+"</p><p class=\"intro\">"+strarray[6]+"</p></div><div class=\"content\"><p>"+strarray[5]+"</p></div><div style=\"text-align:right\"><a href=\"joinin?eid="+strarray[3]+"&typeid="+strarray[2]+"\">->Join in!<-</a></div><div class=\"comment\" align=\"center\"><form method=\"get\" action=\"${pageContext.request.contextPath}/comsubmit\"><input type=\"hidden\" name = \"info\" value = \""+str+"\"><textarea id=\"\" name = \"infoarea\" style=\"width:300px;height:80px;\"></textarea><input type=\"submit\" value=\"SUBMIT COMMENTS\"></form></div></div><br>" ;            }
+  		}
         docFragments.appendChild(liItem);
         begin += 1;
     }
@@ -129,6 +133,7 @@ function ab(){
         	 	<option value="empty"></option>
 				<option value="events">Events</option>
 				<option value="broadcast">Broadcast</option>
+				<option value="discuss">Discuss</option>
 			</select>
 			<input type="submit" value="Type Filter"/>
 		</form>
@@ -163,7 +168,8 @@ function ab(){
 	<div class="content">
 		<p><%=home.getActivity_desc() %></p>
 	</div>
-	<div style="text-align:right"><a href="joinin?eid=<%=home.getPost_id() %>&typeid=<%=home.getEntry_type()%>">->Join in!<-</a></div>
+		<div style="text-align:right"><a href="joinin?eid=<%=home.getPost_id() %>&typeid=<%=home.getEntry_type()%>">->Join in!<-</a></div>
+	
 	<div class="comment" align="center">
 		<form method="get" action="${pageContext.request.contextPath}/comsubmit">
 			<input type="hidden" name = "info" value = "<%=home.toString() %>">
@@ -198,12 +204,12 @@ function ab(){
 	<div class="content">
 		<p><%=home.getActivity_desc() %></p>
 	</div>
-	<div style="text-align:right"><a href="joinin?eid=<%=home.getPost_id() %>&typeid=<%=home.getEntry_type()%>">->Join in!<-</a></div>
+		<div style="text-align:right"><a href="joinin?eid=<%=home.getPost_id() %>&typeid=<%=home.getEntry_type()%>">->Join in!<-</a></div>
 	
 	<div class="comment" align="center">
 		<form method="get" action="${pageContext.request.contextPath}/comsubmit">
 			<input type="hidden" name = "info" value = "<%=home.toString() %>">
-			<textarea id="" name = "infoarea" style="width:300px;height:80px;"></textarea>
+			<textarea id=""  name = "infoarea"  style="width:300px;height:80px;"></textarea>
 	    	<input type="submit" value="SUBMIT COMMENTS">
 		</form>
 	</div>
@@ -218,7 +224,7 @@ function ab(){
 <%
 	}
 %>
-	<input type="hidden" id ="sumofarraylist" value="<%=arraylist.size() %>">
+	<input type="hidden" id ="sum" value="<%=arraylist.size() %>">
 </div>
 <div align="center">
 <input type="image" src="images/4.png" onclick="ab()">

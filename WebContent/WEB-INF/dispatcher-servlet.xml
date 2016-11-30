@@ -19,7 +19,7 @@
 
 	<bean id="jdbcDao" class="com.dao.JDBCDao" />
 	<bean id="eventsJdbcDao" class="com.dao.EventsJdbcDao" />
-
+<bean id="homeJdbcDao" class="com.dao.HomeJdbcDao"/>
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" />
 

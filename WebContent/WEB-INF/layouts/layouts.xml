@@ -73,4 +73,38 @@
 			<add-attribute value="/css/logincss.css" />
 		</put-list-attribute> 
 </definition>
+<definition name="selectbydate" extends="base.definition">
+		<put-attribute name="title" value="Selectbydate" />
+		<put-attribute name="body" value="/WEB-INF/jsp/selectbydate.jsp" />
+	</definition>
+	
+	<definition name="selectbydatefail" extends="base.definition">
+		<put-attribute name="title" value="Selectbydatefail" />
+		<put-attribute name="body" value="/WEB-INF/jsp/selectbydatefail.jsp" />
+	</definition>
+	
+	<definition name="selectbytype" extends="base.definition">
+		<put-attribute name="title" value="Selectbytype" />
+		<put-attribute name="body" value="/WEB-INF/jsp/selectbytype.jsp" />
+	</definition>
+	
+	<definition name="selectbytypefail" extends="base.definition">
+		<put-attribute name="title" value="Selectbytypefail" />
+		<put-attribute name="body" value="/WEB-INF/jsp/selectbytypefail.jsp" />
+	</definition>
+	
+	<definition name="comsubmit" extends="base.definition">
+		<put-attribute name="title" value="Comsubmit" />
+		<put-attribute name="body" value="/WEB-INF/jsp/comsubmit.jsp" />
+	</definition>
+	
+	<definition name="welcome1" extends="base.definition">
+		<put-attribute name="title" value="Welcome1" />
+		<put-attribute name="body" value="/WEB-INF/jsp/welcome1.jsp" />
+	</definition>
+	
+	<definition name="joinin" extends="base.definition">
+		<put-attribute name="title" value="Joinin" />
+		<put-attribute name="body" value="/WEB-INF/jsp/joinin.jsp" />
+	</definition>
 </tiles-definitions>
