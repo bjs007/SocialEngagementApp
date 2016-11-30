@@ -52,9 +52,7 @@ public class Home {
 	}
 	@Override
 	public String toString() {
-		return "Home [entry_id=" + entry_id + ", entry_desc=" + entry_desc + ", entry_type=" + entry_type + ", post_id="
-				+ post_id + ", activity_desc=" + activity_desc + ", create_date_time=" + create_date_time + ", user_id="
-				+ user_id + "]";
+		return entry_id+"&&"+entry_desc+"&&"+entry_type+"&&"+post_id+"&&"+activity_desc+"&&"+create_date_time+"&&"+user_id;
 	}
 	
 	
