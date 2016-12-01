@@ -47,7 +47,7 @@
         //out.println("welcome " + userid);
         //out.println("<a href='logout.jsp'>Log out</a>");
         //response.sendRedirect("pt2.jsp");
-    //}
+   
     //else {
       //  out.println("Invalid password <a href='loginpage.jsp'>try again</a>");
     //}
