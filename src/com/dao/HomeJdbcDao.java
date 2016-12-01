@@ -48,8 +48,8 @@ public class HomeJdbcDao {
 
 		try {
 			connection = DriverManager
-					.getConnection("jdbc:mysql://proj-514-02.cs.iastate.edu:3306/socialDb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC","coms514user","password");
-					//.getConnection(jdbcString,dbUserName,dbPassword);
+					//.getConnection("jdbc:mysql://proj-514-02.cs.iastate.edu:3306/socialDb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC","coms514user","password");
+					.getConnection(jdbcString,dbUserName,dbPassword);
 		} catch (SQLException e) {
 			System.out.println("Connection Failed! Check output console");
 			e.printStackTrace();
@@ -129,8 +129,8 @@ public class HomeJdbcDao {
 
 		try {
 			connection = DriverManager
-					.getConnection("jdbc:mysql://proj-514-02.cs.iastate.edu:3306/socialDb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC","coms514user","password");
-					//.getConnection(jdbcString,dbUserName,dbPassword);
+					//.getConnection("jdbc:mysql://proj-514-02.cs.iastate.edu:3306/socialDb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC","coms514user","password");
+					.getConnection(jdbcString,dbUserName,dbPassword);
 			statement = connection.createStatement();
 		} catch (Exception e) {
 			logger.error("Connection Failed! Check output console");
@@ -242,8 +242,8 @@ public class HomeJdbcDao {
 
 		try {
 			connection = DriverManager
-					.getConnection("jdbc:mysql://proj-514-02.cs.iastate.edu:3306/socialDb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC","coms514user","password");
-					//.getConnection(jdbcString,dbUserName,dbPassword);
+					//.getConnection("jdbc:mysql://proj-514-02.cs.iastate.edu:3306/socialDb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC","coms514user","password");
+					.getConnection(jdbcString,dbUserName,dbPassword);
 			statement = connection.createStatement();
 		} catch (Exception e) {
 			logger.error("Connection Failed! Check output console");
@@ -322,8 +322,8 @@ public class HomeJdbcDao {
 
 		try {
 			connection = DriverManager
-					.getConnection("jdbc:mysql://proj-514-02.cs.iastate.edu:3306/socialDb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC","coms514user","password");
-					//.getConnection(jdbcString,dbUserName,dbPassword);
+					//.getConnection("jdbc:mysql://proj-514-02.cs.iastate.edu:3306/socialDb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC","coms514user","password");
+					.getConnection(jdbcString,dbUserName,dbPassword);
 			statement = connection.createStatement();
 		} catch (Exception e) {
 			logger.error("Connection Failed! Check output console");
