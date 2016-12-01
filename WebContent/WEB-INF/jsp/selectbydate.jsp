@@ -23,7 +23,7 @@ width:100%;
            margin-right: 10px;
 
             height: 23px;
-            margin-left: 310px;
+            margin-left: 350px;
            
         }
         body{
