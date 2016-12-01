@@ -14,11 +14,11 @@
 				</tr>
 				<tr>
 					<td>Enter Description of the event:</td>
-					<td><form:input path="event_desc" /></td>
+					<td><form:input path="event_desc"  required='true' /></td>
 				</tr>
 				<tr>
-					<td>Mention Resource Needed :</td>
-					<td><form:input path="resources_needed" /></td>
+					<td>Mention Resource Needed (or NA):</td>
+					<td><form:input path="resources_needed" required='true'/></td>
 				</tr>
 				
 				<tr>
@@ -32,11 +32,11 @@
 				
 				<tr>
 					<td>Place of event:</td>
-					<td><form:input path="place" /></td>
+					<td><form:input path="place" required='true'/></td>
 				</tr>
 				<tr>
 					<td>Date/Time for event :</td>
-					<td><form:input path="event_date_time" id="datetimepicker" type="text" style="width:250px"/></td>
+					<td><form:input path="event_date_time" id="datetimepicker" type="text" style="width:250px" required='true'/></td>
 				</tr>
 				<tr>
 					<td colspan="2" style="text-align:center"><input type="submit" value="Submit" class="submitBtn"/></td>
