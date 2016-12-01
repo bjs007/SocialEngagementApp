@@ -7,7 +7,7 @@
 
 	<%-- <p>${user_name}</p> --%>
 	<c:set var="userIdSession" value="${session_user_id}"/>
-	<p>${userIdSession}</p>
+	<%-- <p>${userIdSession}</p> --%>
 	<div align="center">
 		<form:form action="saveEditedEvent" method="post" commandName="eventsForm">
 			<form:hidden path="event_id"/>

@@ -64,6 +64,7 @@ public class EventsController {
 		}
 		if(user_name==null || user_name.isEmpty())
 			user_name="UserAbc";
+		user_name=request.getSession().getAttribute("name").toString();
 		request.getSession().setAttribute("user_name", user_name);
 		return model;
 	}
