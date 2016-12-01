@@ -91,7 +91,7 @@ function ab(){
             if(strarray[2] == "1"){
             	liItem.innerHTML = "<div class=\"demo\"><div class=\"title\"><img src=\"images/1.png\" alt=\"\" class=\"head\"/><p class=\"name\">User:"+strarray[6]+"</p><p class=\"intro\">Post date:"+strarray[5]+"</p></div><div class=\"content\"><p>"+strarray[4]+"</p></div><div style=\"text-align:right\"><a href=\"editEvent?event_id="+strarray[3]+"&typeid="+strarray[2]+"\">Go to Event</a></div><div class=\"comment\" align=\"center\"><form method=\"get\" action=\"${pageContext.request.contextPath}/comsubmit\"><input type=\"hidden\" name = \"info\" value = \""+str+"\"><textarea id=\"\" name = \"infoarea\" style=\"width:300px;height:80px;\"></textarea><input type=\"submit\" value=\"SUBMIT COMMENTS\"></form></div></div><br>" ;            }
             else if(strarray[2] == "2"){
-            	liItem.innerHTML = "<div class=\"demo\"><div class=\"title\"><img src=\"images/2.png\" alt=\"\" class=\"head\"/><p class=\"name\">User:"+strarray[6]+"</p><p class=\"intro\">Post date:"+strarray[5]+"</p></div><div class=\"content\"><p>"+strarray[4]+"</p></div><div style=\"text-align:right\"><a href=\"joinin?eid="+strarray[3]+"&typeid="+strarray[2]+"\">Go to Event</a></div><div class=\"comment\" align=\"center\"><form method=\"get\" action=\"${pageContext.request.contextPath}/comsubmit\"><input type=\"hidden\" name = \"info\" value = \""+str+"\"><textarea id=\"\" name = \"infoarea\" style=\"width:300px;height:80px;\"></textarea><input type=\"submit\" value=\"SUBMIT COMMENTS\"></form></div></div><br>" ;            }
+            	liItem.innerHTML = "<div class=\"demo\"><div class=\"title\"><img src=\"images/2.png\" alt=\"\" class=\"head\"/><p class=\"name\">User:"+strarray[6]+"</p><p class=\"intro\">Post date:"+strarray[5]+"</p></div><div class=\"content\"><p>"+strarray[4]+"</p></div><div class=\"comment\" align=\"center\"><form method=\"get\" action=\"${pageContext.request.contextPath}/comsubmit\"><input type=\"hidden\" name = \"info\" value = \""+str+"\"><textarea id=\"\" name = \"infoarea\" style=\"width:300px;height:80px;\"></textarea><input type=\"submit\" value=\"SUBMIT COMMENTS\"></form></div></div><br>" ;            }
             docFragments.appendChild(liItem);
         }
     	begin += 2;
@@ -103,7 +103,7 @@ function ab(){
         if(strarray[2] == "1"){
         	liItem.innerHTML = "<div class=\"demo\"><div class=\"title\"><img src=\"images/1.png\" alt=\"\" class=\"head\"/><p class=\"name\">User:"+strarray[6]+"</p><p class=\"intro\">Post date:"+strarray[5]+"</p></div><div class=\"content\"><p>"+strarray[4]+"</p></div><div style=\"text-align:right\"><a href=\"editEvent?event_id="+strarray[3]+"&typeid="+strarray[2]+"\">Go to Event</a></div><div class=\"comment\" align=\"center\"><form method=\"get\" action=\"${pageContext.request.contextPath}/comsubmit\"><input type=\"hidden\" name = \"info\" value = \""+str+"\"><textarea id=\"\" name = \"infoarea\" style=\"width:300px;height:80px;\"></textarea><input type=\"submit\" value=\"SUBMIT COMMENTS\"></form></div></div><br>" ;            }
         else if(strarray[2] == "2"){
-        	liItem.innerHTML = "<div class=\"demo\"><div class=\"title\"><img src=\"images/2.png\" alt=\"\" class=\"head\"/><p class=\"name\">User:"+strarray[6]+"</p><p class=\"intro\">Post date:"+strarray[5]+"</p></div><div class=\"content\"><p>"+strarray[4]+"</p></div><div style=\"text-align:right\"><a href=\"joinin?eid="+strarray[3]+"&typeid="+strarray[2]+"\">Go to Event</a></div><div class=\"comment\" align=\"center\"><form method=\"get\" action=\"${pageContext.request.contextPath}/comsubmit\"><input type=\"hidden\" name = \"info\" value = \""+str+"\"><textarea id=\"\" name = \"infoarea\" style=\"width:300px;height:80px;\"></textarea><input type=\"submit\" value=\"SUBMIT COMMENTS\"></form></div></div><br>" ;            }
+        	liItem.innerHTML = "<div class=\"demo\"><div class=\"title\"><img src=\"images/2.png\" alt=\"\" class=\"head\"/><p class=\"name\">User:"+strarray[6]+"</p><p class=\"intro\">Post date:"+strarray[5]+"</p></div><div class=\"content\"><p>"+strarray[4]+"</p></div><div class=\"comment\" align=\"center\"><form method=\"get\" action=\"${pageContext.request.contextPath}/comsubmit\"><input type=\"hidden\" name = \"info\" value = \""+str+"\"><textarea id=\"\" name = \"infoarea\" style=\"width:300px;height:80px;\"></textarea><input type=\"submit\" value=\"SUBMIT COMMENTS\"></form></div></div><br>" ;            }
         docFragments.appendChild(liItem);
         begin += 1;
     }
@@ -123,7 +123,7 @@ function ab(){
     </div>
     <div class="right">
     <center>
-       <form action="" method="get">				
+       <form action="${pageContext.request.contextPath}/selectbytype" method="get">				
         	 Type Filter:
         	 <select name="events types">
         	 	<option value="empty"></option>
@@ -169,11 +169,6 @@ function ab(){
 	<div style="text-align:right"><a href="editEvent?event_id=<%=home.getPost_id() %>">Go to Event</a></div>
 	<%
 		}
-		else if(home.getEntry_type() == 2){
-	%>
-	<div style="text-align:right"><a href="joinin?eid=<%=home.getPost_id() %>">Go to Broadcast</a></div>
-	<%
-		} 
 	%>	
 	<div class="comment" align="center">
 		<form method="get" action="${pageContext.request.contextPath}/comsubmit">
@@ -215,11 +210,6 @@ function ab(){
 	<div style="text-align:right"><a href="editEvent?event_id=<%=home.getPost_id() %>">Go to Event</a></div>
 	<%
 		}
-		else if(home.getEntry_type() == 2){
-	%>
-	<div style="text-align:right"><a href="joinin?eid=<%=home.getPost_id() %>">Go to Broadcast</a></div>
-	<%
-		} 
 	%>
 <div class="comment" align="center">
 	<form method="get" action="${pageContext.request.contextPath}/comsubmit">

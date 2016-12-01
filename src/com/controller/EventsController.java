@@ -109,9 +109,12 @@ public class EventsController {
 		//event.setEvent_desc("Test event");
 		//logger.warn("dbString >> " + dbString);
 		ArrayList<Event> eventList=eventsDao.getEventsDataFromDb();
-		for(Event event:eventList)
+		if(eventList!=null && eventList.size()!=0)
 		{
+			for(Event event:eventList)
+			{
 			logger.debug(event);
+			}
 		}
 		modelObj.addAttribute("eventsList",eventList);
 		//modelObj.addAttribute("eventsForm", new Event());

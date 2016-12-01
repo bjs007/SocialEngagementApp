@@ -29,7 +29,7 @@
 			</tr> --%>
 						<tr>
 							<td style="width:30%">Enter Description of the event:</td>
-							<td style="width:70%"><form:input path="event_desc" readonly="${isReadOnly}" style="width:inherit"/></td>
+							<td style="width:70%"><form:input path="event_desc" readonly="${isReadOnly}" style="width:inherit" required='true'/></td>
 						</tr>
 						<tr>
 							<td>Mention Resource Needed :</td>
@@ -47,12 +47,12 @@
 						
 						<tr>
 							<td>Place of event:</td>
-							<td><form:input path="place" readonly="${isReadOnly}"/></td>
+							<td><form:input path="place" readonly="${isReadOnly}" required='true'/></td>
 						</tr>
 						<tr>
 							<td>Date/Time for event :</td>
 							<fmt:formatDate value="${eventsForm.event_date_time}" var="dateString" pattern="yyyy/MMM/dd HH:mm" />
-							<td><form:input path="event_date_time" id="datetimepicker" value ="${dateString}" type="date" readonly="${isReadOnly}" style="width:250px"/></td>
+							<td><form:input path="event_date_time" id="datetimepicker" value ="${dateString}" type="date" readonly="${isReadOnly}" style="width:250px" required='true'/></td>
 						</tr>
 						<tr>
 						<td>Validity :</td>

@@ -1,8 +1,14 @@
 <!-- Created by Dipanjan Karmakar -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <div align="center">
+	<c:choose>
+	<c:when test="${fn:length(eventsList) eq 0}">
+		<p>There are no archived events !<p>
+	</c:when>
+	<c:otherwise>
 	<table border="1" style="background-color: #85c1e9; color: #34495e; font: Arial; border-radius: 6px; font-size: 12px; width: 90%;">
 		<c:forEach items="${eventsList}" var="event">
 			<%-- <c:url value="${pageContext.request.contextPath}/editEvent"	var="eventEditUrl">
@@ -56,5 +62,7 @@
 			</tr>
 		</c:forEach>
 	</table>
+	</c:otherwise>
+	</c:choose>
 </div>
 
