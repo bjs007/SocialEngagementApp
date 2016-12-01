@@ -9,7 +9,6 @@
     String desc=request.getParameter("description");
     
     Statement st = conn.createStatement();
-    //ResultSet rs;
 
     String inquery="insert into broadcasts(title,postdesc,posttime) values('"+title+"','"+desc+"',now())";
     int i=0;

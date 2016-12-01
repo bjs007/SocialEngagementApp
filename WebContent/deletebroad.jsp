@@ -9,8 +9,7 @@
     out.print(bid);
    
     Statement st = conn.createStatement();
-    //ResultSet rs;
-  //  ResultSet rs2;
+   
     String inquery="delete from broadcasts where broadcastid='"+bid+"'";
     int i=0;
     i=st.executeUpdate(inquery);

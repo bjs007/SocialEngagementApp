@@ -36,7 +36,7 @@ try{
 	<br>
 	<p id="linker"> <a href="deletebroad.jsp?id=<%=rs.getString(4) %>">Delete</a>
 </div>
-<br>
+<br><br>
     	
     <% } 
 }

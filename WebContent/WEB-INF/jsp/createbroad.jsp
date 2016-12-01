@@ -30,7 +30,7 @@
 	text-shadow: 1px 1px 0 rgba(256,256,256,1.0);
 	margin-bottom: 10px;">Description</label>
 		<textarea name="description" style="width: 250px; height:200px;
-	padding: 16px 25px;
+	padding: 15px 25px;
 	
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	font-weight: 400;
