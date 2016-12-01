@@ -24,10 +24,9 @@
 		<span></span>
 		</div>
 		<div class="content">
-		<input name="sUserName" type="text" class="input username"/>
-		<div class="user-icon"></div>
-		<input name="sPwd" type="password" class="input password"/>
-		<div class="pass-icon"></div>	
+		<input name="inputusername" type="text" class="input username"/><br><br>
+		<input name="inputpassword" type="password" class="input password"/>
+			
                 
 		</div>
 

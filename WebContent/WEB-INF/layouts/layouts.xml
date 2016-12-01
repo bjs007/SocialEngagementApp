@@ -6,7 +6,7 @@
 		<put-attribute name="header" value="/WEB-INF/jsp/header.jsp" />
 		<put-attribute name="menu" value="/WEB-INF/jsp/menu.jsp" />
 		<put-attribute name="body" value="" />
-		<put-attribute name="footer" value="/WEB-INF/jsp/footer.jsp" />
+		<!-- --><put-attribute name="footer" value="/WEB-INF/jsp/footer.jsp " />
 		<put-list-attribute name="javascripts">
 			<add-attribute value="https://code.jquery.com/jquery-1.12.3.js" />
 			<add-attribute value="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js" />
@@ -73,6 +73,29 @@
 			<add-attribute value="/css/logincss.css" />
 		</put-list-attribute> 
 </definition>
+
+<definition name="broad" extends="base.definition">
+		<put-attribute name="title" value="BROADCAST" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/broadmenu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/broadhome.jsp" />
+		<put-list-attribute name="broadstyle">
+			<add-attribute value="/css/brcss.css" />
+		</put-list-attribute>
+	</definition>
+	<definition name="createbroadcast" extends="base.definition">
+		<put-attribute name="title" value="Create " /> 
+		<put-attribute name="menu" value="/WEB-INF/jsp/broadmenu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/createbroad.jsp" />
+	</definition>
+	<definition name="editbroad" extends="base.definition">
+		<put-attribute name="title" value="Edit Broadcasts" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/broadmenu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/editbroad.jsp" />
+		<put-list-attribute name="broadstyle2">
+			<add-attribute value="/css/brcss.css" />
+		</put-list-attribute>
+		</definition>
+
 <definition name="selectbydate" extends="base.definition">
 		<put-attribute name="title" value="Selectbydate" />
 		<put-attribute name="body" value="/WEB-INF/jsp/selectbydate.jsp" />
@@ -107,4 +130,5 @@
 		<put-attribute name="title" value="Joinin" />
 		<put-attribute name="body" value="/WEB-INF/jsp/joinin.jsp" />
 	</definition>
+
 </tiles-definitions>
