@@ -7,8 +7,7 @@
     //jdbc:mysql://localhost/db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CDT
     String bid=request.getParameter("id");
     out.print(bid);
-   // String desc=request.getParameter("description");
-  
+   
     Statement st = conn.createStatement();
     //ResultSet rs;
   //  ResultSet rs2;

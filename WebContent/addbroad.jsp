@@ -10,7 +10,7 @@
     
     Statement st = conn.createStatement();
     //ResultSet rs;
-  //  ResultSet rs2;
+
     String inquery="insert into broadcasts(title,postdesc,posttime) values('"+title+"','"+desc+"',now())";
     int i=0;
     i=st.executeUpdate(inquery);
