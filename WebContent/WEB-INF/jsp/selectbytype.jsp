@@ -119,7 +119,7 @@ function ab(){
 <div class="main">
     <div class="left">
         <form action="${pageContext.request.contextPath}/selectbydate" method="get">
-        	<center>Date Filter: <input type="date" name="user_date"/><input type="submit" value="Filter"/></center>
+        	Date Filter: <input type="date" name="user_date"/><input type="submit" value="Filter"/>
         </form>
     </div>
     <div class="right">

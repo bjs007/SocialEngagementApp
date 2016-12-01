@@ -132,6 +132,7 @@ public class HomeJdbcDao {
 		logger.debug("You made it, take control your database now!");
 
 		try {
+			System.out.println(date);
 			DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 			Date datetemp = null;
 			
@@ -145,7 +146,8 @@ public class HomeJdbcDao {
 				int i = 0;
 				while(rs.next()){
 					Home home = new Home();
-					String str = rs.getString("create_date_time");
+					String str = rs.getString("create_date_time").split(" ")[0];
+					System.out.println(str);
 					if(str.equals(date)){
 						home.setEntry_id(rs.getInt("entry_id"));
 						home.setEntry_desc(rs.getString("entry_desc"));
