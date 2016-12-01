@@ -287,17 +287,6 @@ public class HomeJdbcDao {
 						home.setUser_id(rs.getInt("user_id"));
 						ale.add(home);
 					}
-					else if(date.equals("discuss") && num == 3){
-						home.setEntry_id(rs.getInt("entry_id"));
-						home.setEntry_desc(rs.getString("entry_desc"));
-						home.setEntry_type(rs.getInt("entry_type"));
-						home.setPost_id(rs.getInt("post_id"));
-						//home.setComment_id(rs.getInt("comment_id"));
-						home.setActivity_desc(rs.getString("activity_desc"));
-						home.setCreate_date_time(rs.getString("create_date_time"));
-						home.setUser_id(rs.getInt("user_id"));
-						ale.add(home);
-					}
 					i++;
 				}
 				flag = cs.getMoreResults();
