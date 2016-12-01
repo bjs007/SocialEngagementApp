@@ -322,7 +322,7 @@ public class HomeJdbcDao {
 
 		try {
 			connection = DriverManager
-					.getConnection("jdbc:mysql://localhost:3306/social","root","liulei");
+					.getConnection("jdbc:mysql://proj-514-02.cs.iastate.edu:3306/socialDb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC","coms514user","password");
 					//.getConnection(jdbcString,dbUserName,dbPassword);
 			statement = connection.createStatement();
 		} catch (Exception e) {
@@ -336,13 +336,13 @@ public class HomeJdbcDao {
 
 		try {
 			Statement stmt = connection.createStatement();
-			int user_id = Integer.parseInt(a[7]);
-			SimpleDateFormat sdf = new  SimpleDateFormat("yyyy-MM-dd");
-			String comment_date_time = sdf.format(new Date());
+			System.out.println(a[0] + " | "+ a[1] +" | "+a[2] +" | "+a[3]+" | "+a[4] + " | "+a[5]+" | "+a[6]);
+			int user_id = Integer.parseInt(a[6]);
+			String comment_date_time = a[5];
 			int post_id = Integer.parseInt(a[3]);
 			String comments = comment;
 			int event_type = Integer.parseInt(a[2]);
-			String sql = "insert into comments(user_id,comment_date_time,post_id,comments,event_type) values("+user_id+",'"+comment_date_time+"',"+post_id+",'"+comments+"',"+event_type+")";
+			String sql = "insert into comments(user_id,date_time,post_id,comment_string,module_type) values("+user_id+",'"+comment_date_time+"',"+post_id+",'"+comments+"',"+event_type+")";
 			int result = stmt.executeUpdate(sql);
 			if(result > 0){
 				f = true;
