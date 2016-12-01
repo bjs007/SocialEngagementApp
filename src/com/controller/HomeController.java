@@ -138,6 +138,14 @@ public class HomeController {
 		//System.out.println(list.toString());
 		return new ModelAndView("welcome","list",list);
 	} 
+	@RequestMapping("/welcomeadmin")
+	public ModelAndView browseadmview(Model model){  
+		ArrayList<Home> list = new ArrayList<Home>();
+		list = homejdbcDao.getDashboardInfo();
+		//System.out.println(list.toString());
+		return new ModelAndView("welcomeadmin","list",list);
+	} 
+	
 	
 	@RequestMapping("/selectbydate")
 	public ModelAndView selectbydate(HttpServletRequest request) throws ParseException{

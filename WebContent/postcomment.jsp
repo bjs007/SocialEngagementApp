@@ -5,13 +5,23 @@
     Class.forName("com.mysql.jdbc.Driver").newInstance();
     conn = DriverManager.getConnection("jdbc:mysql://proj-514-02.cs.iastate.edu:3306/socialDb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=US/Central","coms514user","password");
     //jdbc:mysql://localhost/db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CDT
-    String title=request.getParameter("title");
-    String desc=request.getParameter("description");
-    
+    String bid=request.getParameter("brid");
+    System.out.println(bid);
+    int no = Integer.parseInt(bid);
+    String uid=request.getParameter("uid");
+    String commenter=request.getParameter("comment");
     Statement st = conn.createStatement();
-
-    String inquery="insert into broadcasts(title,postdesc,posttime) values('"+title+"','"+desc+"',now())";
-    int i;
+    Statement st2 = conn.createStatement();
+	String name=(String)session.getAttribute("name");
+	String email=(String)session.getAttribute("userid");
+	
+    ResultSet rs2;
+	
+	rs2=st2.executeQuery("select userid from users where name='"+name+"' and email='"+email+"'");
+	rs2.next();
+	String userid=rs2.getString(1);
+    String inquery="insert into comments(user_id,date_time,post_id,comment_string,module_type) values('"+userid+"',now(),'"+no+"','"+commenter+"',2)";
+    int i=0;
     i=st.executeUpdate(inquery);
     if(i>0){
     	System.out.println("SUCCESS");
@@ -19,8 +29,13 @@
     else
     	System.out.println("NOT CREATED");
     
-    
-    response.sendRedirect("http://localhost:8080/SocialEngagement/createbroadcast");
+    if(userid.equals("121")){
+    	 response.sendRedirect("http://localhost:8080/SocialEngagement/broad");
+    }
+    else{
+    	 response.sendRedirect("http://localhost:8080/SocialEngagement/broaduser");
+    }
+   
    /* rs = st.executeQuery("select * from users where email='"+ userid +"' and password='"+ pwd +"'");
     if (rs.next()) {
         session.setAttribute("userid",userid);

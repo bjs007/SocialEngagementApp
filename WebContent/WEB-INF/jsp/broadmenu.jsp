@@ -8,7 +8,7 @@
 	
 		<li class="blue"><a href="${pageContext.request.contextPath}/broad">BroadcastHome</a></li>
 		<li class="red"><a href="${pageContext.request.contextPath}/createbroadcast">Create Broadcast</a></li>
-		<li class="red"><a href="${pageContext.request.contextPath}/fetchStudent">Delete Broadcast</a></li>
+		<li class="red"><a href="${pageContext.request.contextPath}/editbroad">Delete Broadcast</a></li>
 		<br>
 		
 		<li class="orange"><a href="${pageContext.request.contextPath}/fetchStudent">Go to Discussion board</a></li>

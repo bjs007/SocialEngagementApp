@@ -10,6 +10,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 import org.apache.log4j.Logger;
@@ -74,7 +75,15 @@ public class HomeJdbcDao {
 						home.setEntry_type(rs.getInt("entry_type"));
 						home.setPost_id(rs.getInt("post_id"));
 						home.setActivity_desc(rs.getString("activity_desc"));
-						home.setCreate_date_time(rs.getString("create_date_time"));
+						SimpleDateFormat parser=new SimpleDateFormat("EEE MMM d HH:mm:ss z yyyy");
+						String str = rs.getString("create_date_time");
+						if(str.charAt(0) > '9' || str.charAt(0) < '0'){
+							Date cfg= parser.parse(str);
+							parser = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+							str = parser.format(cfg);
+						}
+						
+						home.setCreate_date_time(str);
 						home.setUser_id(rs.getInt("user_id"));
 						
 						homeList.add(home);
@@ -95,6 +104,7 @@ public class HomeJdbcDao {
 		} else {
 			System.out.println("Failed to make connection!");
 		}
+		Collections.sort(homeList, Collections.reverseOrder());
 		if(homeList.size()>0)
 			return homeList;
 		else
@@ -130,13 +140,15 @@ public class HomeJdbcDao {
 		}
 
 		logger.debug("You made it, take control your database now!");
-
+		
 		try {
+			System.out.println(date);
 			DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 			Date datetemp = null;
 			
 			datetemp = format.parse(date);
-			CallableStatement cs = connection.prepareCall("{call getHomeInfo()}");
+			
+			CallableStatement cs = connection.prepareCall("{call getInfoByDateBroadcast()}");
 			boolean flag = cs.execute();
 			ResultSet rs = null;
 			ale = new ArrayList<Home>();
@@ -145,7 +157,8 @@ public class HomeJdbcDao {
 				int i = 0;
 				while(rs.next()){
 					Home home = new Home();
-					String str = rs.getString("create_date_time");
+					String str = rs.getString("create_date_time").split(" ")[0];
+					System.out.println("parsed:"+str);
 					if(str.equals(date)){
 						home.setEntry_id(rs.getInt("entry_id"));
 						home.setEntry_desc(rs.getString("entry_desc"));
@@ -162,6 +175,43 @@ public class HomeJdbcDao {
 				flag = cs.getMoreResults();
 				
 			}
+			
+			
+			cs = connection.prepareCall("{call getInfoByDateEvent()}");
+			flag = cs.execute();
+			rs = null;
+			while(flag){
+				rs = cs.getResultSet();
+				int i = 0;
+				while(rs.next()){
+					Home home = new Home();
+					String str = rs.getString("create_date_time");
+					
+					SimpleDateFormat parser=new SimpleDateFormat("EEE MMM d HH:mm:ss z yyyy");
+					Date cfg= parser.parse(str);
+					parser = new SimpleDateFormat("yyyy-MM-dd");
+					str = parser.format(cfg);
+					System.out.println(str);
+					if(str.equals(date)){
+						home.setEntry_id(rs.getInt("entry_id"));
+						home.setEntry_desc(rs.getString("entry_desc"));
+						home.setEntry_type(rs.getInt("entry_type"));
+						home.setPost_id(rs.getInt("post_id"));
+						//home.setComment_id(rs.getInt("comment_id"));
+						home.setActivity_desc(rs.getString("activity_desc"));
+						home.setCreate_date_time(rs.getString("create_date_time"));
+						home.setUser_id(rs.getInt("user_id"));
+						ale.add(home);
+					}
+					i++;
+				}
+				flag = cs.getMoreResults();
+				
+			}
+			
+			
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -237,17 +287,6 @@ public class HomeJdbcDao {
 						home.setUser_id(rs.getInt("user_id"));
 						ale.add(home);
 					}
-					else if(date.equals("discuss") && num == 3){
-						home.setEntry_id(rs.getInt("entry_id"));
-						home.setEntry_desc(rs.getString("entry_desc"));
-						home.setEntry_type(rs.getInt("entry_type"));
-						home.setPost_id(rs.getInt("post_id"));
-						//home.setComment_id(rs.getInt("comment_id"));
-						home.setActivity_desc(rs.getString("activity_desc"));
-						home.setCreate_date_time(rs.getString("create_date_time"));
-						home.setUser_id(rs.getInt("user_id"));
-						ale.add(home);
-					}
 					i++;
 				}
 				flag = cs.getMoreResults();
@@ -261,7 +300,7 @@ public class HomeJdbcDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+		Collections.sort(ale, Collections.reverseOrder());
 		return ale;
 	}
 	
@@ -283,7 +322,7 @@ public class HomeJdbcDao {
 
 		try {
 			connection = DriverManager
-					.getConnection("jdbc:mysql://localhost:3306/social","root","liulei");
+					.getConnection("jdbc:mysql://proj-514-02.cs.iastate.edu:3306/socialDb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC","coms514user","password");
 					//.getConnection(jdbcString,dbUserName,dbPassword);
 			statement = connection.createStatement();
 		} catch (Exception e) {
@@ -297,13 +336,13 @@ public class HomeJdbcDao {
 
 		try {
 			Statement stmt = connection.createStatement();
-			int user_id = Integer.parseInt(a[7]);
-			SimpleDateFormat sdf = new  SimpleDateFormat("yyyy-MM-dd");
-			String comment_date_time = sdf.format(new Date());
+			System.out.println(a[0] + " | "+ a[1] +" | "+a[2] +" | "+a[3]+" | "+a[4] + " | "+a[5]+" | "+a[6]);
+			int user_id = Integer.parseInt(a[6]);
+			String comment_date_time = a[5];
 			int post_id = Integer.parseInt(a[3]);
 			String comments = comment;
 			int event_type = Integer.parseInt(a[2]);
-			String sql = "insert into comments(user_id,comment_date_time,post_id,comments,event_type) values("+user_id+",'"+comment_date_time+"',"+post_id+",'"+comments+"',"+event_type+")";
+			String sql = "insert into comments(user_id,date_time,post_id,comment_string,module_type) values("+user_id+",'"+comment_date_time+"',"+post_id+",'"+comments+"',"+event_type+")";
 			int result = stmt.executeUpdate(sql);
 			if(result > 0){
 				f = true;

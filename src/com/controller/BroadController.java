@@ -45,6 +45,17 @@ public class BroadController {
 		//logger.warn("dbString >> " + dbString);
 		return model;
 	}
+	@RequestMapping("/broaduser")
+	public ModelAndView broaduser(HttpServletRequest request,HttpServletResponse response) throws Exception {
+
+		ModelAndView model = new ModelAndView("broaduser");
+		model.addObject("message", "From new function");
+		//logger.debug("Debug Inside the logger");
+		//logger.warn("NEWLOG");
+		//logger.warn("Warn Inside the logger");
+		//logger.warn("dbString >> " + dbString);
+		return model;
+	}
 	@RequestMapping("/createbroadcast")
 	public ModelAndView createbroadcast(HttpServletRequest request,HttpServletResponse response) throws Exception {
 

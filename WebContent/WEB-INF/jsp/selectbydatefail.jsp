@@ -16,7 +16,7 @@ width:100%;
             float: left;
             width: 300px;
             height: 23px;
-            background-color: white;
+            
 			margin-left:10px;
         }
 .right{
@@ -24,7 +24,6 @@ width:100%;
 
             height: 23px;
             margin-left: 310px;
-            background-color: white;
         }
 		.eventmain{
 		height:150px;
@@ -62,7 +61,7 @@ width:100%;
 <div class="main">
     <div class="left">
         <form action="selectbydate" method="get">
-        	<center>Date Filter: <input type="date" name="user_date"}"/><input type="submit" value="Date Filter"/></center>
+        	Date Filter: <input type="date" name="user_date"}"/><input type="submit" value="Filter"/>
         </form>
     </div>
     <div class="right">
@@ -73,9 +72,9 @@ width:100%;
         	 	<option value="empty"></option>
 				<option value="events">Events</option>
 				<option value="broadcast">Broadcast</option>
-				<option value="discuss">Discuss</option>
+
 			</select>
-			<input type="submit" value="Type Filter"/>
+			<input type="submit" value="Filter"/>
 		</form>
 		</center>
     </div>
