@@ -378,14 +378,24 @@ public class EventsJdbcDao {
 
 			try {
 				Statement statement=connection.createStatement();
-				StringBuilder selectTableSQL = new StringBuilder("delete from events where 1=1 ");
+				StringBuilder deleteEventsSql = new StringBuilder("delete from events where");
 				if(evt.getEvent_id()!=null)
-					selectTableSQL.append(" and event_id='"+evt.getEvent_id()+ "'");
+					deleteEventsSql.append(" event_id='"+evt.getEvent_id()+ "'");
 
-				System.out.println(selectTableSQL.toString());
+				System.out.println(deleteEventsSql.toString());
 
-				count = statement.executeUpdate(selectTableSQL.toString());
-				logger.warn("deleted "+ count + " number of records");
+				count = statement.executeUpdate(deleteEventsSql.toString());
+				logger.warn("deleted events "+ count + " number of records");
+				
+				statement=connection.createStatement();
+				StringBuilder deleteCommentsSql = new StringBuilder("delete from comments where ");
+				if(evt.getEvent_id()!=null)
+					deleteCommentsSql.append(" module_type=1 and post_id="+evt.getEvent_id());
+
+				System.out.println(deleteCommentsSql.toString());
+
+				count = statement.executeUpdate(deleteCommentsSql.toString());
+				logger.warn("deleted comments "+ count + " number of records");
 			}
 			catch(Exception e)
 			{
