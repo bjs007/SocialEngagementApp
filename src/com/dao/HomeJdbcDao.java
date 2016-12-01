@@ -10,6 +10,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 import org.apache.log4j.Logger;
@@ -74,7 +75,15 @@ public class HomeJdbcDao {
 						home.setEntry_type(rs.getInt("entry_type"));
 						home.setPost_id(rs.getInt("post_id"));
 						home.setActivity_desc(rs.getString("activity_desc"));
-						home.setCreate_date_time(rs.getString("create_date_time"));
+						SimpleDateFormat parser=new SimpleDateFormat("EEE MMM d HH:mm:ss z yyyy");
+						String str = rs.getString("create_date_time");
+						if(str.charAt(0) > '9' || str.charAt(0) < '0'){
+							Date cfg= parser.parse(str);
+							parser = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+							str = parser.format(cfg);
+						}
+						
+						home.setCreate_date_time(str);
 						home.setUser_id(rs.getInt("user_id"));
 						
 						homeList.add(home);
@@ -95,6 +104,7 @@ public class HomeJdbcDao {
 		} else {
 			System.out.println("Failed to make connection!");
 		}
+		Collections.sort(homeList, Collections.reverseOrder());
 		if(homeList.size()>0)
 			return homeList;
 		else
@@ -201,6 +211,7 @@ public class HomeJdbcDao {
 			
 			
 			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -300,7 +311,7 @@ public class HomeJdbcDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+		Collections.sort(ale, Collections.reverseOrder());
 		return ale;
 	}
 	

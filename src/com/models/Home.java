@@ -1,6 +1,6 @@
 package com.models;
 
-public class Home {
+public class Home implements Comparable<Home>{
 	private Integer entry_id;
 	private String entry_desc;
 	private Integer entry_type;
@@ -49,6 +49,10 @@ public class Home {
 	}
 	public void setUser_id(Integer user_id) {
 		this.user_id = user_id;
+	}
+	
+	public int compareTo(Home other){
+		return create_date_time.compareTo(other.create_date_time);
 	}
 	@Override
 	public String toString() {
