@@ -8,8 +8,9 @@
 <link rel="stylesheet" type="text/css" href="css/brcss.css">
 </head>
 <body>
-<%
-System.out.println(session.getAttribute("name"));
+
+<p id="title" style="color:#FDFEFE"> Broadcasts Home</p>
+<%System.out.println(session.getAttribute("name"));
 Connection conn = null;
 Class.forName("com.mysql.jdbc.Driver").newInstance();
 conn = DriverManager.getConnection("jdbc:mysql://proj-514-02.cs.iastate.edu:3306/socialDb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=US/Central","coms514user","password");
@@ -37,6 +38,7 @@ try{
     	// SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
 	//String dates=formatter.format(result);%>
+	
     	 <div id="brcontainer"  style=" margin:0 auto;" >
     <p id="title"> <%= rs.getString(1) %></p>
 	

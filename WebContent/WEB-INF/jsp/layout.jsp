@@ -35,7 +35,7 @@
 			<tiles:insertAttribute name="header" />
 		</tr>
 		<tr>
-			<td height="40%"  style="background: #16A085; width:30%;align:left;valign:top" ><tiles:insertAttribute name="menu" /></td>
+			<td height="40%"  style="background: #16A085; width:30%;align:left;valign:top; " ><tiles:insertAttribute name="menu" /></td>
 			<td style="width:70%"><tiles:insertAttribute name="body" /></td>
 		</tr>
 		<tr>

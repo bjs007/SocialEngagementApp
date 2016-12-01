@@ -25,12 +25,14 @@
         session.setAttribute("userpass",pwd);
         session.setAttribute("name",rs.getString("name"));
      	String email=(String)session.getAttribute("userid");
+     	
      	String name=(String)session.getAttribute("name");
      	  
      	
     	rs2=st2.executeQuery("select userid from users where name='"+name+"' and email='"+email+"'");
        	rs2.next();
        	String useractualid=rs2.getString(1);
+       	session.setAttribute("session_user_id",useractualid);
         
         //rs2=st.executeQuery("select name from uss where uid='"+ userid +"' and upass='"+ pwd +"'");
         //String po="select pos from uss where uid='"+userid+"' and upass='"+pwd+"'";
