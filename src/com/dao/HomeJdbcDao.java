@@ -130,14 +130,15 @@ public class HomeJdbcDao {
 		}
 
 		logger.debug("You made it, take control your database now!");
-
+		
 		try {
 			System.out.println(date);
 			DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 			Date datetemp = null;
 			
 			datetemp = format.parse(date);
-			CallableStatement cs = connection.prepareCall("{call getHomeInfo()}");
+			
+			CallableStatement cs = connection.prepareCall("{call getInfoByDateBroadcast()}");
 			boolean flag = cs.execute();
 			ResultSet rs = null;
 			ale = new ArrayList<Home>();
@@ -146,17 +147,40 @@ public class HomeJdbcDao {
 				int i = 0;
 				while(rs.next()){
 					Home home = new Home();
+					String str = rs.getString("create_date_time").split(" ")[0];
+					System.out.println("parsed:"+str);
+					if(str.equals(date)){
+						home.setEntry_id(rs.getInt("entry_id"));
+						home.setEntry_desc(rs.getString("entry_desc"));
+						home.setEntry_type(rs.getInt("entry_type"));
+						home.setPost_id(rs.getInt("post_id"));
+						//home.setComment_id(rs.getInt("comment_id"));
+						home.setActivity_desc(rs.getString("activity_desc"));
+						home.setCreate_date_time(rs.getString("create_date_time"));
+						home.setUser_id(rs.getInt("user_id"));
+						ale.add(home);
+					}
+					i++;
+				}
+				flag = cs.getMoreResults();
+				
+			}
+			
+			
+			cs = connection.prepareCall("{call getInfoByDateEvent()}");
+			flag = cs.execute();
+			rs = null;
+			while(flag){
+				rs = cs.getResultSet();
+				int i = 0;
+				while(rs.next()){
+					Home home = new Home();
 					String str = rs.getString("create_date_time");
-					if(str.charAt(0) >= '0' && str.charAt(0) <= '9'){
-						str = str.split(" ")[0];
-					}
-					else{
-						SimpleDateFormat parser=new SimpleDateFormat("EEE MMM d HH:mm:ss z yyyy");
-						Date cdt= parser.parse(rs.getString(str));
-						parser = new SimpleDateFormat("yyyy-MM-dd");
-						str = parser.format(cdt);
-						
-					}
+					
+					SimpleDateFormat parser=new SimpleDateFormat("EEE MMM d HH:mm:ss z yyyy");
+					Date cfg= parser.parse(str);
+					parser = new SimpleDateFormat("yyyy-MM-dd");
+					str = parser.format(cfg);
 					System.out.println(str);
 					if(str.equals(date)){
 						home.setEntry_id(rs.getInt("entry_id"));
@@ -174,6 +198,9 @@ public class HomeJdbcDao {
 				flag = cs.getMoreResults();
 				
 			}
+			
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
