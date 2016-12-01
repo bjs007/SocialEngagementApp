@@ -10,21 +10,18 @@
         .main{
 
             height: 24px;
-width:100%;
+			width:100%;
         }
         .left{
             float: left;
             width: 300px;
             height: 23px;
-            background-color: white;
 			margin-left:10px;
         }
 		.right{
            margin-right: 10px;
-
             height: 23px;
-            margin-left: 310px;
-            background-color: white;
+            margin-left: 350px;
         }
         body{
             font: 16px/1.5 "Mircisoft Yahei";
@@ -82,18 +79,17 @@ function ab(){
 	var mydocument = document;
     var mylist = mydocument.getElementById("tt");
     var docFragments = mydocument.createDocumentFragment();
-    var sum = mydocument.getElementById("sumofarraylist").value;
+    var sum = mydocument.getElementById("sum").value;
     if((sum - begin) > 1 ){
-    	alert("i am here");
     	for (var i = begin; i < begin + 2; ++i) {
-    		alert(i);
             var liItem = mydocument.createElement("div");
             var str = mydocument.getElementById(i).value;
+            
             var strarray = str.split("&&");
             if(strarray[2] == "1"){
-            	liItem.innerHTML = "<div class=\"demo\"><div class=\"title\"><img src=\"images/1.png\" alt=\"\" class=\"head\"/><p class=\"name\">"+strarray[7]+"</p><p class=\"intro\">"+strarray[6]+"</p></div><div class=\"content\"><p>"+strarray[5]+"</p></div><div style=\"text-align:right\"><a href=\"joinin?eid="+strarray[3]+"&typeid="+strarray[2]+"\">->Join in!<-</a></div><div class=\"comment\" align=\"center\"><form method=\"get\" action=\"${pageContext.request.contextPath}/comsubmit\"><input type=\"hidden\" name = \"info\" value = \""+str+"\"><textarea id=\"\" name = \"infoarea\" style=\"width:300px;height:80px;\"></textarea><input type=\"submit\" value=\"SUBMIT COMMENTS\"></form></div></div><br>" ;            }
+            	liItem.innerHTML = "<div class=\"demo\"><div class=\"title\"><img src=\"images/1.png\" alt=\"\" class=\"head\"/><p class=\"name\">User:"+strarray[6]+"</p><p class=\"intro\">Post date:"+strarray[5]+"</p></div><div class=\"content\"><p>"+strarray[4]+"</p></div><div style=\"text-align:right\"><a href=\"editEvent?event_id="+strarray[3]+"&typeid="+strarray[2]+"\">Go to Event</a></div><div class=\"comment\" align=\"center\"><form method=\"get\" action=\"${pageContext.request.contextPath}/comsubmit\"><input type=\"hidden\" name = \"info\" value = \""+str+"\"><textarea id=\"\" name = \"infoarea\" style=\"width:300px;height:80px;\"></textarea><input type=\"submit\" value=\"SUBMIT COMMENTS\"></form></div></div><br>" ;            }
             else if(strarray[2] == "2"){
-            	liItem.innerHTML = "<div class=\"demo\"><div class=\"title\"><img src=\"images/2.png\" alt=\"\" class=\"head\"/><p class=\"name\">"+strarray[7]+"</p><p class=\"intro\">"+strarray[6]+"</p></div><div class=\"content\"><p>"+strarray[5]+"</p></div><div style=\"text-align:right\"><a href=\"joinin?eid="+strarray[3]+"&typeid="+strarray[2]+"\">->Join in!<-</a></div><div class=\"comment\" align=\"center\"><form method=\"get\" action=\"${pageContext.request.contextPath}/comsubmit\"><input type=\"hidden\" name = \"info\" value = \""+str+"\"><textarea id=\"\" name = \"infoarea\" style=\"width:300px;height:80px;\"></textarea><input type=\"submit\" value=\"SUBMIT COMMENTS\"></form></div></div><br>" ;            }
+            	liItem.innerHTML = "<div class=\"demo\"><div class=\"title\"><img src=\"images/2.png\" alt=\"\" class=\"head\"/><p class=\"name\">User:"+strarray[6]+"</p><p class=\"intro\">Post date:"+strarray[5]+"</p></div><div class=\"content\"><p>"+strarray[4]+"</p></div><div style=\"text-align:right\"><a href=\"joinin?eid="+strarray[3]+"&typeid="+strarray[2]+"\">Go to Event</a></div><div class=\"comment\" align=\"center\"><form method=\"get\" action=\"${pageContext.request.contextPath}/comsubmit\"><input type=\"hidden\" name = \"info\" value = \""+str+"\"><textarea id=\"\" name = \"infoarea\" style=\"width:300px;height:80px;\"></textarea><input type=\"submit\" value=\"SUBMIT COMMENTS\"></form></div></div><br>" ;            }
             mylist.appendChild(liItem);
         }
     	begin += 2;
@@ -103,9 +99,9 @@ function ab(){
         var str = mydocument.getElementById(begin).value;
         var strarray = str.split("&&");
         if(strarray[2] == "1"){
-        	liItem.innerHTML = "<div class=\"demo\"><div class=\"title\"><img src=\"images/1.png\" alt=\"\" class=\"head\"/><p class=\"name\">"+strarray[7]+"</p><p class=\"intro\">"+strarray[6]+"</p></div><div class=\"content\"><p>"+strarray[5]+"</p></div><div style=\"text-align:right\"><a href=\"joinin?eid="+strarray[3]+"&typeid="+strarray[2]+"\">->Join in!<-</a></div><div class=\"comment\" align=\"center\"><form method=\"get\" action=\"${pageContext.request.contextPath}/comsubmit\"><input type=\"hidden\" name = \"info\" value = \""+str+"\"><textarea id=\"\" name = \"infoarea\" style=\"width:300px;height:80px;\"></textarea><input type=\"submit\" value=\"SUBMIT COMMENTS\"></form></div></div><br>" ;            }
+        	liItem.innerHTML = "<div class=\"demo\"><div class=\"title\"><img src=\"images/1.png\" alt=\"\" class=\"head\"/><p class=\"name\">User:"+strarray[6]+"</p><p class=\"intro\">Post date:"+strarray[5]+"</p></div><div class=\"content\"><p>"+strarray[4]+"</p></div><div style=\"text-align:right\"><a href=\"editEvent?event_id="+strarray[3]+"&typeid="+strarray[2]+"\">Go to Event</a></div><div class=\"comment\" align=\"center\"><form method=\"get\" action=\"${pageContext.request.contextPath}/comsubmit\"><input type=\"hidden\" name = \"info\" value = \""+str+"\"><textarea id=\"\" name = \"infoarea\" style=\"width:300px;height:80px;\"></textarea><input type=\"submit\" value=\"SUBMIT COMMENTS\"></form></div></div><br>" ;            }
         else if(strarray[2] == "2"){
-        	liItem.innerHTML = "<div class=\"demo\"><div class=\"title\"><img src=\"images/2.png\" alt=\"\" class=\"head\"/><p class=\"name\">"+strarray[7]+"</p><p class=\"intro\">"+strarray[6]+"</p></div><div class=\"content\"><p>"+strarray[5]+"</p></div><div style=\"text-align:right\"><a href=\"joinin?eid="+strarray[3]+"&typeid="+strarray[2]+"\">->Join in!<-</a></div><div class=\"comment\" align=\"center\"><form method=\"get\" action=\"${pageContext.request.contextPath}/comsubmit\"><input type=\"hidden\" name = \"info\" value = \""+str+"\"><textarea id=\"\" name = \"infoarea\" style=\"width:300px;height:80px;\"></textarea><input type=\"submit\" value=\"SUBMIT COMMENTS\"></form></div></div><br>" ;            }
+        	liItem.innerHTML = "<div class=\"demo\"><div class=\"title\"><img src=\"images/2.png\" alt=\"\" class=\"head\"/><p class=\"name\">User:"+strarray[6]+"</p><p class=\"intro\">Post date:"+strarray[5]+"</p></div><div class=\"content\"><p>"+strarray[4]+"</p></div><div style=\"text-align:right\"><a href=\"joinin?eid="+strarray[3]+"&typeid="+strarray[2]+"\">Go to Event</a></div><div class=\"comment\" align=\"center\"><form method=\"get\" action=\"${pageContext.request.contextPath}/comsubmit\"><input type=\"hidden\" name = \"info\" value = \""+str+"\"><textarea id=\"\" name = \"infoarea\" style=\"width:300px;height:80px;\"></textarea><input type=\"submit\" value=\"SUBMIT COMMENTS\"></form></div></div><br>" ;            }
         docFragments.appendChild(liItem);
         begin += 1;
     }
@@ -120,7 +116,7 @@ function ab(){
 <div class="main">
     <div class="left">
         <form action="${pageContext.request.contextPath}/selectbydate" method="get">
-        	<center>Date Filter: <input type="date" name="user_date"/><input type="submit" value="Date Filter"/></center>
+        	Date Filter: <input type="date" name="user_date"/><input type="submit" value="Filter"/>
         </form>
     </div>
     <div class="right">
@@ -132,7 +128,7 @@ function ab(){
 				<option value="events">Events</option>
 				<option value="broadcast">Broadcast</option>
 			</select>
-			<input type="submit" value="Type Filter"/>
+			<input type="submit" value="Filter"/>
 		</form>
 		</center>
     </div>
@@ -166,7 +162,18 @@ function ab(){
 	<div class="content">
 		<p><%=home.getActivity_desc() %></p>
 	</div>
-	<div style="text-align:right"><a href="joinin?eid=<%=home.getPost_id() %>&typeid=<%=home.getEntry_type()%>">->Join in!<-</a></div>
+	<%
+		if(home.getEntry_type() == 1){
+	%>
+	<div style="text-align:right"><a href="editEvent?event_id=<%=home.getPost_id() %>">Go to Event</a></div>
+	<%
+		}
+		else if(home.getEntry_type() == 2){
+	%>
+	<div style="text-align:right"><a href="joinin?eid=<%=home.getPost_id() %>">Go to Broadcast</a></div>
+	<%
+		} 
+	%>
 	<div class="comment" align="center">
 		<form method="get" action="${pageContext.request.contextPath}/comsubmit">
 			<input type="hidden" name = "info" value = "<%=home.toString() %>">
@@ -203,8 +210,18 @@ function ab(){
 	<div class="content">
 		<p><%=home.getActivity_desc() %></p>
 	</div>
-	<div style="text-align:right"><a href="joinin?eid=<%=home.getPost_id() %>&typeid=<%=home.getEntry_type()%>">->Join in!<-</a></div>
-	
+<%
+		if(home.getEntry_type() == 1){
+	%>
+	<div style="text-align:right"><a href="editEvent?event_id=<%=home.getPost_id() %>">Go to Event</a></div>
+	<%
+		}
+		else if(home.getEntry_type() == 2){
+	%>
+	<div style="text-align:right"><a href="joinin?eid=<%=home.getPost_id() %>">Go to Broadcast</a></div>
+	<%
+		} 
+	%>	
 	<div class="comment" align="center">
 		<form method="get" action="${pageContext.request.contextPath}/comsubmit">
 			<input type="hidden" name = "info" value = "<%=home.toString() %>">
@@ -224,7 +241,7 @@ function ab(){
 <%
 	}
 %>
-	<input type="hidden" id ="sumofarraylist" value="<%=arraylist.size() %>">
+	<input type="hidden" id ="sum" value="<%=arraylist.size() %>">
 </div>
 <div id="readmore" align="center">
 <input type="image" src="images/4.png" onclick="ab()">
