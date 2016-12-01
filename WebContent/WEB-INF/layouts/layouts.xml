@@ -32,6 +32,12 @@
 		<put-attribute name="title" value="Social App for Seniors" />
 		<put-attribute name="body" value="/WEB-INF/jsp/welcome.jsp" />
 	</definition>
+	<definition name="welcomeadmin" extends="base.definition">
+		<put-attribute name="title" value="Social App for Seniors" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/broadmenu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/welcome.jsp" />
+		
+	</definition>
 	<definition name="student" extends="base.definition">
 		<put-attribute name="title" value="Students" />
 		<put-attribute name="body" value="/WEB-INF/jsp/studentPage.jsp" />
@@ -77,6 +83,14 @@
 <definition name="broad" extends="base.definition">
 		<put-attribute name="title" value="BROADCAST" />
 		<put-attribute name="menu" value="/WEB-INF/jsp/broadmenu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/broadhome.jsp" />
+		<put-list-attribute name="broadstyle">
+			<add-attribute value="/css/brcss.css" />
+		</put-list-attribute>
+	</definition>
+	<definition name="broaduser" extends="base.definition">
+		<put-attribute name="title" value="View Broadcasts" />
+		
 		<put-attribute name="body" value="/WEB-INF/jsp/broadhome.jsp" />
 		<put-list-attribute name="broadstyle">
 			<add-attribute value="/css/brcss.css" />

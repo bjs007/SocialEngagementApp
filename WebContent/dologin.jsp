@@ -12,18 +12,41 @@
     ResultSet rs;
     ResultSet rs2;
     
+    Statement st2 = conn.createStatement();
+   //	String name=(String)session.getAttribute("name");
+  
+   	
+   
+   
+    
     rs = st.executeQuery("select * from users where email='"+ userid +"' and password='"+ pwd +"'");
     if (rs.next()) {
         session.setAttribute("userid",userid);
         session.setAttribute("userpass",pwd);
         session.setAttribute("name",rs.getString("name"));
+     	String email=(String)session.getAttribute("userid");
+     	String name=(String)session.getAttribute("name");
+     	  
+     	
+    	rs2=st2.executeQuery("select userid from users where name='"+name+"' and email='"+email+"'");
+       	rs2.next();
+       	String useractualid=rs2.getString(1);
+        
         //rs2=st.executeQuery("select name from uss where uid='"+ userid +"' and upass='"+ pwd +"'");
         //String po="select pos from uss where uid='"+userid+"' and upass='"+pwd+"'";
         String n=rs.getString("name");
       //  String po=rs.getString("pos");
        //response.sendRedirect("http://localhost:8080/SocialEngagement/welcome");
        //response.sendRedirect("http://proj-514-02.cs.iastate.edu:8080/welcome");
-      response.sendRedirect("http://localhost:8080/SocialEngagement/welcome");
+        
+        if(useractualid.equals("121")){
+        	 response.sendRedirect("http://localhost:8080/SocialEngagement/welcomeadmin");
+        }
+        else{
+        	 response.sendRedirect("http://localhost:8080/SocialEngagement/welcome");
+        }
+       
+      
        //if(po.equals("Manager")){
            // response.sendRedirect("mghome.jsp");
             

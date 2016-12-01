@@ -14,7 +14,14 @@
 }
 
 
-
+body {
+	background: url('loginimages/oceanBG-145x145.jpg');
+	font-family: "Georgia", "Georgia", "Georgia", Georgia, Arial, "Lucida Grande", sans-serif;
+	font-weight:300;
+	text-align: left;
+	text-decoration: none;
+	height: 500px;
+}
 .reg-form .header {
 	padding: 40px 30px 30px 30px;
 }
