@@ -146,7 +146,17 @@ public class HomeJdbcDao {
 				int i = 0;
 				while(rs.next()){
 					Home home = new Home();
-					String str = rs.getString("create_date_time").split(" ")[0];
+					String str = rs.getString("create_date_time");
+					if(str.charAt(0) >= '0' && str.charAt(0) <= '9'){
+						str = str.split(" ")[0];
+					}
+					else{
+						SimpleDateFormat parser=new SimpleDateFormat("EEE MMM d HH:mm:ss z yyyy");
+						Date cdt= parser.parse(rs.getString(str));
+						parser = new SimpleDateFormat("yyyy-MM-dd");
+						str = parser.format(cdt);
+						
+					}
 					System.out.println(str);
 					if(str.equals(date)){
 						home.setEntry_id(rs.getInt("entry_id"));
