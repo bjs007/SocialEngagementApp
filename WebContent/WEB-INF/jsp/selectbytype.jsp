@@ -16,7 +16,7 @@ width:100%;
             float: left;
             width: 300px;
             height: 23px;
-            background-color: white;
+            
 			margin-left:10px;
         }
 		.right{
@@ -24,7 +24,7 @@ width:100%;
 
             height: 23px;
             margin-left: 310px;
-            background-color: white;
+            
         }
         body{
             font: 16px/1.5 "Mircisoft Yahei";
@@ -86,15 +86,14 @@ function ab(){
     if((sum - begin) > 1 ){
     	for (var i = begin; i < begin + 2; ++i) {
             var liItem = mydocument.createElement("div");
-            var str = mydocument.getElementById(begin).value;
+            var str = mydocument.getElementById(i).value;
+            //alert(str);
             var strarray = str.split("&&");
             if(strarray[2] == "1"){
-            	liItem.innerHTML = "<div class=\"demo\"><div class=\"title\"><img src=\"images/1.png\" alt=\"\" class=\"head\"/><p class=\"name\">"+strarray[7]+"</p><p class=\"intro\">"+strarray[6]+"</p></div><div class=\"content\"><p>"+strarray[5]+"</p></div><div style=\"text-align:right\"><a href=\"joinin?eid="+strarray[3]+"&typeid="+strarray[2]+"\">->Join in!<-</a></div><div class=\"comment\" align=\"center\"><form method=\"get\" action=\"${pageContext.request.contextPath}/comsubmit\"><input type=\"hidden\" name = \"info\" value = \""+str+"\"><textarea id=\"\" name = \"infoarea\" style=\"width:300px;height:80px;\"></textarea><input type=\"submit\" value=\"SUBMIT COMMENTS\"></form></div></div><br>" ;            }
-            }
+            	liItem.innerHTML = "<div class=\"demo\"><div class=\"title\"><img src=\"images/1.png\" alt=\"\" class=\"head\"/><p class=\"name\">User:"+strarray[6]+"</p><p class=\"intro\">Post date:"+strarray[5]+"</p></div><div class=\"content\"><p>"+strarray[4]+"</p></div><div style=\"text-align:right\"><a href=\"joinin?eid="+strarray[3]+"&typeid="+strarray[2]+"\">->Join in!<-</a></div><div class=\"comment\" align=\"center\"><form method=\"get\" action=\"${pageContext.request.contextPath}/comsubmit\"><input type=\"hidden\" name = \"info\" value = \""+str+"\"><textarea id=\"\" name = \"infoarea\" style=\"width:300px;height:80px;\"></textarea><input type=\"submit\" value=\"SUBMIT COMMENTS\"></form></div></div><br>" ;            }
             else if(strarray[2] == "2"){
-            	liItem.innerHTML = "<div class=\"demo\"><div class=\"title\"><img src=\"images/2.png\" alt=\"\" class=\"head\"/><p class=\"name\">"+strarray[7]+"</p><p class=\"intro\">"+strarray[6]+"</p></div><div class=\"content\"><p>"+strarray[5]+"</p></div><div style=\"text-align:right\"><a href=\"joinin?eid="+strarray[3]+"&typeid="+strarray[2]+"\">->Join in!<-</a></div><div class=\"comment\" align=\"center\"><form method=\"get\" action=\"${pageContext.request.contextPath}/comsubmit\"><input type=\"hidden\" name = \"info\" value = \""+str+"\"><textarea id=\"\" name = \"infoarea\" style=\"width:300px;height:80px;\"></textarea><input type=\"submit\" value=\"SUBMIT COMMENTS\"></form></div></div><br>" ;            }
-      		}
-            docFragments.appendChild(liItem);
+            	liItem.innerHTML = "<div class=\"demo\"><div class=\"title\"><img src=\"images/2.png\" alt=\"\" class=\"head\"/><p class=\"name\">User:"+strarray[6]+"</p><p class=\"intro\">Post date:"+strarray[5]+"</p></div><div class=\"content\"><p>"+strarray[4]+"</p></div><div style=\"text-align:right\"><a href=\"joinin?eid="+strarray[3]+"&typeid="+strarray[2]+"\">->Join in!<-</a></div><div class=\"comment\" align=\"center\"><form method=\"get\" action=\"${pageContext.request.contextPath}/comsubmit\"><input type=\"hidden\" name = \"info\" value = \""+str+"\"><textarea id=\"\" name = \"infoarea\" style=\"width:300px;height:80px;\"></textarea><input type=\"submit\" value=\"SUBMIT COMMENTS\"></form></div></div><br>" ;            }
+            mylist.appendChild(liItem);
         }
     	begin += 2;
     }
@@ -103,11 +102,9 @@ function ab(){
         var str = mydocument.getElementById(begin).value;
         var strarray = str.split("&&");
         if(strarray[2] == "1"){
-        	liItem.innerHTML = "<div class=\"demo\"><div class=\"title\"><img src=\"images/1.png\" alt=\"\" class=\"head\"/><p class=\"name\">"+strarray[7]+"</p><p class=\"intro\">"+strarray[6]+"</p></div><div class=\"content\"><p>"+strarray[5]+"</p></div><div style=\"text-align:right\"><a href=\"joinin?eid="+strarray[3]+"&typeid="+strarray[2]+"\">->Join in!<-</a></div><div class=\"comment\" align=\"center\"><form method=\"get\" action=\"${pageContext.request.contextPath}/comsubmit\"><input type=\"hidden\" name = \"info\" value = \""+str+"\"><textarea id=\"\" name = \"infoarea\" style=\"width:300px;height:80px;\"></textarea><input type=\"submit\" value=\"SUBMIT COMMENTS\"></form></div></div><br>" ;            }
-        }
+        	liItem.innerHTML = "<div class=\"demo\"><div class=\"title\"><img src=\"images/1.png\" alt=\"\" class=\"head\"/><p class=\"name\">User:"+strarray[6]+"</p><p class=\"intro\">Post date:"+strarray[5]+"</p></div><div class=\"content\"><p>"+strarray[4]+"</p></div><div style=\"text-align:right\"><a href=\"joinin?eid="+strarray[3]+"&typeid="+strarray[2]+"\">->Join in!<-</a></div><div class=\"comment\" align=\"center\"><form method=\"get\" action=\"${pageContext.request.contextPath}/comsubmit\"><input type=\"hidden\" name = \"info\" value = \""+str+"\"><textarea id=\"\" name = \"infoarea\" style=\"width:300px;height:80px;\"></textarea><input type=\"submit\" value=\"SUBMIT COMMENTS\"></form></div></div><br>" ;            }
         else if(strarray[2] == "2"){
-        	liItem.innerHTML = "<div class=\"demo\"><div class=\"title\"><img src=\"images/2.png\" alt=\"\" class=\"head\"/><p class=\"name\">"+strarray[7]+"</p><p class=\"intro\">"+strarray[6]+"</p></div><div class=\"content\"><p>"+strarray[5]+"</p></div><div style=\"text-align:right\"><a href=\"joinin?eid="+strarray[3]+"&typeid="+strarray[2]+"\">->Join in!<-</a></div><div class=\"comment\" align=\"center\"><form method=\"get\" action=\"${pageContext.request.contextPath}/comsubmit\"><input type=\"hidden\" name = \"info\" value = \""+str+"\"><textarea id=\"\" name = \"infoarea\" style=\"width:300px;height:80px;\"></textarea><input type=\"submit\" value=\"SUBMIT COMMENTS\"></form></div></div><br>" ;            }
-  		}
+        	liItem.innerHTML = "<div class=\"demo\"><div class=\"title\"><img src=\"images/2.png\" alt=\"\" class=\"head\"/><p class=\"name\">User:"+strarray[6]+"</p><p class=\"intro\">Post date:"+strarray[5]+"</p></div><div class=\"content\"><p>"+strarray[4]+"</p></div><div style=\"text-align:right\"><a href=\"joinin?eid="+strarray[3]+"&typeid="+strarray[2]+"\">->Join in!<-</a></div><div class=\"comment\" align=\"center\"><form method=\"get\" action=\"${pageContext.request.contextPath}/comsubmit\"><input type=\"hidden\" name = \"info\" value = \""+str+"\"><textarea id=\"\" name = \"infoarea\" style=\"width:300px;height:80px;\"></textarea><input type=\"submit\" value=\"SUBMIT COMMENTS\"></form></div></div><br>" ;            }
         docFragments.appendChild(liItem);
         begin += 1;
     }
@@ -122,7 +119,7 @@ function ab(){
 <div class="main">
     <div class="left">
         <form action="${pageContext.request.contextPath}/selectbydate" method="get">
-        	<center>Date Filter: <input type="date" name="user_date"/><input type="submit" value="Date Filter"/></center>
+        	<center>Date Filter: <input type="date" name="user_date"/><input type="submit" value="Filter"/></center>
         </form>
     </div>
     <div class="right">
@@ -133,9 +130,8 @@ function ab(){
         	 	<option value="empty"></option>
 				<option value="events">Events</option>
 				<option value="broadcast">Broadcast</option>
-				<option value="discuss">Discuss</option>
 			</select>
-			<input type="submit" value="Type Filter"/>
+			<input type="submit" value="Filter"/>
 		</form>
 		</center>
     </div>
