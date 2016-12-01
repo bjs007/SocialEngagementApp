@@ -39,8 +39,8 @@
 			<td style="width:70%"><tiles:insertAttribute name="body" /></td>
 		</tr>
 		<tr>
-			<td colspan ="2" class="layout_header"><tiles:insertAttribute name="footer" />
-			</td>
+			<!--  <td colspan ="2" class="layout_header"><tiles:insertAttribute name="footer" />
+			</td>-->
 		</tr>
 	</table>
 	   
