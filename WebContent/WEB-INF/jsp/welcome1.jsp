@@ -189,11 +189,6 @@ function ab(){
 	<div style="text-align:right"><a href="editEvent?event_id=<%=home.getPost_id() %>">Go to Event</a></div>
 	<%
 		}
-		else if(home.getEntry_type() == 2){
-	%>
-	<div style="text-align:right"><a href="joinin?eid=<%=home.getPost_id() %>">Go to Broadcast</a></div>
-	<%
-		} 
 	%>	
 	<div class="comment" align="center">
 		<form method="get" action="${pageContext.request.contextPath}/comsubmit">
@@ -235,11 +230,6 @@ function ab(){
 	<div style="text-align:right"><a href="editEvent?event_id=<%=home.getPost_id() %>">Go to Event</a></div>
 	<%
 		}
-		else if(home.getEntry_type() == 2){
-	%>
-	<div style="text-align:right"><a href="joinin?eid=<%=home.getPost_id() %>">Go to Broadcast</a></div>
-	<%
-		} 
 	%>	
 	<div class="comment" align="center">
 		<form method="get" action="${pageContext.request.contextPath}/comsubmit">
