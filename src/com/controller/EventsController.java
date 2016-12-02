@@ -64,7 +64,7 @@ public class EventsController {
 		}
 		if(user_name==null || user_name.isEmpty())
 			user_name="UserAbc";
-		user_name=request.getSession().getAttribute("name").toString();
+		//user_name=request.getSession().getAttribute("name").toString();
 		request.getSession().setAttribute("user_name", user_name);
 		return model;
 	}
@@ -109,7 +109,11 @@ public class EventsController {
 		//event = new Event();
 		//event.setEvent_desc("Test event");
 		//logger.warn("dbString >> " + dbString);
-		ArrayList<Event> eventList=eventsDao.getEventsDataFromDb();
+		Object isUserAdmin=request.getSession().getAttribute("isUserAdm");
+		Boolean userAdmin=false;
+		if(isUserAdmin!=null && isUserAdmin.toString().equals("true"))
+			userAdmin=true;
+		ArrayList<Event> eventList=eventsDao.getAllEventsDataFromDb(userAdmin);
 		if(eventList!=null && eventList.size()!=0)
 		{
 			for(Event event:eventList)

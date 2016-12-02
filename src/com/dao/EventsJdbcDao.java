@@ -63,7 +63,7 @@ public class EventsJdbcDao {
 			logger.debug("You made it, take control your database now!");
 
 			try {
-				String insertEventsSQL = "Insert into events (event_desc,created_date_time,user_id,resources_needed,place,event_date_time,is_archived,is_resources_satisfied) values(?,?,?,?,?,?,?,?)";
+				String insertEventsSQL = "Insert into events (event_desc,created_date_time,user_id,resources_needed,place,event_date_time,is_archived,is_resources_satisfied,time_to_display) values(?,?,?,?,?,?,?,?,?)";
 				PreparedStatement pstmt = connection.prepareStatement(insertEventsSQL);
 
 				//event description
@@ -111,6 +111,18 @@ public class EventsJdbcDao {
 
 				//is_resources_satisfied
 				pstmt.setString(8,String.valueOf(event.getIs_resources_satisfied()==null?"false":event.getIs_resources_satisfied()));
+				
+				if(event.getTime_to_display()!=null)
+				{
+					SimpleDateFormat parser=new SimpleDateFormat("EEE MMM d HH:mm:ss z yyyy");
+					Date dateToSet=parser.parse(event.getTime_to_display().toString());
+					logger.warn("Java date : " + dateToSet);
+					java.sql.Timestamp timeStampToSet=new java.sql.Timestamp( dateToSet.getTime());
+					logger.warn("SQL date : " + timeStampToSet);
+					pstmt.setTimestamp(9,timeStampToSet);
+				}
+				else
+					pstmt.setString(9,null);
 
 				//int[] updateCounts = pstmt.executeBatch();
 				boolean updated = pstmt.execute();
@@ -131,7 +143,7 @@ public class EventsJdbcDao {
 		return "Success";
 	}
 
-	public ArrayList<Event> getEventsDataFromDb()
+	public ArrayList<Event> getAllEventsDataFromDb(Boolean isUserAdmin)
 	{
 
 		System.out.println("-------- MySQL JDBC Connection Testing ------------");
@@ -194,6 +206,10 @@ public class EventsJdbcDao {
 					java.sql.Timestamp dateTimeToSet=rs.getTimestamp("event_date_time");
 					Date event_date_time= new Date(dateTimeToSet.getTime());
 					event.setEvent_date_time(event_date_time);
+					
+					java.sql.Timestamp dateTimeToDisplay=rs.getTimestamp("time_to_display");
+					Date event_dis_date_time= new Date(dateTimeToDisplay.getTime());
+					event.setTime_to_display(event_dis_date_time);
 
 					Boolean is_archived=rs.getBoolean("is_archived");
 					event.setIs_archived(is_archived);
@@ -201,9 +217,13 @@ public class EventsJdbcDao {
 					Boolean is_resources_satisfied=rs.getBoolean("is_resources_satisfied");
 					event.setIs_resources_satisfied(is_resources_satisfied);
 
-
-					eventList.add(event);
-					logger.warn(event);
+					if(event.getTime_to_display().before(new Date()) || isUserAdmin)
+					{
+						eventList.add(event);
+						logger.warn(event);
+					}
+					else
+						logger.warn("Event " + event.getEvent_id() +" is before time");
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

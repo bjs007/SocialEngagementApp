@@ -19,6 +19,7 @@ public class Event {
 	private Boolean is_resources_satisfied;
 	private ArrayList<Comment> prevComments;
 	private String commentToAdd;
+	private Date time_to_display;
 	public Integer getEvent_id() {
 		return event_id;
 	}
@@ -119,6 +120,18 @@ public class Event {
 	public void setCommentToAdd(String commentToAdd) {
 		this.commentToAdd = commentToAdd;
 	}
+	
+	
+
+	
+
+	public Date getTime_to_display() {
+		return time_to_display;
+	}
+
+	public void setTime_to_display(Date time_to_display) {
+		this.time_to_display = time_to_display;
+	}
 
 	@Override
 	public String toString() {
@@ -128,7 +141,12 @@ public class Event {
 				+ ", place=" + place + ", event_date_time=" + event_date_time
 				+ ", is_archived=" + is_archived + ", is_resources_satisfied="
 				+ is_resources_satisfied + ", prevComments=" + prevComments
-				+ ", commentToAdd=" + commentToAdd + "]";
+				+ ", commentToAdd=" + commentToAdd + ", time_to_display="
+				+ time_to_display + "]";
 	}
+
+	
+
+	
 
 }

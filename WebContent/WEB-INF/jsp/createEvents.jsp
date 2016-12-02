@@ -36,7 +36,12 @@
 				</tr>
 				<tr>
 					<td>Date/Time for event :</td>
-					<td><form:input path="event_date_time" id="datetimepicker" type="text" style="width:250px" required='true'/></td>
+					<td><form:input path="event_date_time" id="datetimepicker1" type="text" style="width:250px" required='true'/></td>
+				</tr>
+				
+				<tr>
+					<td>Date/Time to Display :</td>
+					<td><form:input path="time_to_display" id="datetimepicker" type="text" style="width:250px" required='true'/></td>
 				</tr>
 				<tr>
 					<td colspan="2" style="text-align:center"><input type="submit" value="Submit" class="submitBtn"/></td>
