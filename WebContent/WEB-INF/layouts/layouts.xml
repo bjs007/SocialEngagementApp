@@ -145,4 +145,35 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/joinin.jsp" />
 	</definition>
 
+	<definition name="discussion" extends="base.definition">
+		<put-attribute name="title" value="Discussion" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/discussion.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/discussionHome.jsp" />
+	</definition>
+	
+	<definition name="addDiscussion" extends="base.definition">
+		<put-attribute name="title" value="Discussion" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/discussion.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/addDiscussion.jsp" />
+	</definition>
+	
+	<definition name="displayDiscussion" extends="base.definition">
+		<put-attribute name="title" value="Discussion" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/discussion.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/displayDiscussion.jsp" />
+	</definition>
+	
+	<definition name="displayDiscussionAdmin" extends="base.definition">
+		<put-attribute name="title" value="Discussion" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/discussion.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/displayDiscussionAdmin.jsp" />
+	</definition>
+	
+	
+	<definition name="responsediscussion" extends="base.definition">
+		<put-attribute name="title" value="Discussion" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/discussion.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/responsediscussion.jsp" />
+	</definition>
+
 </tiles-definitions>

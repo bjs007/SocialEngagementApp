@@ -8,7 +8,8 @@
 		<%-- <li class="blue"><a href="${pageContext.request.contextPath}/fetchStudent">Fetch Students Data</a></li>
 		<li class="red"><a href="${pageContext.request.contextPath}/fetchSubject">Fetch Subjects Data</a></li> --%>
 		<li class="blue"><a href="${pageContext.request.contextPath}/broaduser">Broadcasts</a></li>
-		<li class="orange"><a href="${pageContext.request.contextPath}/fetchStudent">Go to Discussion board</a></li>
+		<li class="orange"><a href="${pageContext.request.contextPath}/discussion">Go to Discussion board</a></li>
+		<%--<li class="orange"><a href="${pageContext.request.contextPath}/fetchStudent">Go to Discussion board</a></li> --%>
 		<%-- <li class="bright"><a href="${pageContext.request.contextPath}/fetchSubject">Create a Broadcast</a></li> --%>
 		<%-- <li class="red"><a href="${pageContext.request.contextPath}/fetchSubject">See all my Broadcasts</a></li> --%>
 		<li class="blue"><a href="${pageContext.request.contextPath}/events">Let's go to Events</a></li>
