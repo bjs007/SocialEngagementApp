@@ -14,13 +14,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Value;
-
 import com.models.Discussion;
 
-//import com.models.Discussion;
-
-
-//com.dao.DiscussionDao
 
 
 public class DiscussionDao {
@@ -117,7 +112,7 @@ public class DiscussionDao {
 		
 		
 		
-			/*
+		/*
 		    This method is by the controller to save the new discussion made by Normal Users in Discussion Table
 		*/
 
@@ -146,9 +141,6 @@ public class DiscussionDao {
 			if (connection != null) {
 				
 				
-
-				
-
 				try {
 					String insertdiscussionsSQL = "Insert into Discussion (discussionID,userID,message,time) values(?,?,?,?)";
 					
@@ -191,8 +183,6 @@ public class DiscussionDao {
 				System.out.println("Failed to make connection!");
 			} 
 			
-		//	disc.add(discussion);
-		//	System.out.println("saved discussion User"+disc);
 			return "Success"; 
 			
 		}
@@ -289,7 +279,7 @@ public class DiscussionDao {
 		}
 
 		
-		 /*
+		/*
 		    This method is by the controller to check the Login user status and rights 
 		*/
 		public boolean isAdminUser(Integer userId)
