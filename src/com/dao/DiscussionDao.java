@@ -27,9 +27,7 @@ public class DiscussionDao {
 	
 
 		public static ArrayList<Discussion> disc = new ArrayList<Discussion>();
-	/*	private String jdbcString = "jdbc:mysql://localhost:3307/socialDb?";
-		private String dbUserName = "root";
-		private String dbPassword = "password";*/
+
 		
 		@Value("${eventsJdbcString}")
 		private String jdbcString;
@@ -42,7 +40,9 @@ public class DiscussionDao {
 
 
 		 
-		
+		/*
+		    This method is by the controller to save the discussion response by the Admin Users in Discussion Table
+		*/
 		public String savediscussionsAdmin(Discussion discussion)
 		{
 
@@ -117,7 +117,9 @@ public class DiscussionDao {
 		
 		
 		
-		
+			/*
+		    This method is by the controller to save the new discussion made by Normal Users in Discussion Table
+		*/
 
 		public String savediscussionsUser(Discussion discussion)
 		{
@@ -194,7 +196,9 @@ public class DiscussionDao {
 			return "Success"; 
 			
 		}
-
+        /*
+		    This method is by the controller to fetch all the discussion in the Discussion Table
+		*/
 		public ArrayList<Discussion> getdiscussionsDataFromDb()
 		{
 			
@@ -285,7 +289,9 @@ public class DiscussionDao {
 		}
 
 		
-		
+		 /*
+		    This method is by the controller to check the Login user status and rights 
+		*/
 		public boolean isAdminUser(Integer userId)
 		{
 			boolean result=false;
