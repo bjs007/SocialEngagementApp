@@ -28,13 +28,13 @@ public class HomeJdbcDao {
 	@Value("${dbPassword}")
 	private String dbPassword;
 
-	Logger logger= Logger.getLogger(EventsJdbcDao.class);
+	Logger logger= Logger.getLogger(HomeJdbcDao.class);
 	
 	public ArrayList<Home> getDashboardInfo()
 	{
 
 		System.out.println("-------- MySQL JDBC Connection Testing ------------");
-		ArrayList<Home> homeList=null;
+		ArrayList<Home> homeList=new ArrayList<Home>();
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
@@ -56,14 +56,16 @@ public class HomeJdbcDao {
 			return null;
 		}
 
+		
 		if (connection != null) {
 			System.out.println("You made it, take control your database now!");
 
 			try {
+				
 				CallableStatement cs = connection.prepareCall("{call getHomeInfo()}");
 				boolean flag = cs.execute();
 				ResultSet rs = null;
-				homeList = new ArrayList<Home>();
+				//homeList = new ArrayList<Home>();
 				while(flag){
 					rs = cs.getResultSet();
 					int i = 0;
@@ -91,6 +93,9 @@ public class HomeJdbcDao {
 					}
 					flag = cs.getMoreResults();
 				}
+				
+				cs.close();
+				rs.close();
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -104,7 +109,24 @@ public class HomeJdbcDao {
 		} else {
 			System.out.println("Failed to make connection!");
 		}
+		Home home = new Home();
+		
+		home.setEntry_id(123);
+		home.setEntry_desc("123");
+		home.setEntry_type(123);
+		home.setPost_id(123);
+		home.setActivity_desc(jdbcString);
+		home.setCreate_date_time(dbUserName+"%%%%%"+dbPassword);
+		home.setUser_id(123);
+		
+		homeList.add(home);
 		Collections.sort(homeList, Collections.reverseOrder());
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(homeList.size()>0)
 			return homeList;
 		else
@@ -112,7 +134,7 @@ public class HomeJdbcDao {
 	}
 	
 	public ArrayList<Home> browsebyDate(String date) throws ParseException{
-		ArrayList<Home> ale = null;
+		ArrayList<Home> ale = new ArrayList<Home>();
 		Statement statement = null;
 	
 		System.out.println("-------- Events JDBC Connection Testing ------------");
@@ -151,7 +173,6 @@ public class HomeJdbcDao {
 			CallableStatement cs = connection.prepareCall("{call getInfoByDateBroadcast()}");
 			boolean flag = cs.execute();
 			ResultSet rs = null;
-			ale = new ArrayList<Home>();
 			while(flag){
 				rs = cs.getResultSet();
 				int i = 0;
@@ -225,7 +246,7 @@ public class HomeJdbcDao {
 	}
 	
 	public ArrayList<Home> browsebyType(String date) throws ParseException{
-		ArrayList<Home> ale = null;
+		ArrayList<Home> ale = new ArrayList<Home>();
 		Statement statement = null;
 	
 		System.out.println("-------- Events JDBC Connection Testing ------------");
@@ -258,7 +279,6 @@ public class HomeJdbcDao {
 			CallableStatement cs = connection.prepareCall("{call getHomeInfo()}");
 			boolean flag = cs.execute();
 			ResultSet rs = null;
-			ale = new ArrayList<Home>();
 			while(flag){
 				rs = cs.getResultSet();
 				int i = 0;
