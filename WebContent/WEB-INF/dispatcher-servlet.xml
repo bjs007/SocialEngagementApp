@@ -17,6 +17,7 @@
 		/> <property name="prefix" value="/WEB-INF/jsp/" /> <property name="suffix" 
 		value=".jsp" /> </bean> -->
 
+	<bean id="discussionDao" class="com.dao.DiscussionDao" />
 	<bean id="jdbcDao" class="com.dao.JDBCDao" />
 	<bean id="eventsJdbcDao" class="com.dao.EventsJdbcDao" />
 <bean id="homeJdbcDao" class="com.dao.HomeJdbcDao"/>
