@@ -8,6 +8,16 @@ import java.util.Date;
 
 public class Discussion {
 //discussionID
+
+/*
+    discussionID : Discussion ID created by User
+    userID : Login User Id
+    adminID : Id of Admin who will response to this discussion
+    adminMessage : Admin response to this discussion
+    message : user message created 
+    time : time stamp when user created this message
+    admintime : time stamp when admin response to this message
+*/
 	private Integer discussionID;
 	private Integer userID;
 	private Integer adminID;
