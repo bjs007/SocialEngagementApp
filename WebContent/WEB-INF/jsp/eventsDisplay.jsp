@@ -15,9 +15,6 @@
 				<th><p>Delete Link</p></th>
 			</tr>
 		<c:forEach items="${eventsList}" var="event">
-			<%-- <c:url value="${pageContext.request.contextPath}/editEvent"	var="eventEditUrl">
-				<c:param name="event_id" value="${event.event_id}" />
-			</c:url> --%>
 			<tr>
 				<td><p>${event.event_desc}</p></td>
 				<td><p>${event.place}</p></td>
@@ -35,13 +32,10 @@
 				<td><a href="${pageContext.request.contextPath}/editEvent?event_id=${event.event_id}">Edit this Event</a></td>
 				<c:choose>
   				<c:when test="${(((not empty isUserAdm) && isUserAdm == 'true') || (event.user_id eq session_user_id))}">
-					<%-- <c:set var="editUrl">${pageContext.request.contextPath}/editEvent?event_id=${event.event_id}</c:set> --%>
 					<c:set var="deleteUrl">${pageContext.request.contextPath}/deleteEvent?event_id=${event.event_id}</c:set>
-					<%-- <td><a href="${editUrl}">Edit this Event</a></td> --%>
 					<td><a href="${deleteUrl}">Delete this Event</a></td>
 				</c:when>
 				<c:otherwise>
-				<!-- <td><p>You cannot Edit this Event</p></td> -->
 				<td><p>You cannot Delete this Event</p></td>
 				</c:otherwise>
 				</c:choose>
@@ -49,9 +43,7 @@
 			<tr>
 			<td colspan="7">
 				<c:set var="randomImageIndex"><%= java.lang.Math.round(1+java.lang.Math.random()*3) %></c:set>
-				<%-- <p>${randomImageIndex}</p> --%>
 				<c:set var="imageUrl" value="${pageContext.request.contextPath}/images/event_image_${randomImageIndex}.jpg" />
-				<%-- <p>${imageUrl}</p> --%>
 				<img alt="ImageIcon" style="height: 320px;width: 100%;" src="${imageUrl}">
 			
 			</td>

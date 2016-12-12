@@ -2,6 +2,7 @@ package com.dao;
 
 /**
  * @author Dipanjan Karmakar
+ * This data access object interacts with database and fetches and saves into database
  */
 
 import java.sql.Connection;
@@ -23,6 +24,10 @@ import com.models.Comment;
 import com.models.Event;
 
 public class EventsJdbcDao {
+	
+	/**
+	 * All the following values are fetched from the dbDetails.properties file
+	 */
 
 	@Value("${eventsJdbcString}")
 	private String jdbcString;
@@ -35,14 +40,18 @@ public class EventsJdbcDao {
 
 	Logger logger= Logger.getLogger(EventsJdbcDao.class);
 
+	/**
+	 * Persist the event to database
+	 * @param event		The event to ve saved
+	 * @return			"Success" if the data has been saved successully
+	 */
 	public String saveEvents(Event event)
 	{
 
-		System.out.println("-------- Events JDBC Connection Testing ------------");
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
-			logger.error("Where is your MySQL JDBC Driver?");
+			logger.error("MYSQL JDBC Driver not found!");
 			logger.error(e.getStackTrace());
 			return null;
 		}
@@ -60,7 +69,7 @@ public class EventsJdbcDao {
 		}
 
 		if (connection != null) {
-			logger.debug("You made it, take control your database now!");
+			logger.debug("Connection with database successful");
 
 			try {
 				String insertEventsSQL = "Insert into events (event_desc,created_date_time,user_id,resources_needed,place,event_date_time,is_archived,is_resources_satisfied,time_to_display) values(?,?,?,?,?,?,?,?,?)";
@@ -143,15 +152,19 @@ public class EventsJdbcDao {
 		return "Success";
 	}
 
+	/**
+	 * This function fetches all the events from database
+	 * @param isUserAdmin		True if the user is Admin 
+	 * @return					The list of all active events
+	 */
 	public ArrayList<Event> getAllEventsDataFromDb(Boolean isUserAdmin)
 	{
 
-		System.out.println("-------- MySQL JDBC Connection Testing ------------");
 		ArrayList<Event> eventList=null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
-			System.out.println("Where is your MySQL JDBC Driver?");
+			System.out.println("MYSQL JDBC Driver not found!");
 			e.printStackTrace();
 			return null;
 		}
@@ -170,7 +183,7 @@ public class EventsJdbcDao {
 		}
 
 		if (connection != null) {
-			System.out.println("You made it, take control your database now!");
+			System.out.println("Connection with database successful");
 
 			try {
 				Statement statement=connection.createStatement();
@@ -242,15 +255,19 @@ public class EventsJdbcDao {
 		else
 			return null;
 	}
+	/**
+	 * Fetch the event's details from database
+	 * @param evt		The event whose details to be fetched
+	 * @return			The list of all events fetched
+	 */
 	public ArrayList<Event> getEventsDataFromDb(Event evt)
 	{
 
-		System.out.println("-------- MySQL JDBC Connection Testing ------------");
 		ArrayList<Event> eventList=null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
-			System.out.println("Where is your MySQL JDBC Driver?");
+			System.out.println("MYSQL JDBC Driver not found!");
 			e.printStackTrace();
 			return null;
 		}
@@ -269,7 +286,7 @@ public class EventsJdbcDao {
 		}
 
 		if (connection != null) {
-			System.out.println("You made it, take control your database now!");
+			System.out.println("Connection with database successful");
 
 			try {
 				Statement statement=connection.createStatement();
@@ -367,15 +384,19 @@ public class EventsJdbcDao {
 			return null;
 	}
 
+	/**
+	 * This function will delete the events
+	 * @param evt			The event whose details is to be deleted from the database
+	 * @return				"true" if deleted successfully else "false"
+	 */
 	public Boolean deletEventsDataFromDb(Event evt)
 	{
 
-		System.out.println("-------- MySQL JDBC Connection Testing ------------");
 		Integer count=0;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
-			System.out.println("Where is your MySQL JDBC Driver?");
+			System.out.println("MYSQL JDBC Driver not found!");
 			e.printStackTrace();
 			return null;
 		}
@@ -394,7 +415,7 @@ public class EventsJdbcDao {
 		}
 
 		if (connection != null) {
-			System.out.println("You made it, take control your database now!");
+			System.out.println("Connection with database successful");
 
 			try {
 				Statement statement=connection.createStatement();
@@ -438,14 +459,18 @@ public class EventsJdbcDao {
 
 	}
 
+	/**
+	 * This function will save the edited events
+	 * @param event		The modified event object from the UI
+	 * @return			status of the operation
+	 */
 	public String saveEditedEvents(Event event)
 	{
 
-		System.out.println("-------- Events JDBC Connection Testing ------------");
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
-			logger.error("Where is your MySQL JDBC Driver?");
+			logger.error("MYSQL JDBC Driver not found!");
 			logger.error(e.getStackTrace());
 			return null;
 		}
@@ -463,10 +488,9 @@ public class EventsJdbcDao {
 		}
 
 		if (connection != null) {
-			logger.debug("You made it, take control your database now!");
+			logger.debug("Connection with database successful");
 
 			try {
-				//String insertEventsSQL = "update events set event_desc=?,created_date_time=?,user_id=?,resources_needed=?,place=?,event_date_time=?,is_archived=?,is_resources_satisfied=? where event_id=?";
 				String insertEventsSQL = "update events set event_desc=?,created_date_time=?,resources_needed=?,place=?,event_date_time=?,is_archived=?,is_resources_satisfied=? where event_id=?";
 				PreparedStatement pstmt = connection.prepareStatement(insertEventsSQL);
 
@@ -478,12 +502,6 @@ public class EventsJdbcDao {
 
 				//created date
 				pstmt.setString(2,new Date().toString());
-
-				//user-id
-				/*if(event.getUser_id()!=null && event.getUser_id()>0)
-					pstmt.setString(3,event.getUser_id().toString());
-				else
-					pstmt.setString(3,null);*/
 
 				//resources-needed
 				if(event.getResources_needed()!=null && !event.getResources_needed().isEmpty())
@@ -519,7 +537,6 @@ public class EventsJdbcDao {
 
 				pstmt.setInt(8,event.getEvent_id());
 
-				//int[] updateCounts = pstmt.executeBatch();
 				int updated = pstmt.executeUpdate();
 				logger.warn("Updated events :" + updated);
 				
@@ -556,15 +573,19 @@ public class EventsJdbcDao {
 		}
 		return "Success";
 	}
+	/**
+	 * This function checks if the user has an admin account
+	 * @param userId		The userId of the user to check
+	 * @return				true if the user is admins
+	 */
 	public boolean isAdminUser(Integer userId)
 	{
 		boolean result=false;
 
-		System.out.println("-------- MySQL JDBC Connection Testing ------------");
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
-			System.out.println("Where is your MySQL JDBC Driver?");
+			System.out.println("MYSQL JDBC Driver not found!");
 			e.printStackTrace();
 			return result;
 		}
@@ -583,7 +604,7 @@ public class EventsJdbcDao {
 		}
 
 		if (connection != null) {
-			System.out.println("You made it, take control your database now!");
+			System.out.println("Connection with database successful");
 
 			try {
 				String selectTableSQL = new String("SELECT * from users where userid= ? ");
@@ -614,15 +635,18 @@ public class EventsJdbcDao {
 		}
 		return result;
 	}
+	/**
+	 * Thiis function will fetch all archived events's data from database
+	 * @return			The list of archived events
+	 */
 	public ArrayList<Event> getArchivedEventsDataFromDb()
 	{
 
-		System.out.println("-------- MySQL JDBC Connection Testing ------------");
 		ArrayList<Event> eventList=null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
-			System.out.println("Where is your MySQL JDBC Driver?");
+			System.out.println("MYSQL JDBC Driver not found!");
 			e.printStackTrace();
 			return null;
 		}
@@ -641,7 +665,7 @@ public class EventsJdbcDao {
 		}
 
 		if (connection != null) {
-			System.out.println("You made it, take control your database now!");
+			System.out.println("Connection with database successful");
 
 			try {
 				Statement statement=connection.createStatement();
@@ -706,19 +730,18 @@ public class EventsJdbcDao {
 			return null;
 	}
 
-	/**
-	 * @param user_id
-	 * @return
+	/**	This function fetches the userName of the user
+	 * @param user_id			The userId for whom to search
+	 * @return					The username if the user
 	 */
 	public String getUserNameFromId(Integer user_id) 
 	{
-		boolean result=false;
 
 		System.out.println("-------- MySQL JDBC Connection Testing ------------");
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
-			System.out.println("Where is your MySQL JDBC Driver?");
+			System.out.println("MYSQL JDBC Driver not found!");
 			e.printStackTrace();
 			return null;
 		}
@@ -737,7 +760,7 @@ public class EventsJdbcDao {
 		}
 
 		if (connection != null) {
-			System.out.println("You made it, take control your database now!");
+			System.out.println("Connection with database successful");
 
 			try {
 				String selectTableSQL = new String("SELECT * from users where userid= ? ");

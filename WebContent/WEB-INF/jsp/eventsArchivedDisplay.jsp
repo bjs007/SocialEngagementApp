@@ -11,9 +11,6 @@
 	<c:otherwise>
 	<table border="1" style="background-color: #85c1e9; color: #34495e; font: Arial; border-radius: 6px; font-size: 12px; width: 90%;">
 		<c:forEach items="${eventsList}" var="event">
-			<%-- <c:url value="${pageContext.request.contextPath}/editEvent"	var="eventEditUrl">
-				<c:param name="event_id" value="${event.event_id}" />
-			</c:url> --%>
 			<tr>
 				<th><p>Event Description</p></th>
 				<th><p>Location</p></th>
@@ -52,13 +49,9 @@
 			<tr>
 			<td colspan="7">
 				<c:set var="randomImageIndex"><%= java.lang.Math.round(1+java.lang.Math.random()*3) %></c:set>
-				<%-- <p>${randomImageIndex}</p> --%>
 				<c:set var="imageUrl" value="${pageContext.request.contextPath}/images/event_image_${randomImageIndex}.jpg" />
-				<%-- <p>${imageUrl}</p> --%>
 				<img alt="ImageIcon" style="height: 320px;width: 100%;" src="${imageUrl}">
-			
 			</td>
-			
 			</tr>
 		</c:forEach>
 	</table>

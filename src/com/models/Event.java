@@ -2,6 +2,7 @@ package com.models;
 
 /**
  * @author Dipanjan Karmakar
+ * This is the event bean
  */
 
 import java.util.ArrayList;
