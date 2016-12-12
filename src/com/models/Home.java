@@ -1,5 +1,8 @@
 package com.models;
-
+/**
+*@author Lei Liu
+*This class is the model of Home, which is refered to the table of dashboard in the database
+*/
 public class Home implements Comparable<Home>{
 	private Integer entry_id;
 	private String entry_desc;
@@ -50,7 +53,7 @@ public class Home implements Comparable<Home>{
 	public void setUser_id(Integer user_id) {
 		this.user_id = user_id;
 	}
-	
+
 	public int compareTo(Home other){
 		return create_date_time.compareTo(other.create_date_time);
 	}
@@ -58,6 +61,6 @@ public class Home implements Comparable<Home>{
 	public String toString() {
 		return entry_id+"&&"+entry_desc+"&&"+entry_type+"&&"+post_id+"&&"+activity_desc+"&&"+create_date_time+"&&"+user_id;
 	}
-	
-	
+
+
 }

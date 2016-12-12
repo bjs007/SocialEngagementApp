@@ -3,7 +3,7 @@ package com.controller;
 import java.text.ParseException;
 
 /**
- * @author Dipanjan Karmakar
+ * @author Lei Liu
  */
 
 import java.util.ArrayList;
@@ -27,126 +27,52 @@ import com.models.Student;
 import com.models.Subject;
 
 
-
+/**
+* This controller is for Dashboard, which can be used to fetch information
+* from events and broadcasts by execuating store procedure in the database
+*/
 @Controller
 public class HomeController {
-	
+
 	@Autowired
 	JDBCDao jdbcDao;
 	@Autowired
 	HomeJdbcDao homejdbcDao;
-	
+
 	@Value("${dbString}")
 	  private String dbString;
-	
+
 	Logger logger= Logger.getLogger(HomeController.class);
- 
-	//@RequestMapping("/welcome")
-	public ModelAndView helloWorld() {
- 
-		String message = "<br><div style='text-align:center;'>"
-				+ "<h3>********** Hello World, Spring MVC Tutorial</h3>This message is coming from Controller  **********</div><br><br>";
-		return new ModelAndView("welcome", "message", message);
-	}
-	//@RequestMapping("/welcome")
-	public ModelAndView hello(HttpServletRequest request,HttpServletResponse response) throws Exception {
 
-		ModelAndView model = new ModelAndView("welcome");
-		model.addObject("message", "From new function");
-		logger.debug("Debug Inside the logger");
-		logger.warn("Warn Inside the logger");
-		logger.warn("dbString >> " + dbString);
-		return model;
-	}
-	
-	@RequestMapping("/contact")
-	public ModelAndView springTiles(HttpServletRequest request,HttpServletResponse response) throws Exception {
-
-		ModelAndView model = new ModelAndView("contact");
-		model.addObject("message", "From new function");
-		logger.debug("Debug Inside the logger");
-		logger.warn("Warn Inside the logger");
-		return model;
-	}
 	/*
-	 * 
-	 * New code to merge with ComS 514
-	 */
-	
-	@RequestMapping("/fetchStudent")
-	public ModelAndView fetchStudent(HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception {
-
-		ModelAndView model = new ModelAndView("student");
-		model.addObject("message", "From fetchStudent function");
-		logger.debug("Debug Inside the logger");
-		logger.warn("Warn Inside the logger");
-		modelObj.addAttribute("studentForm", new Student());
-
-		return model;
-	}
-
-	@RequestMapping("/getStudentData")
-	public ModelAndView getStudentData(@ModelAttribute("studentForm") Student student , HttpServletRequest request,HttpServletResponse response,Model model) throws Exception {
-
-		ModelAndView modelObj = new ModelAndView("student");
-		logger.warn("Got value from form :" + student.getFirst_name());
-		modelObj.addObject("newMessage", "Got details");
-		logger.debug("Debug Inside the logger");
-		logger.warn("Warn Inside the logger");
-		model.addAttribute("studentFormstudentForm", new Student());
-		ArrayList<Student> studentObj=jdbcDao.getStudentDataFromDb(student);
-		for(Student instance:studentObj)
-			logger.warn(instance);
-		model.addAttribute("isDataPresent", true);
-		model.addAttribute("student", studentObj);
-		return modelObj;
-	}
-
-	@RequestMapping("/fetchSubject")
-	public ModelAndView fetchSubject(HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception {
-
-		ModelAndView model = new ModelAndView("subject");
-		model.addObject("message", "From fetchSubject function");
-		logger.debug("Debug Inside the logger");
-		logger.warn("Warn Inside the logger");
-		modelObj.addAttribute("subjectForm", new Subject());
-
-		return model;
-	}
-
-	@RequestMapping("/getSubjectData")
-	public ModelAndView getSubjectData(@ModelAttribute("subjectForm") Subject subject , HttpServletRequest request,HttpServletResponse response,Model model) throws Exception {
-
-		ModelAndView modelObj = new ModelAndView("subject");
-		logger.warn("Got value from form :" + subject.getSubject_name());
-		modelObj.addObject("newMessage", "Got details");
-		logger.debug("Debug Inside the logger");
-		logger.warn("Warn Inside the logger");
-		model.addAttribute("subjectForm", new Subject());
-		ArrayList<Subject> subjectObj=jdbcDao.getSubjectDataFromDb(subject);
-		for(Subject instance:subjectObj)
-			logger.warn(instance);
-		model.addAttribute("isDataPresent", true);
-		model.addAttribute("subject", subjectObj);
-		return modelObj;
-	}
-	
+	*solving the request from welcome.jsp
+	*return to welcome.jsp with the list of results
+	*/
 	@RequestMapping("/welcome")
-	public ModelAndView browseEvents(Model model){  
+	public ModelAndView browseEvents(Model model){
 		ArrayList<Home> list = new ArrayList<Home>();
 		list = homejdbcDao.getDashboardInfo();
 		//System.out.println(list.toString());
 		return new ModelAndView("welcome","list",list);
-	} 
+	}
+
+	/*
+	*solving the request after logging in as the admin
+	*return to welcomeadmin.jsp with the list of results
+	*/
 	@RequestMapping("/welcomeadmin")
-	public ModelAndView browseadmview(Model model){  
+	public ModelAndView browseadmview(Model model){
 		ArrayList<Home> list = new ArrayList<Home>();
 		list = homejdbcDao.getDashboardInfo();
 		//System.out.println(list.toString());
 		return new ModelAndView("welcomeadmin","list",list);
-	} 
-	
-	
+	}
+
+	/*
+	*solving the request from Dashboard
+	*return to selectbydate.jsp with list of results if there are some results
+	*elso return to selectbydatefail.jsp if no results returned
+	*/
 	@RequestMapping("/selectbydate")
 	public ModelAndView selectbydate(HttpServletRequest request) throws ParseException{
 		String date = request.getParameter("user_date");
@@ -159,7 +85,12 @@ public class HomeController {
 			mav = new ModelAndView("selectbydatefail");
 		return mav;
 	}
-	
+
+	/*
+	*solving the request from Dashboard
+	*return to selectbytype.jsp with list of results if there are some results
+	*else return to selectbytypefail.jsp if no resutls returned
+	*/
 	@RequestMapping("/selectbytype")
 	public ModelAndView selectbytype(HttpServletRequest request) throws ParseException{
 		String date = request.getParameter("events types");
@@ -173,7 +104,12 @@ public class HomeController {
 			mav = new ModelAndView("selectbytypefail");
 		return mav;
 	}
-	
+
+	/*
+	* solving the request from Dashboard
+	* if the comments has been submitted successfully, then rturn true
+	* else return false
+	*/
 	@RequestMapping("/comsubmit")
 	public ModelAndView commentSubmit(HttpServletRequest request) throws ParseException{
 		String string1 = request.getParameter("info");
@@ -191,7 +127,7 @@ public class HomeController {
 			result.add("false");
 		}
 		result.add(list2);
-		
+
 		ModelAndView mav = null;
 		if(list)
 			mav = new ModelAndView("welcome1","result",result);
@@ -199,7 +135,10 @@ public class HomeController {
 			mav = new ModelAndView("welcome1","result",result);
 		return mav;
 	}
-	
+
+	/*
+	*this is a test method which is not included in the final application
+	*/
 	@RequestMapping("/joinin")
 	public ModelAndView joinin(HttpServletRequest request){
 		String eid = request.getParameter("eid");

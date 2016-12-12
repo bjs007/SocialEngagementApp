@@ -1,5 +1,7 @@
 package com.dao;
-
+/**
+* @author Lei Liu
+*/
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,6 +20,9 @@ import org.springframework.beans.factory.annotation.Value;
 
 import com.models.Home;
 
+/**
+* This is the class for jdbc, which is used for fetching data from database
+*/
 public class HomeJdbcDao {
 	@Value("${eventsJdbcString}")
 	private String jdbcString;
@@ -29,7 +34,10 @@ public class HomeJdbcDao {
 	private String dbPassword;
 
 	Logger logger= Logger.getLogger(HomeJdbcDao.class);
-	
+
+	/*
+	*Get events and broadcasts from the database by executing store procedure in the database
+	*/
 	public ArrayList<Home> getDashboardInfo()
 	{
 
@@ -56,12 +64,12 @@ public class HomeJdbcDao {
 			return null;
 		}
 
-		
+
 		if (connection != null) {
 			System.out.println("You made it, take control your database now!");
 
 			try {
-				
+
 				CallableStatement cs = connection.prepareCall("{call getHomeInfo()}");
 				boolean flag = cs.execute();
 				ResultSet rs = null;
@@ -71,7 +79,7 @@ public class HomeJdbcDao {
 					int i = 0;
 					while(rs.next()){
 						Home home = new Home();
-						
+
 						home.setEntry_id(rs.getInt("entry_id"));
 						home.setEntry_desc(rs.getString("entry_desc"));
 						home.setEntry_type(rs.getInt("entry_type"));
@@ -84,16 +92,16 @@ public class HomeJdbcDao {
 							parser = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 							str = parser.format(cfg);
 						}
-						
+
 						home.setCreate_date_time(str);
 						home.setUser_id(rs.getInt("user_id"));
-						
+
 						homeList.add(home);
 						i++;
 					}
 					flag = cs.getMoreResults();
 				}
-				
+
 				cs.close();
 				rs.close();
 
@@ -110,7 +118,7 @@ public class HomeJdbcDao {
 			System.out.println("Failed to make connection!");
 		}
 		Home home = new Home();
-		
+
 		home.setEntry_id(123);
 		home.setEntry_desc("123");
 		home.setEntry_type(123);
@@ -118,7 +126,7 @@ public class HomeJdbcDao {
 		home.setActivity_desc(jdbcString);
 		home.setCreate_date_time(dbUserName+"%%%%%"+dbPassword);
 		home.setUser_id(123);
-		
+
 		homeList.add(home);
 		Collections.sort(homeList, Collections.reverseOrder());
 		try {
@@ -132,11 +140,14 @@ public class HomeJdbcDao {
 		else
 			return null;
 	}
-	
+
+	/*
+	*Get events and broadcasts from the database which match the date
+	*/
 	public ArrayList<Home> browsebyDate(String date) throws ParseException{
 		ArrayList<Home> ale = new ArrayList<Home>();
 		Statement statement = null;
-	
+
 		System.out.println("-------- Events JDBC Connection Testing ------------");
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -162,14 +173,14 @@ public class HomeJdbcDao {
 		}
 
 		logger.debug("You made it, take control your database now!");
-		
+
 		try {
 			System.out.println(date);
 			DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 			Date datetemp = null;
-			
+
 			datetemp = format.parse(date);
-			
+
 			CallableStatement cs = connection.prepareCall("{call getInfoByDateBroadcast()}");
 			boolean flag = cs.execute();
 			ResultSet rs = null;
@@ -194,10 +205,10 @@ public class HomeJdbcDao {
 					i++;
 				}
 				flag = cs.getMoreResults();
-				
+
 			}
-			
-			
+
+
 			cs = connection.prepareCall("{call getInfoByDateEvent()}");
 			flag = cs.execute();
 			rs = null;
@@ -207,7 +218,7 @@ public class HomeJdbcDao {
 				while(rs.next()){
 					Home home = new Home();
 					String str = rs.getString("create_date_time");
-					
+
 					SimpleDateFormat parser=new SimpleDateFormat("EEE MMM d HH:mm:ss z yyyy");
 					Date cfg= parser.parse(str);
 					parser = new SimpleDateFormat("yyyy-MM-dd");
@@ -227,12 +238,12 @@ public class HomeJdbcDao {
 					i++;
 				}
 				flag = cs.getMoreResults();
-				
+
 			}
-			
-			
-			
-			
+
+
+
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -241,14 +252,17 @@ public class HomeJdbcDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return ale;
 	}
-	
+
+	/*
+	*get Events or Broadcasts which match the type which is specified by front page request
+	*/
 	public ArrayList<Home> browsebyType(String date) throws ParseException{
 		ArrayList<Home> ale = new ArrayList<Home>();
 		Statement statement = null;
-	
+
 		System.out.println("-------- Events JDBC Connection Testing ------------");
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -310,7 +324,7 @@ public class HomeJdbcDao {
 					i++;
 				}
 				flag = cs.getMoreResults();
-				
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -323,11 +337,15 @@ public class HomeJdbcDao {
 		Collections.sort(ale, Collections.reverseOrder());
 		return ale;
 	}
-	
+
+	/*
+	*submit the comment
+	*insert the comment into table of comment
+	*/
 	public boolean commentSubmit(String[] a, String comment) throws ParseException{
 		boolean f = false;
 		Statement statement = null;
-	
+
 		System.out.println("-------- Events JDBC Connection Testing ------------");
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -378,7 +396,7 @@ public class HomeJdbcDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return f;
 	}
 }
