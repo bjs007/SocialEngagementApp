@@ -153,9 +153,15 @@ public class EventsController {
 		modelObj.addAttribute("eventsList",eventList);
 		return model;
 	}
-	
-	
-	
+	/**
+	 * This function fetches the data of the event that is to be edited
+	 * @param event_id		The event_id of the event to be edited
+	 * @param request		The servlet request object
+	 * @param response		The servlet response object
+	 * @param modelObj		The model object to bind various variables to it
+	 * @return				The ModelAndView to displayed
+	 * @throws Exception
+	 */
 	@RequestMapping("/editEvent")
 	public ModelAndView editEvent(@RequestParam(value="event_id") Integer event_id,HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception {
 
@@ -171,6 +177,15 @@ public class EventsController {
 		return model;
 	}
 	
+	/**
+	 * This function will receive the updated event data from UI and persists to the database
+	 * @param event			The updated event object
+	 * @param request		The servlet request object
+	 * @param response		The servlet response object
+	 * @param modelObj		The model object to bind various variables to it
+	 * @return				The ModelAndView to displayed
+	 * @throws Exception
+	 */
 	@RequestMapping("/saveEditedEvent")
 	public ModelAndView saveEditEvent(@ModelAttribute("eventsForm") Event event,HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception {
 
@@ -191,21 +206,35 @@ public class EventsController {
 		
 	}
 	
+	/**
+	 * This function will delete the event from the database
+	 * @param event_id			The eventId that should be deleted
+	 * @param request			The servlet request object
+	 * @param response			The servlet response object
+	 * @param modelObj			The model object to bind various variables to it
+	 * @return					The ModelAndView to displayed
+	 * @throws Exception
+	 */
 	@RequestMapping("/deleteEvent")
 	public ModelAndView deleteEvent(@RequestParam(value="event_id") Integer event_id,HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception {
 
 		ModelAndView model = new ModelAndView("eventsHome");
 		model.addObject("message", "From eventsHome controller");
 		logger.warn("Inside Event id : " + event_id);
-		logger.warn("Warn Inside the logger");
 		Event newEvent= new Event();
 		newEvent.setEvent_id(event_id);
 		Boolean result=eventsDao.deletEventsDataFromDb(newEvent);
-		//modelObj.addAttribute("eventsForm", new Event());
-		//return model;
 		logger.warn("Deleted >> " + result);
 		return new ModelAndView("redirect:/fetchEvent");
 	}
+	
+	/**
+	 * This event will fetch the archived events from the database
+	 * @param request		The servlet request object
+	 * @param response		The servlet response object
+	 * @param modelObj		The model object to bind various variables to it
+	 * @return				The ModelAndView to displayed
+	 */
 	@RequestMapping("/fetchArchivedEvent")
 	public ModelAndView fetchArchivedEvents(HttpServletRequest request,HttpServletResponse response,Model modelObj) 
 	{
@@ -213,11 +242,6 @@ public class EventsController {
 		ModelAndView model = new ModelAndView("eventsArchivedDisplay");
 		ArrayList<Event> eventList=null;
 		model.addObject("message", "From eventsHome controller");
-		logger.debug("Debug Inside the logger");
-		logger.warn("Warn Inside the logger");
-		//event = new Event();
-		//event.setEvent_desc("Test event");
-		//logger.warn("dbString >> " + dbString);
 		try{
 			eventList=eventsDao.getArchivedEventsDataFromDb();
 			if(eventList!=null){
@@ -235,7 +259,6 @@ public class EventsController {
 		if(eventList==null || eventList.isEmpty())
 			eventList=new ArrayList<Event>();
 		modelObj.addAttribute("eventsList",eventList);
-		//modelObj.addAttribute("eventsForm", new Event());
 		return model;
 	}
 

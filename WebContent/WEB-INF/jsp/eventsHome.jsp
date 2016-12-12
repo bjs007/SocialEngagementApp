@@ -14,8 +14,6 @@
 	  		<img class="mySlides" src="images/events-home-3.jpg" style="width:500px; height: 300px">
 	  		<img class="mySlides" src="images/events-home-4.jpg" style="width:500px; height: 300px">
 	  		<img class="mySlides" src="images/events-home-5.jpg" style="width:500px; height: 300px">
-	  		<!-- <img class="mySlides" src="img_ny.jpg" style="width:100%">
-	  		<img class="mySlides" src="img_chicago.jpg" style="width:100%"> -->
 		</div>
 		
 	</div>
@@ -44,9 +42,6 @@ function scroll() {
 	    scroll();
 	  });
 	}
-
 	scroll();
-
-
 </script>
 	

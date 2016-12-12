@@ -5,7 +5,7 @@ package com.enums;
 
 /**
  * @author dipanjankarmakar
- *
+ * This enum differentiates the various modules. Used for saving comments
  */
 public enum ModuleEnum {
  
