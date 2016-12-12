@@ -78,7 +78,6 @@ public class EventsController {
 		}
 		if(user_name==null || user_name.isEmpty())
 			user_name="UserAbc";
-		//user_name=request.getSession().getAttribute("name").toString();
 		request.getSession().setAttribute("user_name", user_name);
 		return model;
 	}
@@ -116,15 +115,10 @@ public class EventsController {
 
 		ModelAndView model = new ModelAndView("eventsHome");
 		model.addObject("message", "From eventsHome controller");
-		logger.debug("Debug Inside the logger");
-		logger.warn("Warn Inside the logger");
-		//event = new Event();
-		//event.setEvent_desc("Test event");
 		event.setCreated_date_time(new Date());
 		String user_id=request.getSession().getAttribute("session_user_id").toString();
 		event.setUser_id(Integer.parseInt(user_id));
 		eventsDao.saveEvents(event);
-		//logger.warn("dbString >> " + dbString);
 		modelObj.addAttribute("eventsForm", new Event());
 		return model;
 	}
@@ -144,9 +138,6 @@ public class EventsController {
 		model.addObject("message", "From eventsHome controller");
 		logger.debug("Debug Inside the logger");
 		logger.warn("Warn Inside the logger");
-		//event = new Event();
-		//event.setEvent_desc("Test event");
-		//logger.warn("dbString >> " + dbString);
 		Object isUserAdmin=request.getSession().getAttribute("isUserAdm");
 		Boolean userAdmin=false;
 		if(isUserAdmin!=null && isUserAdmin.toString().equals("true"))
@@ -160,7 +151,6 @@ public class EventsController {
 			}
 		}
 		modelObj.addAttribute("eventsList",eventList);
-		//modelObj.addAttribute("eventsForm", new Event());
 		return model;
 	}
 	
@@ -176,7 +166,7 @@ public class EventsController {
 		Event newEvent= new Event();
 		newEvent.setEvent_id(event_id);
 		modelObj.addAttribute("eventsForm", eventsDao.getEventsDataFromDb(newEvent).get(0));
-		//modelObj.addAttribute("eventsForm", new Event());
+		// In this way we can redirect to different controller
 		//return new ModelAndView("redirect:/eventEdit?event_id="+event_id);
 		return model;
 	}
