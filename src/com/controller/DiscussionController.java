@@ -26,11 +26,18 @@ public class DiscussionController {
 
 	@Autowired
 	DiscussionDao discussionDao;
+	
+	/*
+	static ID used for testing purpose
+	*/
 	private String staticUserId = "1215";
 	
+	/* Create the discussion id */
 	private static final AtomicInteger count = new AtomicInteger(0); 
 	
-	
+	/*  Mapped Page : responsediscussion.jsp
+	    Method Functionality : this method will save the discussion response by admin.
+	*/
 	@RequestMapping("/saveDiscussionAdmin")
 	public ModelAndView saveDiscussionAdmin(@ModelAttribute("discussionForm") Discussion discussion, HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception {
 		
@@ -42,6 +49,10 @@ public class DiscussionController {
 		return model;
 	}  
 	
+	/*  Mapped Page : discussion.jsp
+	    Method Functionality : this method will show the layout of responsediscussion and append the discussionId with 
+	    discussion form object.
+	*/
 	@RequestMapping("/responsediscussion")
 	public ModelAndView responsediscussion(@RequestParam(value="discussionID") Integer discussionID,HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception {
 
@@ -55,7 +66,10 @@ public class DiscussionController {
 		return model;
 	}
 	
-	
+	/*  Mapped Page : discussion.jsp
+	    Method Functionality : this method will show all the discussion of the Users in the table format
+	    discussion form object.
+	*/
 	@RequestMapping("/responseDiscussion")
 	public ModelAndView displayDiscussionAdmin(HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception {
 
@@ -75,7 +89,10 @@ public class DiscussionController {
 		return model;
 		}
 	
-	
+	/*  Mapped Page : discussion.jsp
+	    Method Functionality : methods is used by menu page of discussion and check the user status,
+	    this status will help the discussion page to nevigate further pages.
+	*/
 
 	@RequestMapping("/discussion")
 	public ModelAndView discussion(HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception {
@@ -98,16 +115,22 @@ public class DiscussionController {
 		return model;
 	}
 	
+	/*  Mapped Page : addDiscussion.jsp
+	    Method Functionality : methods is used to add discussion by the users.
+	*/
 	@RequestMapping("/addDiscussion")
 	public ModelAndView CreateDiscussion(HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception {
 
 		ModelAndView model = new ModelAndView("addDiscussion");
 		model.addObject("message", "From addDiscussion controller");
-		//logger.warn("dbString >> " + dbString);
 		modelObj.addAttribute("saveDiscussion", new Discussion());
 		return model;
 		}
-		
+	
+	/*  Mapped Page : addDiscussion.jsp
+	    Method Functionality : this method will save the discussion on submit button in addDiscussion page, this will save
+	    the user text message in table Discussion.
+	*/
 	@RequestMapping("/saveDiscussion")
 	public ModelAndView saveDiscussion(@ModelAttribute("saveDiscussion") Discussion discussion,HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception {
 
@@ -118,14 +141,15 @@ public class DiscussionController {
 		discussion.setTime(new Date());
 		String user_id=request.getSession().getAttribute("session_user_id").toString();
 		discussion.setUserID(Integer.valueOf(user_id));
-	//	System.out.println(user_id);
 		System.out.println(discussion);
 		discussionDao.savediscussionsUser(discussion);
 		return model;
 	}
 	
 	
-
+    /*  Mapped Page : displayDiscussion.jsp
+	    Method Functionality : this method will show all the discussion of the Users to admin
+	*/
 	@RequestMapping("/displayDiscussiontoadmin")
 	public ModelAndView displayDiscussiontoadmin(HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception {
 
@@ -137,7 +161,9 @@ public class DiscussionController {
 	}
 	
 	
-	
+	/*  Mapped Page : displayDiscussion.jsp
+	    Method Functionality : this method will show all the discussion created by User and admin response
+	*/
 	@RequestMapping("/displayDiscussion")
 	public ModelAndView displayDiscussion(HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception {
 
@@ -152,9 +178,7 @@ public class DiscussionController {
 			}
 		}
 		System.out.println(myDiscussion);
-	//	ArrayList<Discussion> discussionList=displayDiscussion.getdiscussionsDataFromDb();
 		modelObj.addAttribute("discussionList",myDiscussion);
-		//modelObj.addAttribute("eventsForm", new Event());
 		return model;
 	}
 	
