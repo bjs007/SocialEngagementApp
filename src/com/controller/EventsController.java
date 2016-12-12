@@ -2,6 +2,7 @@ package com.controller;
 
 /**
  * @author Dipanjan Karmakar
+ * This controller is the main file for the Events module. All actions for the events module are handled here
  */
 
 import java.util.ArrayList;
@@ -30,11 +31,25 @@ public class EventsController {
 	@Autowired
 	private EventsJdbcDao eventsDao;
 	
+	/**
+	 * In case the userId is not received from the login module, we use this userId. The userId is autowired from dbDetails.properties file
+	 */
 	@Value("${eventsStaticUserId}")
 	private String staticUserId;
 	
 	Logger logger= Logger.getLogger(EventsController.class);
 	
+	/**
+	 * Display the main Events page. 
+	 * <p> Get the userId from the Login module. If not present use the static userId
+	 * <p> Get the userName from the Login module. If not present use "UserAbc"
+	 * <p> Check if the user is Admin and save it to the session for accessing in the jsp
+	 * @param request			The servlet request object
+	 * @param response			The servlet response object
+	 * @param modelObj			The model object to bind various variables to it
+	 * @return					The ModelAndView to display
+	 * @throws Exception
+	 */
 	@RequestMapping("/events")
 	public ModelAndView eventsHome(HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception
 	{
@@ -67,7 +82,14 @@ public class EventsController {
 		request.getSession().setAttribute("user_name", user_name);
 		return model;
 	}
-	
+	/**
+	 * This function forwards the request to create an event
+	 * @param request		The servlet request object
+	 * @param response		The servlet response object
+	 * @param modelObj		The model object to bind various variables to it	
+	 * @return				The ModelAndView to display
+	 * @throws Exception
+	 */
 	@RequestMapping("/createEvents")
 	public ModelAndView createEvents(HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception {
 
@@ -80,6 +102,15 @@ public class EventsController {
 		return model;
 	}
 	
+	/**
+	 * This function saves the event to the database
+	 * @param event			The Event form object that is received from the UI
+	 * @param request		The servlet request object
+	 * @param response		The servlet response object
+	 * @param modelObj		The model object to bind various variables to it
+	 * @return				The ModelAndView to displayed
+	 * @throws Exception
+	 */
 	@RequestMapping("/saveEvent")
 	public ModelAndView saveEvents(@ModelAttribute("eventsForm") Event event,HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception {
 
@@ -98,6 +129,14 @@ public class EventsController {
 		return model;
 	}
 	
+	/**
+	 * This function fetches all active events from the database
+	 * @param request		The servlet request object
+	 * @param response		The servlet response object
+	 * @param modelObj		The model object to bind various variables to it
+	 * @return				The ModelAndView to displayed
+	 * @throws Exception
+	 */
 	@RequestMapping("/fetchEvent")
 	public ModelAndView fetchAllEvents(HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception {
 
