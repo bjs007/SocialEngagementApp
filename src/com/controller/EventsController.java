@@ -36,7 +36,6 @@ public class EventsController {
 	Logger logger= Logger.getLogger(EventsController.class);
 	
 	@RequestMapping("/events")
-	//public ModelAndView eventsHome(@RequestParam(required=false) Integer event_id,HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception
 	public ModelAndView eventsHome(HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception
 	{
 
