@@ -44,7 +44,7 @@ public class HomeController {
 
 	Logger logger= Logger.getLogger(HomeController.class);
 
-	/*
+	/**
 	*solving the request from welcome.jsp
 	*return to welcome.jsp with the list of results
 	*/
@@ -56,7 +56,7 @@ public class HomeController {
 		return new ModelAndView("welcome","list",list);
 	}
 
-	/*
+	/**
 	*solving the request after logging in as the admin
 	*return to welcomeadmin.jsp with the list of results
 	*/
@@ -68,7 +68,7 @@ public class HomeController {
 		return new ModelAndView("welcomeadmin","list",list);
 	}
 
-	/*
+	/**
 	*solving the request from Dashboard
 	*return to selectbydate.jsp with list of results if there are some results
 	*elso return to selectbydatefail.jsp if no results returned
@@ -86,7 +86,7 @@ public class HomeController {
 		return mav;
 	}
 
-	/*
+	/**
 	*solving the request from Dashboard
 	*return to selectbytype.jsp with list of results if there are some results
 	*else return to selectbytypefail.jsp if no resutls returned
@@ -105,7 +105,7 @@ public class HomeController {
 		return mav;
 	}
 
-	/*
+	/**
 	* solving the request from Dashboard
 	* if the comments has been submitted successfully, then rturn true
 	* else return false
@@ -136,7 +136,7 @@ public class HomeController {
 		return mav;
 	}
 
-	/*
+	/**
 	*this is a test method which is not included in the final application
 	*/
 	@RequestMapping("/joinin")

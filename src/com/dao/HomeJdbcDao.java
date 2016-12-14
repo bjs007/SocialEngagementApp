@@ -35,7 +35,7 @@ public class HomeJdbcDao {
 
 	Logger logger= Logger.getLogger(HomeJdbcDao.class);
 
-	/*
+	/**
 	*Get events and broadcasts from the database by executing store procedure in the database
 	*/
 	public ArrayList<Home> getDashboardInfo()
@@ -141,7 +141,7 @@ public class HomeJdbcDao {
 			return null;
 	}
 
-	/*
+	/**
 	*Get events and broadcasts from the database which match the date
 	*/
 	public ArrayList<Home> browsebyDate(String date) throws ParseException{
@@ -256,7 +256,7 @@ public class HomeJdbcDao {
 		return ale;
 	}
 
-	/*
+	/**
 	*get Events or Broadcasts which match the type which is specified by front page request
 	*/
 	public ArrayList<Home> browsebyType(String date) throws ParseException{
@@ -338,7 +338,7 @@ public class HomeJdbcDao {
 		return ale;
 	}
 
-	/*
+	/**
 	*submit the comment
 	*insert the comment into table of comment
 	*/
