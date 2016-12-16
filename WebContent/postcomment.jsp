@@ -40,9 +40,11 @@
     
     if(userid.equals("121")){
     	 response.sendRedirect("http://localhost:8080/SocialEngagement/broad");
+    	 //response.sendRedirect("http://proj-514-02.cs.iastate.edu:8080/SocialEngagement/broad");
     }
     else{
     	 response.sendRedirect("http://localhost:8080/SocialEngagement/broaduser");
+    	// response.sendRedirect("http://proj-514-02.cs.iastate.edu:8080/SocialEngagement/broaduser");
     }
    
    /* rs = st.executeQuery("select * from users where email='"+ userid +"' and password='"+ pwd +"'");
