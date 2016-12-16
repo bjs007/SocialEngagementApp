@@ -116,6 +116,8 @@ Steps to deploy the application has also been checked in. *Team2-DeploymentDocum
 
 As this is a Maven project,we can simple clone the project into our local
 environment and import the project in Eclipse as an existing Maven project.
+The code for the web-application is present in the *master* branch. Code for the 
+Sms notification has been checked in the *smsnotification* branch.
 
 **How to use the application**
 
