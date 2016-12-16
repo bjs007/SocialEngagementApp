@@ -21,7 +21,7 @@
    
     Class.forName("com.mysql.jdbc.Driver").newInstance();
     Connection conn1 = null;
-    conn1 = DriverManager.getConnection("jdbc:mysql://proj-514-02.cs.iastate.edu:3306/socialDb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=US/Central","coms514user","password");
+    conn1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/socialDb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=US/Central","coms514user","password");
     Statement st = conn1.createStatement();
     ResultSet rs;
     try{

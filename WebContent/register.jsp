@@ -39,7 +39,7 @@
 
 		<div class="footer">
 		<input type="submit" name="submit" value="Create Account" class="button" />
-		<br><input type="button" name="reg" value=" Back to Login" class="register" onClick="window.document.location.href='loginpage.jsp'"/>
+		<br><input type="button" name="reg" value=" Back to Login" class="register" onClick="window.document.location.href='hello.jsp'"/>
 		</div>
 	
 	</form>

@@ -11,7 +11,7 @@
 
     Connection conn = null;
     Class.forName("com.mysql.jdbc.Driver").newInstance();
-    conn = DriverManager.getConnection("jdbc:mysql://proj-514-02.cs.iastate.edu:3306/socialDb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=US/Central","coms514user","password");
+    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/socialDb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=US/Central","coms514user","password");
     //jdbc:mysql://localhost/db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CDT
     String userid=request.getParameter("inputusername");
     String pwd=request.getParameter("inputpassword");
@@ -51,13 +51,13 @@
        //response.sendRedirect("http://proj-514-02.cs.iastate.edu:8080/welcome");
         
         if(useractualid.equals("121")){
-        	 response.sendRedirect("http://localhost:8080/SocialEngagement/welcomeadmin");
-        	 //response.sendRedirect("http://proj-514-02.cs.iastate.edu:8080/SocialEngagement/welcomeadmin");
+        	// response.sendRedirect("http://localhost:8080/SocialEngagement/welcomeadmin");
+        	 response.sendRedirect("http://proj-514-02.cs.iastate.edu:8080/SocialEngagement/welcomeadmin");
         }
         else{
-        	 response.sendRedirect("http://localhost:8080/SocialEngagement/welcome");
+        	// response.sendRedirect("http://localhost:8080/SocialEngagement/welcome");
         	 //
-        	 //response.sendRedirect("http://proj-514-02.cs.iastate.edu:8080/SocialEngagement/welcome");
+        	 response.sendRedirect("http://proj-514-02.cs.iastate.edu:8080/SocialEngagement/welcome");
         }
        
       
