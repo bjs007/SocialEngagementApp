@@ -108,9 +108,9 @@ their events.
 This application is a SpringMvc based web-application. The project integrates
 Maven for dependency management and Apache Tiles for keeping the UI
 consistent accross all the pages.
-We use MySql as a backend database and use Jdbc to connect to database.
-The database configuration documement has been checked in Git.
-Steps to deploy the application has also been checked in.
+We use MySQL as a backend database and use Jdbc to connect to database. 
+The database configuration documement *Team2-DB_Configuration* has been checked in Git along with a sample DB schema.
+Steps to deploy the application has also been checked in. *Team2-DeploymentDocument*
 
 **To import this project**
 
