@@ -17,6 +17,7 @@ The application is designed for senior citizens, keeping in mind the factor of
 ease of use. Notifications, for example, will let the seniors know some kinds of
 social activities is coming.
 We shall talk a bit more about each modules in more details below.
+
 --------------------------------------
 ### End user's guide:
 In our project there are 4 main modules. They are:
@@ -36,9 +37,19 @@ We have tried to keep this module a generic one. Usually an events needs:
 - Comments section so that other seniors can communicate and share their ideas
 - Archiving functionality to set it as old
 
-We are allowing the users to enter this details from the Create Event [ *Create a
-new Event* ] 
-page. After this event is created other users can view this event through *See 
-all active events*. Other user can go through these events and comment on this 
-events
+We are allowing the users to enter this details from the Create Event [ **Create a
+new Event** ] 
+page. After this event is created other users can view this event through **See 
+all active events** . Other user can go through these events and comment on this 
+events. They can mention in the comment whether they are willing to join the event or not
+and whether they can bring any required resources.
+Users can also go to the **See all Archived Events** section to see all the past events.
+They can come to know which user is interested in these type of events.
+After a event has been held, the event's creator or the Admin can set it to Archived.
+** Access Control in Event module **
+Care has been taken to see that only authorised user are able to make the necessary changes.
+Only the Event's creator are able to modify the important information for an event. He will 
+be able to mark the Event as Archived and set whether the required resources are satisfied.
+Other users can only post a comment on the page. He will see all other fields disabled.
+
 
