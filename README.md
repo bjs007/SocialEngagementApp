@@ -48,6 +48,7 @@ They can come to know which user is interested in these type of events.
 After a event has been held, the event's creator or the Admin can set it to Archived.
 
 **Access Control in Event module**
+
 Care has been taken to see that only authorised user are able to make the necessary changes.
 Only the Event's creator are able to modify the important information for an event. He will 
 be able to mark the Event as Archived and set whether the required resources are satisfied.
@@ -71,8 +72,24 @@ The database configuration documement has been checked in Git.
 Steps to deploy the application has also been checked in.
 
 **To import this project**
+
 As this is a Maven project,we can simple clone the project into our local 
 environment and import the project in Eclipse as an existing Maven project.
+
+**How to use the application**
+*End user's guide# module at the start of this page has been provided for this purpose.
+
+**Team members & contacts**
+Dipanjan Karmakar: dipanjan@iastate.edu
+Prateek Gupta:     prateekg@iastate.edu 
+Nikita Tiwari:     prateekg@iastate.edu 
+Lei Liu:		   lliu@iastate.edu
+
+**External resource links**
+In the Sms notification module we use a Third Party API for sending SMS.
+For more details please refer the official page [TextBelt website](http://textbelt.com)
+	
+
 
 
 
