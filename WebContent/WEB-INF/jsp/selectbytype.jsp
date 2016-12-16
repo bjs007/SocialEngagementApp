@@ -1,30 +1,23 @@
-<%@ page import="java.util.ArrayList,com.models.*" language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@taglib prefix ="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<!-- Created by Lei Liu -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <style>
         .main{
 
             height: 24px;
-width:100%;
+                        width:100%;
         }
         .left{
             float: left;
             width: 300px;
             height: 23px;
-            
-			margin-left:10px;
+                        margin-left:10px;
         }
-		.right{
+                .right{
            margin-right: 10px;
-
             height: 23px;
             margin-left: 350px;
-            
         }
         body{
             font: 16px/1.5 "Mircisoft Yahei";
@@ -49,7 +42,7 @@ width:100%;
         .title img{
             float: left;
             margin-right: 10px;
-        }
+}
 
         .title .name{
             font-weight: bold;
@@ -75,166 +68,54 @@ width:100%;
             float: left;
         }
 </style>
-<script src="http://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>
-<script type="text/javascript">
-var begin = 2;
-function ab(){
-	var mydocument = document;
-    var mylist = mydocument.getElementById("tt");
-    var docFragments = mydocument.createDocumentFragment();
-    var sum = mydocument.getElementById("sum").value;
-    if((sum - begin) > 1 ){
-    	for (var i = begin; i < begin + 2; ++i) {
-            var liItem = mydocument.createElement("div");
-            var str = mydocument.getElementById(i).value;
-            //alert(str);
-            var strarray = str.split("&&");
-            if(strarray[2] == "1"){
-            	liItem.innerHTML = "<div class=\"demo\"><div class=\"title\"><img src=\"images/1.png\" alt=\"\" class=\"head\"/><p class=\"name\">User:"+strarray[6]+"</p><p class=\"intro\">Post date:"+strarray[5]+"</p></div><div class=\"content\"><p>"+strarray[4]+"</p></div><div style=\"text-align:right\"><a href=\"editEvent?event_id="+strarray[3]+"&typeid="+strarray[2]+"\">Go to Event</a></div><div class=\"comment\" align=\"center\"><form method=\"get\" action=\"${pageContext.request.contextPath}/comsubmit\"><input type=\"hidden\" name = \"info\" value = \""+str+"\"><textarea id=\"\" name = \"infoarea\" style=\"width:300px;height:80px;\"></textarea><input type=\"submit\" value=\"SUBMIT COMMENTS\"></form></div></div><br>" ;            }
-            else if(strarray[2] == "2"){
-            	liItem.innerHTML = "<div class=\"demo\"><div class=\"title\"><img src=\"images/2.png\" alt=\"\" class=\"head\"/><p class=\"name\">User:"+strarray[6]+"</p><p class=\"intro\">Post date:"+strarray[5]+"</p></div><div class=\"content\"><p>"+strarray[4]+"</p></div><div class=\"comment\" align=\"center\"><form method=\"get\" action=\"${pageContext.request.contextPath}/comsubmit\"><input type=\"hidden\" name = \"info\" value = \""+str+"\"><textarea id=\"\" name = \"infoarea\" style=\"width:300px;height:80px;\"></textarea><input type=\"submit\" value=\"SUBMIT COMMENTS\"></form></div></div><br>" ;            }
-            mylist.appendChild(liItem);
-        }
-    	begin += 2;
-    }
-    else if((sum - begin) == 1){
-        var liItem = mydocument.createElement("div");
-        var str = mydocument.getElementById(begin).value;
-        var strarray = str.split("&&");
-        if(strarray[2] == "1"){
-        	liItem.innerHTML = "<div class=\"demo\"><div class=\"title\"><img src=\"images/1.png\" alt=\"\" class=\"head\"/><p class=\"name\">User:"+strarray[6]+"</p><p class=\"intro\">Post date:"+strarray[5]+"</p></div><div class=\"content\"><p>"+strarray[4]+"</p></div><div style=\"text-align:right\"><a href=\"editEvent?event_id="+strarray[3]+"&typeid="+strarray[2]+"\">Go to Event</a></div><div class=\"comment\" align=\"center\"><form method=\"get\" action=\"${pageContext.request.contextPath}/comsubmit\"><input type=\"hidden\" name = \"info\" value = \""+str+"\"><textarea id=\"\" name = \"infoarea\" style=\"width:300px;height:80px;\"></textarea><input type=\"submit\" value=\"SUBMIT COMMENTS\"></form></div></div><br>" ;            }
-        else if(strarray[2] == "2"){
-        	liItem.innerHTML = "<div class=\"demo\"><div class=\"title\"><img src=\"images/2.png\" alt=\"\" class=\"head\"/><p class=\"name\">User:"+strarray[6]+"</p><p class=\"intro\">Post date:"+strarray[5]+"</p></div><div class=\"content\"><p>"+strarray[4]+"</p></div><div class=\"comment\" align=\"center\"><form method=\"get\" action=\"${pageContext.request.contextPath}/comsubmit\"><input type=\"hidden\" name = \"info\" value = \""+str+"\"><textarea id=\"\" name = \"infoarea\" style=\"width:300px;height:80px;\"></textarea><input type=\"submit\" value=\"SUBMIT COMMENTS\"></form></div></div><br>" ;            }
-        docFragments.appendChild(liItem);
-        begin += 1;
-    }
-    else{
-    	alert("No more records");
-    }
-    mylist.appendChild(docFragments);
-}
-</script>
-</head>
-<body>
 <div class="main">
     <div class="left">
         <form action="${pageContext.request.contextPath}/selectbydate" method="get">
-        	Date Filter: <input type="date" name="user_date"/><input type="submit" value="Filter"/>
+                Date Filter: <input type="date" name="user_date"/><input type="submit" value="Filter"/>
         </form>
     </div>
-    <div class="right">
-    <center>
-       <form action="${pageContext.request.contextPath}/selectbytype" method="get">				
-        	 Type Filter:
-        	 <select name="events types">
-        	 	<option value="empty"></option>
-				<option value="events">Events</option>
-				<option value="broadcast">Broadcast</option>
-			</select>
-			<input type="submit" value="Filter"/>
-		</form>
-		</center>
+    <div class="right" align="center">
+       <form action="${pageContext.request.contextPath}/selectbytype" method="get">
+                 Type Filter:
+                 <select name="events types">
+                        <option value="empty"></option>
+                        <option value="events">Events</option>
+                                <option value="broadcast">Broadcast</option>
+                        </select>
+                        <input type="submit" value="Filter"/>
+                </form>
     </div>
 </div>
-<br/>
+<br>
 <div id="tt">
-	<%
-	ArrayList<Home> arraylist = (ArrayList<Home>)request.getAttribute("list");
-	if(arraylist.size() >= 2)
-	for(int i = 0 ; i < 2; i++){
-		Home home = arraylist.get(i);
-		%>
-	<div class="demo">
-		<div class="title">
-		<%
-		if(home.getEntry_type() == 1){
-		%>
-		<img src="images/1.png" alt="" class="head"/>
-		<%
-		}
-		else if(home.getEntry_type() == 2){
-		%>
-		<img src="images/2.png" alt="" class="head"/>
-		<%
-		}
-		%>
-		<p class="name">User: <%=home.getUser_id() %></p>
-		<p class="intro">Post Date: <%=home.getCreate_date_time() %></p>
-	</div>
-	<div class="content">
-		<p><%=home.getActivity_desc() %></p>
-	</div>
-<%
-		if(home.getEntry_type() == 1){
-	%>
-	<div style="text-align:right"><a href="editEvent?event_id=<%=home.getPost_id() %>">Go to Event</a></div>
-	<%
-		}
-	%>	
-	<div class="comment" align="center">
-		<form method="get" action="${pageContext.request.contextPath}/comsubmit">
-			<input type="hidden" name = "info" value = "<%=home.toString() %>">
-			<textarea id="" name = "infoarea" style="width:300px;height:80px;"></textarea>
-	    	<input type="submit" value="SUBMIT COMMENTS">
-		</form>
-	</div>
-	</div>
-	<br>
-<%
-	}
-	else if(arraylist.size() == 1){
-		Home home = arraylist.get(0);
-		%>
-	<div class="demo">
-		<div class="title">
-		<%
-		if(home.getEntry_type() == 1){
-		%>
-		<img src="images/1.png" alt="" class="head"/>
-		<%
-		}
-		else if(home.getEntry_type() == 2){
-		%>
-		<img src="images/2.png" alt="" class="head"/>
-		<%
-		}
-		%>
-		<p class="name">User: <%=home.getUser_id() %></p>
-		<p class="intro">Post Date: <%=home.getCreate_date_time() %></p>
-	</div>
-	<div class="content">
-		<p><%=home.getActivity_desc() %></p>
-	</div>
-<%
-		if(home.getEntry_type() == 1){
-	%>
-	<div style="text-align:right"><a href="editEvent?event_id=<%=home.getPost_id() %>">Go to Event</a></div>
-	<%
-		}
-	%>	
-	<div class="comment" align="center">
-		<form method="get" action="${pageContext.request.contextPath}/comsubmit">
-			<input type="hidden" name = "info" value = "<%=home.toString() %>">
-			<textarea id=""  name = "infoarea"  style="width:300px;height:80px;"></textarea>
-	    	<input type="submit" value="SUBMIT COMMENTS">
-		</form>
-	</div>
-	</div>
-	<br>
-	<%
-		}
-	if(arraylist.size() > 2)
-	for(int i = 2; i < arraylist.size(); i++){
-%>
-	<input type="hidden" id = "<%=i %>" value = "<%=arraylist.get(i).toString() %>">
-<%
-	}
-%>
-	<input type="hidden" id ="sum" value="<%=arraylist.size() %>">
+        <c:forEach items="${list}" var="home">
+        <div class="demo">
+                <div class="title">
+                <c:choose>
+                <c:when test="${(home.entry_type == 1)}">
+                <img src="images/1.png"/>
+                </c:when>
+                <c:otherwise>
+                <img src="images/2.png"/>
+                </c:otherwise>
+                </c:choose>
+                <p class="name">User: ${home.user_id}</p>
+                <p class="intro">Post Date: ${home.create_date_time}</p>
+        </div>
+        <div class="content">
+                <p>${home.activity_desc}</p>
+        </div>
+        <c:if test="${(home.entry_type == 1)}">
+        <div style="text-align:right"><a href="${pageContext.request.contextPath}/editEvent?event_id=${home.post_id}">Go to Event</a></div>
+        </c:if>
+        <div class="comment" align="center">
+                <form method="get" action="${pageContext.request.contextPath}/comsubmit">
+                        <input type="hidden" name = "info" value = "${home }">
+                        <textarea name = "infoarea" style="width:300px;height:80px;"></textarea>
+                <input type="submit" value="SUBMIT COMMENTS">
+                </form>
+        </div>
+        </div>
+        <br>
+        </c:forEach>
 </div>
-<div align="center">
-<input type="image" src="images/4.png" onclick="ab()">
-</div>
-
-</body>
-</html>

@@ -71,11 +71,8 @@ public class HomeJdbcDao {
 			try {
 
 				CallableStatement cs = connection.prepareCall("{call getHomeInfo()}");
-				boolean flag = cs.execute();
-				ResultSet rs = null;
+				ResultSet rs = cs.executeQuery();
 				//homeList = new ArrayList<Home>();
-				while(flag){
-					rs = cs.getResultSet();
 					int i = 0;
 					while(rs.next()){
 						Home home = new Home();
@@ -99,8 +96,6 @@ public class HomeJdbcDao {
 						homeList.add(home);
 						i++;
 					}
-					flag = cs.getMoreResults();
-				}
 
 				cs.close();
 				rs.close();
@@ -117,17 +112,6 @@ public class HomeJdbcDao {
 		} else {
 			System.out.println("Failed to make connection!");
 		}
-		Home home = new Home();
-
-		home.setEntry_id(123);
-		home.setEntry_desc("123");
-		home.setEntry_type(123);
-		home.setPost_id(123);
-		home.setActivity_desc(jdbcString);
-		home.setCreate_date_time(dbUserName+"%%%%%"+dbPassword);
-		home.setUser_id(123);
-
-		homeList.add(home);
 		Collections.sort(homeList, Collections.reverseOrder());
 		try {
 			connection.close();
@@ -182,10 +166,7 @@ public class HomeJdbcDao {
 			datetemp = format.parse(date);
 
 			CallableStatement cs = connection.prepareCall("{call getInfoByDateBroadcast()}");
-			boolean flag = cs.execute();
-			ResultSet rs = null;
-			while(flag){
-				rs = cs.getResultSet();
+			ResultSet rs = cs.executeQuery();
 				int i = 0;
 				while(rs.next()){
 					Home home = new Home();
@@ -204,17 +185,10 @@ public class HomeJdbcDao {
 					}
 					i++;
 				}
-				flag = cs.getMoreResults();
-
-			}
-
 
 			cs = connection.prepareCall("{call getInfoByDateEvent()}");
-			flag = cs.execute();
-			rs = null;
-			while(flag){
-				rs = cs.getResultSet();
-				int i = 0;
+				rs = cs.executeQuery();
+			 i = 0;
 				while(rs.next()){
 					Home home = new Home();
 					String str = rs.getString("create_date_time");
@@ -237,11 +211,6 @@ public class HomeJdbcDao {
 					}
 					i++;
 				}
-				flag = cs.getMoreResults();
-
-			}
-
-
 
 
 		} catch (Exception e) {
@@ -291,10 +260,8 @@ public class HomeJdbcDao {
 
 		try {
 			CallableStatement cs = connection.prepareCall("{call getHomeInfo()}");
-			boolean flag = cs.execute();
 			ResultSet rs = null;
-			while(flag){
-				rs = cs.getResultSet();
+			rs = cs.executeQuery();
 				int i = 0;
 				while(rs.next()){
 					Home home = new Home();
@@ -323,9 +290,6 @@ public class HomeJdbcDao {
 					}
 					i++;
 				}
-				flag = cs.getMoreResults();
-
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

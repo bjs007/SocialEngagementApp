@@ -119,20 +119,11 @@ public class HomeController {
 		boolean list = homejdbcDao.commentSubmit(string1.split("&&"), string2);
 		ArrayList<Home> list2 = new ArrayList<Home>();
 		list2 = homejdbcDao.getDashboardInfo();
-		ArrayList<Object> result = new ArrayList();
-		if(list){
-			result.add("true");
-		}
-		else{
-			result.add("false");
-		}
-		result.add(list2);
-
 		ModelAndView mav = null;
 		if(list)
-			mav = new ModelAndView("welcome1","result",result);
+			mav = new ModelAndView("welcome","list",list2);
 		else
-			mav = new ModelAndView("welcome1","result",result);
+			mav = new ModelAndView("welcome1");
 		return mav;
 	}
 
