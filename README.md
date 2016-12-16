@@ -30,6 +30,7 @@ In our project there are 5 main modules. They are:
 #### Events
 Events is a multipurpose module that can be used in several ways by the seniors. 
 We have tried to keep this module a generic one. Usually an events needs:
+- Description/purpose of the event
 - Resources
 - To know whether all resources are satisfied
 - Date & Time for an event
@@ -41,7 +42,7 @@ We have tried to keep this module a generic one. Usually an events needs:
 We are allowing the users to enter this details from the Create Event [ **Create a
 new Event** ] 
 page. After this event is created other users can view this event through **See 
-all active events** . Other user can go through these events and comment on this 
+all active events**. Other user can go through these events and comment on these
 events. They can mention in the comment whether they are willing to join the event or not
 and whether they can bring any required resources.
 Users can also go to the **See all Archived Events** section to see all the past events.
@@ -53,7 +54,9 @@ After a event has been held, the event's creator or the Admin can set it to Arch
 Care has been taken to see that only authorised user are able to make the necessary changes.
 Only the Event's creator are able to modify the important information for an event. He will 
 be able to mark the Event as Archived and set whether the required resources are satisfied.
+He can delete the Event is he wishes.
 Other users can only post a comment on the page. He will see all other fields disabled.
+The Admin users(Community Representative) have access to modify or delete the events.
 
 #### Broadcast
 
