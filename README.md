@@ -47,8 +47,7 @@ Users can also go to the **See all Archived Events** section to see all the past
 They can come to know which user is interested in these type of events.
 After a event has been held, the event's creator or the Admin can set it to Archived.
 
-** Access Control in Event module **
-
+**Access Control in Event module**
 Care has been taken to see that only authorised user are able to make the necessary changes.
 Only the Event's creator are able to modify the important information for an event. He will 
 be able to mark the Event as Archived and set whether the required resources are satisfied.
@@ -71,8 +70,7 @@ We use MySql as a backend database and use Jdbc to connect to database.
 The database configuration documement has been checked in Git. 
 Steps to deploy the application has also been checked in.
 
-** To import this project **
-
+**To import this project**
 As this is a Maven project,we can simple clone the project into our local 
 environment and import the project in Eclipse as an existing Maven project.
 
