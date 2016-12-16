@@ -1,4 +1,4 @@
-# SocialEngagementApp
+# Engage
 
 We have created a java based web application which runs in a tomcat server. The 
 application uses MySql database.
@@ -20,7 +20,7 @@ We shall talk a bit more about each modules in more details below.
 
 --------------------------------------
 ### End user's guide:
-In our project there are 4 main modules. They are:
+In our project there are 5 main modules. They are:
 1. Events
 2. Broadcast
 3. Discussion
@@ -88,10 +88,10 @@ environment and import the project in Eclipse as an existing Maven project.
 
 **Team members & contacts**
 
-Dipanjan Karmakar: dipanjan@iastate.edu
-Prateek Gupta:     prateekg@iastate.edu 
-Nikita Tiwari:     prateekg@iastate.edu 
-Lei Liu:		   lliu@iastate.edu
+Dipanjan Karmakar: dipanjan@iastate.edu  
+Prateek Gupta:     prateekg@iastate.edu   
+Nikita Tiwari:     prateekg@iastate.edu   
+Lei Liu:		   lliu@iastate.edu  
 
 **External resource links**
 
