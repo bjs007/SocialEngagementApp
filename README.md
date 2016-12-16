@@ -100,6 +100,7 @@ Lei Liu:		   lliu@iastate.edu
 
 In the Sms notification module we use a Third Party API for sending SMS.
 For more details please refer the official page [TextBelt website](http://textbelt.com)
+The code is checked in the “smsnotification” branch in git.
 
 
 
