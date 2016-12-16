@@ -46,6 +46,7 @@ and whether they can bring any required resources.
 Users can also go to the **See all Archived Events** section to see all the past events.
 They can come to know which user is interested in these type of events.
 After a event has been held, the event's creator or the Admin can set it to Archived.
+
 ** Access Control in Event module **
 Care has been taken to see that only authorised user are able to make the necessary changes.
 Only the Event's creator are able to modify the important information for an event. He will 
