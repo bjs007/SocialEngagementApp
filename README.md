@@ -63,16 +63,21 @@ The Admin users(Community Representative) have access to modify or delete the ev
 Broadcasts are announcements posted from the Care-Center to notify all users regarding an event/ situation. 
 These are global posts which are visible to each user of the application and appears on the Dashboard along with a section for Broadcasts.
 - Create Broadcasts
+
 The Admin user has the right to create these broadcasts. This can be done by choosing the *Create Broadcast* link in the Broadcasts Homepage.
 Here, the Admin can provide the Title and Description of the Broadcast that they need to make. These details are then published to the application.
 
 - Delete Broadcasts
+
 Further, the Admin has the right to delete any of these broadcast posts. This can be done by choosing *Edit Broadcast*. 
 The broadcasts will be displayed in order, and the admin can click on the "Delete" button for any of the posts required to be deleted. 
 - Browsing
+
 Users and Admins can both browse these broadcasts from the dashboard as well as the broadcast homepage. They have the ability to comment on any of these posts to communicate or 
 ask questions regarding the broadcast.
+
 - Comments
+
 Users have the ability to comment on any of these posts to communicate or 
 ask questions regarding the broadcast.
 An Admin also has the ability to comment on these posts, and respond to any feedback or queries. These comments will be posted in order of the time they were posted.
