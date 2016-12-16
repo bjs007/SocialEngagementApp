@@ -54,4 +54,27 @@ Only the Event's creator are able to modify the important information for an eve
 be able to mark the Event as Archived and set whether the required resources are satisfied.
 Other users can only post a comment on the page. He will see all other fields disabled.
 
+#### Broadcast
+
+#### Discussion
+
+#### Dashboard
+
+--------------------------------------
+
+### Technical Guide:
+
+This application is a SpringMvc based web-application. The project integrates 
+Maven for dependency management and Apache Tiles for keeping the UI
+consistent accross all the pages.
+We use MySql as a backend database and use Jdbc to connect to database.
+The database configuration documement has been checked in Git. 
+Steps to deploy the application has also been checked in.
+
+** To import this project **
+
+As this is a Maven project,we can simple clone the project into our local 
+environment and import the project in Eclipse as an existing Maven project.
+
+
 
