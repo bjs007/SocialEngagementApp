@@ -25,6 +25,7 @@ In our project there are 4 main modules. They are:
 2. Broadcast
 3. Discussion
 4. Dashboard
+5. Sms Notification
 
 #### Events
 Events is a multipurpose module that can be used in several ways by the seniors. 
@@ -60,6 +61,11 @@ Other users can only post a comment on the page. He will see all other fields di
 
 #### Dashboard
 
+
+#### Sms Notification
+This is a simple Java project which uses a Third party API to remind the event's creator about
+their events.
+
 --------------------------------------
 
 ### Technical Guide:
@@ -77,18 +83,21 @@ As this is a Maven project,we can simple clone the project into our local
 environment and import the project in Eclipse as an existing Maven project.
 
 **How to use the application**
-*End user's guide# module at the start of this page has been provided for this purpose.
+
+*End user's guide* module at the start of this page has been provided for this purpose.
 
 **Team members & contacts**
+
 Dipanjan Karmakar: dipanjan@iastate.edu
 Prateek Gupta:     prateekg@iastate.edu 
 Nikita Tiwari:     prateekg@iastate.edu 
 Lei Liu:		   lliu@iastate.edu
 
 **External resource links**
+
 In the Sms notification module we use a Third Party API for sending SMS.
 For more details please refer the official page [TextBelt website](http://textbelt.com)
-	
+
 
 
 
