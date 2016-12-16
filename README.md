@@ -82,7 +82,7 @@ Users have the ability to comment on any of these posts to communicate or
 ask questions regarding the broadcast.
 An Admin also has the ability to comment on these posts, and respond to any feedback or queries. These comments will be posted in order of the time they were posted.
 
-
+*Access Control exists in the Broadcast Module. The creation and deletion rights exist only in the Admin User's account*
 
 #### Discussion
 These are private conversations between the user and the care center or Admin which are not visible to other users. This can be used for contacting care center for scheduling appointments, making any reservations or for any queries they might want to keep private.
