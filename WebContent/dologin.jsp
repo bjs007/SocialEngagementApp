@@ -1,3 +1,11 @@
+<!-- 
+* <h1>Login </h1>
+* The code retrieves user info parameters from hellopage.jsp  and verifies it with the SQL DB.
+* User is logged in if information matches the values in the Users Table.
+* @author  Nikita Tiwari
+* @version 1.0
+* 
+-->
 <%@ page language="java" import="java.sql.*" errorPage="" %>
 <%
 
@@ -33,6 +41,7 @@
        	rs2.next();
        	String useractualid=rs2.getString(1);
        	session.setAttribute("session_user_id",useractualid);
+       	System.out.println(useractualid);
         
         //rs2=st.executeQuery("select name from uss where uid='"+ userid +"' and upass='"+ pwd +"'");
         //String po="select pos from uss where uid='"+userid+"' and upass='"+pwd+"'";
@@ -43,9 +52,12 @@
         
         if(useractualid.equals("121")){
         	 response.sendRedirect("http://localhost:8080/SocialEngagement/welcomeadmin");
+        	 //response.sendRedirect("http://proj-514-02.cs.iastate.edu:8080/SocialEngagement/welcomeadmin");
         }
         else{
         	 response.sendRedirect("http://localhost:8080/SocialEngagement/welcome");
+        	 //
+        	 //response.sendRedirect("http://proj-514-02.cs.iastate.edu:8080/SocialEngagement/welcome");
         }
        
       

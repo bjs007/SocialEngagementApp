@@ -1,3 +1,11 @@
+<!-- 
+* <h1>Registration Page</h1>
+* This page contains a form for user to enter the profile information which is then added to the database.
+* The user account is create in the Users Table in SQL Db, and then routed to login page to continue application use.
+* @author  Nikita Tiwari
+* @version 1.0
+* 
+-->
 <!DOCTYPE html>
 <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

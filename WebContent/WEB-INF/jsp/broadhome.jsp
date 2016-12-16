@@ -1,3 +1,15 @@
+<!-- 
+* <h1>Broadcast Home</h1>
+* This code is to display all the Broadcasts for any user. The data is fetched from the 
+* database and displayed. The code also fetches records for each broadcast id from the Comments Table in SQL Db
+* and displays it in order which it was posted.  
+* 
+*
+* @author  Nikita Tiwari
+* @version 1.0
+* 
+-->
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*,java.text.SimpleDateFormat"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
@@ -10,6 +22,12 @@
 <body>
 
 <p id="title" style="color:#FDFEFE"> Broadcasts Home</p>
+  /**
+   * This script creates a JDBC Connection to the database, and extracts records from Broadcast Table.
+   * It also extracts records from the Comments Table to display each Broadcast posts's comments
+   *
+   */
+
 <%System.out.println(session.getAttribute("name"));
 Connection conn = null;
 Class.forName("com.mysql.jdbc.Driver").newInstance();

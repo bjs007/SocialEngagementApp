@@ -1,3 +1,13 @@
+<!-- 
+* <h1>Add Broadcast</h1>
+* This code uses parameters passed on by createbroad.jsp to push the new post to database. 
+* A JDBC Connection is created and the post is added according to the parameters
+*
+*
+* @author  Nikita Tiwari
+* @version 1.0
+* 
+-->
 <%@ page language="java" import="java.sql.*" errorPage="" %>
 <%
 
@@ -21,6 +31,9 @@
     
     
     response.sendRedirect("http://localhost:8080/SocialEngagement/createbroadcast");
+    // response.sendRedirect("http://proj-514-02.cs.iastate.edu:8080/SocialEngagement/createbroadcast");
+    
+    
    /* rs = st.executeQuery("select * from users where email='"+ userid +"' and password='"+ pwd +"'");
     if (rs.next()) {
         session.setAttribute("userid",userid);

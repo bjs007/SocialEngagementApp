@@ -1,3 +1,12 @@
+<!-- 
+* <h1>Comments</h1>
+* This code retrieves received parameters like broadcast ID and user ID when a user comments on a page. These parameters 
+* are used to add records in the Comments Table in the database with other details like the timestamp.
+* @author  Nikita Tiwari
+* @version 1.0
+* 
+-->
+
 <%@ page language="java" import="java.sql.*" errorPage="" %>
 <%
 

@@ -1,3 +1,14 @@
+<!--  
+* <h1>Create Broadcast</h1>
+* This page contains a form that allows admin to input Title and Description for a broadcast and post it to 
+* the database. 
+* @return addbroad.jsp 
+*
+* @author  Nikita Tiwari
+* @version 1.0
+* 
+-->
+
 <!DOCTYPE html>
 <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

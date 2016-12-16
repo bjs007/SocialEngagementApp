@@ -1,3 +1,13 @@
+<!-- 
+* <h1>Login Page</h1>
+* This page allows user to enter the login credentials - Email and password to login to the application.
+* The details are verified with the database entries in Users table in SQL Db. The user is then routed accordingly
+* based on their role - User or Admin. 
+* Also contains an option to go to Register page for new users.
+* @author  Nikita Tiwari
+* @version 1.0
+* 
+-->
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 

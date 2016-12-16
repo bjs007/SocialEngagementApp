@@ -1,3 +1,12 @@
+<!-- 
+* <h1>Broadcast Edit</h1>
+* This page displays all the broadcasts by fetching records from the SQL DB
+* made by the Admin with an option of Delete by each post. Updates are made on clicking the delete.
+* @return deletebroad.jsp
+* @author  Nikita Tiwari
+* @version 1.0
+* 
+-->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*,java.text.SimpleDateFormat"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
@@ -29,7 +38,7 @@ try{
 	//String dates=formatter.format(result);%>
     	 <div id="brcontainer"  style=" margin:0 auto;" >
     <p id="title"> <%= rs.getString(1) %></p>
-	
+	S
 	<p id="timetext"><%out.print(result); %></p>
 	
 	<p id="descript"><%= rs.getString(3) %></p>

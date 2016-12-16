@@ -1,4 +1,11 @@
-
+<!-- 
+* <h1>Registration </h1>
+* This code contains receives parameters from the registation page to create a new profile/ record in the Users Table. 
+* The user is then routed to the login page on success to allow user to access the new account.
+* @author  Nikita Tiwari
+* @version 1.0
+* 
+-->
 <%@ page language="java" import="java.sql.*" errorPage="" %>
 <%@ page import ="java.sql.*" %>
 <%
@@ -31,6 +38,8 @@
         //response.sendRedirect("+user+.jsp");
         //out.print("Registration Successful");
         response.sendRedirect("http://localhost:8080/SocialEngagement/hello");
+        //response.sendRedirect("http://proj-514-02.cs.iastate.edu:8080/SocialEngagement/hello");
+        
     } else {
         //response.sendRedirect("index.jsp");
         out.print("Error. Please Enter details again");

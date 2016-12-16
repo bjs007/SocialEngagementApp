@@ -1,3 +1,13 @@
+<!-- 
+* <h1>Delete Broadcast</h1>
+* This code uses parameters passed on by editbroad.jsp to delete the post from database. 
+* A JDBC Connection is created and the post is deleted according to the parameters
+*
+*
+* @author  Nikita Tiwari
+* @version 1.0
+* 
+-->
 <%@ page language="java" import="java.sql.*" errorPage="" %>
 <%
 
@@ -16,6 +26,7 @@
     if(i>0){
     	System.out.println("SUCCESS");
     	response.sendRedirect("http://localhost:8080/SocialEngagement/broad");
+    	//response.sendRedirect("http://proj-514-02.cs.iastate.edu:8080/SocialEngagement/broad");
     }
     else
     	System.out.println("NOT CREATED");

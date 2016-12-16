@@ -1,5 +1,13 @@
-<!-- Created by Nikita -->
-<!-- <p>Menu</p> -->
+<!-- 
+* <h1>Broadcast Menu</h1>
+* This displays the menu options a User should view when in the Broadcast Module
+* 
+* 
+*
+* @author  Nikita Tiwari
+* @version 1.0
+* 
+-->
 
 <div class="container" style="background: #16A085; ">
 
