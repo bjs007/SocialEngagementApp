@@ -1,14 +1,44 @@
 # SocialEngagementApp
 
-We have created a java based web application which runs in a tomcat server. The application uses MySql database.
+We have created a java based web application which runs in a tomcat server. The 
+application uses MySql database.
 
 ## Summary of the project
-This application will provide the old people a platform which will help them coordinate with society and get help 
-for even the daily activities which they find difficult. For example, some seniors are no longer able to drive a car. 
-Ideally, other people living in the same community can share them a ride if they all agree on the schedule they set before. 
-Our application will offer two different roles. For the seniors, they can log in this application, creating, viewing and 
-discussing social events. For staff members, they not only have the same privileges as the seniors’, but more privileges managing those activities. 
-The application is designed for senior citizens, keeping in mind the factor of ease of use. Notifications, for example, 
-will let the seniors know some kinds of social activities is coming.
+This application will provide the old people a platform which will help them 
+coordinate with society and get help for even the daily activities which they 
+find difficult. For example, some seniors are no longer able to drive a car. 
+Ideally, other people living in the same community can share them a ride if they
+all agree on the schedule they set before. 
+Our application will offer two different roles. For the seniors, they can log in
+this application, creating, viewing and discussing social events. For staff 
+members, they not only have the same privileges as the seniors’, but more 
+privileges managing those activities. 
+The application is designed for senior citizens, keeping in mind the factor of 
+ease of use. Notifications, for example, will let the seniors know some kinds of
+social activities is coming.
 We shall talk a bit more about each modules in more details below.
+--------------------------------------
+### End user's guide:
+In our project there are 4 main modules. They are:
+1. Events
+2. Broadcast
+3. Discussion
+4. Dashboard
+
+#### Events
+Events is a multipurpose module that can be used in several ways by the seniors. 
+We have tried to keep this module a generic one. Usually an events needs:
+- Resources
+- To know whether all resources are satisfied
+- Date & Time for an event
+- Place of event
+- When this notification is to be displayed 
+- Comments section so that other seniors can communicate and share their ideas
+- Archiving functionality to set it as old
+
+We are allowing the users to enter this details from the Create Event [ *Create a
+new Event* ] 
+page. After this event is created other users can view this event through *See 
+all active events*. Other user can go through these events and comment on this 
+events
 
